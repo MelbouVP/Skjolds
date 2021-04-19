@@ -33,14 +33,14 @@
             </div>
             <div class="navigation__navbar">
                 <a href="" class="navbar__link">
-                    <img src="\images\Icon awesome-user-alt.png" alt="Login button">
+                    <img src="\images\Icon-user-alt.png" alt="Login button">
                     <li class="navbar__link--content">
                         Login
                     </li>
                 </a>
                 <a href="" class="navbar__link">
                     <div class="navbar__cart-button">
-                        <img src="\images\Icon feather-shopping-bag.png" alt="Shopping cart button">
+                        <img src="\images\Icon-shopping-bag.png" alt="Shopping cart button">
                         <div class="navbar__cart-button--items-counter">
                             <p>0</p>
                         </div>
@@ -154,8 +154,120 @@
 
 
             <section class="feature-section">
-                
+                <div class="feature__container">
+                        
+                    <div class="feature__container--title">
+                        <h1>Our features</h1>
+                    </div>
+
+                    <div class="feature__container--content">
+
+                        <div class="feature-card__container">
+                            <div class="feature-card__feature-image">
+                                <img src="\images\Icon-shipping.png" alt="Shipping icon">
+                            </div>
+
+                            <div class="feature-card__description">
+                                <div class="description__title">
+                                    Free shipping
+                                </div>
+                                <div class="description__text">
+                                    <p>
+                                        SKJOLDS offers a free shipping on orders exceeding 50 EUR. Also note discounts that include free shipping!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-card__container">
+
+                            <div class="feature-card__feature-image">
+                                <img src="\images\Icon-refresh.png" alt="Refresh icon">
+                            </div>
+
+                            <div class="feature-card__description">
+                                <div class="description__title">
+                                    Free returns
+                                </div>
+                                <div class="description__text">
+                                    <p>
+                                        Sometimes it's though to find your match and we at SKJOLDS understand it. Our solution? Free item returns!
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="feature-card__container">
+                            
+                            <div class="feature-card__feature-image">
+                                <img src="\images\Icon-question-answer.png" alt="Support icon">
+                            </div>
+
+                            <div class="feature-card__description">
+                                <div class="description__title">
+                                    Customer support
+                                </div>
+                                <div class="description__text">
+                                    <p>
+                                        Hence the name, SKJOLDS prides itself in helping to unleash your passion through fashion! Chat with us to to find help.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
             </section>
+
+            <footer class="page-footer">
+                <div class="footer__container">
+
+                    <div class="footer__social-media">
+                        <a href="" class="footer__social-media--link">
+                            <img src="\images\Icon-twitter.png" alt="Twitter icon">
+                        </a>
+                        <a href="" class="footer__social-media--link">
+                            <img src="\images\Icon-facebook.png" alt="Facebook icon">
+                        </a>
+                        <a href="" class="footer__social-media--link">
+                            <img src="\images\Icon-instagram.png" alt="Instagram icon">
+                        </a>
+                    </div>
+
+                    <div class="footer__description">
+
+
+                        <div class="description__information">
+                            <div class="description__information--title">
+                                Skjolds clothing
+                            </div>
+                            <div class="description__information--address">
+                                skjolds.support@gmail.com
+                            </div>
+                            <div class="description__information--address">
+                                +431 4400 230 32
+                            </div>
+                            <div class="description__information--address">
+                                1 St. Olavs Pass, Oslo, Norway
+                            </div>
+                        </div>
+
+
+                        <div class="description__copyright">
+                            <p>
+                                © Copyright 2021 MelbouVP Design Inc.
+                            </p>
+                            <p>
+                                All rights reserved.
+                            </p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </footer>
         </main>
     </body>
 </html>

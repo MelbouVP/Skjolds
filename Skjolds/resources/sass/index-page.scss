@@ -1,3 +1,6 @@
+
+@import './footer.scss';
+
 .index-page {
 
     .navigation {
@@ -90,10 +93,7 @@
         }
     }
 
-
-
     .welcome-section {
-        position: relative;
         height: 100vh;
 
         .welcome-section__container {
@@ -227,7 +227,7 @@
 
     .category-section {
 
-        height: 110vh;
+        height: 120vh;
         
 
         .category__container-wrapper {
@@ -252,9 +252,9 @@
                     justify-content: center;
                     align-items: center;
                     height: 10%;
-                    width:30%;
+                    width: 25%;
                     margin: 0 auto;
-                    border-bottom: 4px solid white;
+                    border-bottom: 2px solid white;
 
                     h1 {
                         color: white;
@@ -369,6 +369,77 @@
                 }
             }
             
+        }
+    }
+
+
+    .feature-section {
+        height: 80vh;
+        background: rgb(240, 240, 240);
+
+        .feature__container {
+            height: 100%;
+
+            &--title {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 10%;
+                width: 15%;
+                margin: 0 auto;
+                padding: 3rem 0 2rem 0;
+                border-bottom: 2px solid black;
+
+                h1 {
+                    color: black;
+                    font-weight: bold;
+                    font-size: 1.5rem;
+                }
+            }
+
+            &--content {
+                height: 80%;
+                width: 90%;
+                padding: 6rem 1rem;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+
+                .feature-card__container {
+                    display: flex;
+                    justify-content: center;
+                    width: 100%;
+
+                    .feature-card__feature-image {
+                        width: 30%;
+                        padding: 0 1rem;
+                        img {
+                            height: 3rem;
+                            width: 3.5rem;
+                        }
+                    }
+
+                    .feature-card__description {
+                        width: 50%;
+                        
+
+                        .description__title {
+                            font-weight: 2rem;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            padding-bottom: 1.5rem;
+                        }
+
+                        .description__text {
+                            color: #555555;
+                            line-height: 1.25rem;
+                        }
+
+                        
+                    }
+
+                }
+            }
         }
     }
 
