@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .index-page .navigation {
   display: flex;
   justify-content: center;
@@ -59,20 +60,25 @@
 }
 .index-page .welcome-section {
   position: relative;
+  height: 100vh;
+}
+.index-page .welcome-section .welcome-section__container {
+  position: relative;
   height: 80vh;
   background: #f0f0f0;
 }
-.index-page .welcome-section__content {
+.index-page .welcome-section .welcome-section__container .welcome-section__content {
   position: absolute;
   left: 20%;
   top: 20%;
+  height: 80vh;
 }
-.index-page .welcome-section__content .content__text--sup-title {
+.index-page .welcome-section .welcome-section__container .welcome-section__content .content__text--sup-title {
   color: #5136ff;
   font-weight: bold;
   font-style: italic;
 }
-.index-page .welcome-section__content .content__text--title {
+.index-page .welcome-section .welcome-section__container .welcome-section__content .content__text--title {
   padding: 1rem 0 1rem 0;
   font-size: 2.2rem;
   font-weight: bold;
@@ -81,7 +87,7 @@
   text-transform: uppercase;
   position: relative;
 }
-.index-page .welcome-section__content .content__text--title:after {
+.index-page .welcome-section .welcome-section__container .welcome-section__content .content__text--title:after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -90,7 +96,7 @@
   border-bottom: 4px solid #5136ff;
   border-radius: 2rem;
 }
-.index-page .welcome-section__content .content__text--sub-title {
+.index-page .welcome-section .welcome-section__container .welcome-section__content .content__text--sub-title {
   padding: 1rem 0 1rem 0;
   font-size: 20px;
   color: #4b4b4b;
@@ -100,14 +106,14 @@
   font-weight: bold;
   width: 70%;
 }
-.index-page .welcome-section__content .content__action-btn {
+.index-page .welcome-section .welcome-section__container .welcome-section__content .content__action-btn {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 10rem;
   height: 2rem;
 }
-.index-page .welcome-section__content .content__action-btn--link {
+.index-page .welcome-section .welcome-section__container .welcome-section__content .content__action-btn--link {
   background-color: black;
   color: white;
   width: 90%;
@@ -119,43 +125,160 @@
   box-shadow: 3px 3px 3px gray;
   transition: ease 0.2s;
 }
-.index-page .welcome-section__content .content__action-btn--link:hover {
+.index-page .welcome-section .welcome-section__container .welcome-section__content .content__action-btn--link:hover {
   transform: scale(1.1);
 }
-.index-page .welcome-section__hero-img {
+.index-page .welcome-section .welcome-section__container .welcome-section__banner-img {
   position: absolute;
   bottom: 0;
   right: 10%;
   height: 100%;
   width: 45%;
 }
-.index-page .welcome-section__hero-img img {
+.index-page .welcome-section .welcome-section__container .welcome-section__banner-img img {
   height: 100%;
   width: 100%;
 }
-.index-page .welcome-section__half-elipse {
+.index-page .welcome-section .welcome-section__container .welcome-section__half-elipse {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
-.index-page .welcome-section__half-elipse img {
+.index-page .welcome-section .welcome-section__container .welcome-section__half-elipse img {
   height: 60%;
   width: 60%;
 }
-.index-page .welcome-section__half-elipse:nth-of-type(3) {
+.index-page .welcome-section .welcome-section__container .welcome-section__half-elipse:nth-of-type(3) {
   bottom: 0;
   left: 5%;
 }
-.index-page .welcome-section__half-elipse:nth-of-type(3) img {
+.index-page .welcome-section .welcome-section__container .welcome-section__half-elipse:nth-of-type(3) img {
   height: 60%;
   width: 60%;
 }
-.index-page .welcome-section__half-elipse:nth-of-type(4) {
+.index-page .welcome-section .welcome-section__container .welcome-section__half-elipse:nth-of-type(4) {
   justify-content: flex-start;
   top: 0;
 }
-.index-page .welcome-section__half-elipse:nth-of-type(4) img {
+.index-page .welcome-section .welcome-section__container .welcome-section__half-elipse:nth-of-type(4) img {
   transform: rotate(180deg);
   bottom: 0;
+}
+.index-page .category-section {
+  height: 110vh;
+}
+.index-page .category-section .category__container-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/images/category-container-background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.index-page .category-section .category__container-wrapper .category__container {
+  width: 90%;
+  height: 90%;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.6);
+}
+.index-page .category-section .category__container-wrapper .category__container--title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  width: 30%;
+  margin: 0 auto;
+  border-bottom: 4px solid white;
+}
+.index-page .category-section .category__container-wrapper .category__container--title h1 {
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+.index-page .category-section .category__container-wrapper .category__container--content {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 90%;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container {
+  display: flex;
+  justify-content: flex-end;
+  width: 40%;
+  height: 85%;
+  position: relative;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__description {
+  position: absolute;
+  left: 0%;
+  top: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background: rgba(255, 255, 255, 0.65);
+  height: 18rem;
+  width: 12rem;
+  padding: 1rem;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__description .description__sup-title {
+  color: #5136ff;
+  font-weight: bold;
+  font-style: italic;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__description .description__title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.5rem 0 0.5rem 0;
+  text-shadow: 1px 1px 4px gray;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__description .description__text {
+  border-left: 3px solid black;
+  padding-left: 0.5rem;
+  color: #555555;
+  font-style: italic;
+  font-weight: bold;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__description .description__text p:nth-of-type(1) {
+  margin-bottom: 1rem;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__description .description__action-btn {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__description .description__action-btn a {
+  color: #2200fe;
+  text-decoration: none;
+  transition: ease 0.5s;
+  position: relative;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__description .description__action-btn a:after {
+  content: "»";
+  position: absolute;
+  opacity: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__description .description__action-btn a:hover {
+  padding-right: 24px;
+  padding-left: 8px;
+  color: #5136ff;
+  transform: scale(1.1);
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__description .description__action-btn a:hover:after {
+  opacity: 1;
+  right: 5px;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__gender-img {
+  height: 100%;
+  width: 80%;
+}
+.index-page .category-section .category__container-wrapper .category__container--content .gender-card__container .gender-card__gender-img img {
+  height: 100%;
+  width: 100%;
+  box-shadow: 2px 2px 8px black;
 }
