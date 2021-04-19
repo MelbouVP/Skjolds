@@ -1,4 +1,6 @@
 const mix = require('laravel-mix');
+const fs = require('fs');
+const path = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,7 +13,12 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.js('resources/js/app.js', 'public/js');
+
+
+// Automatically adds new scss files in resource/sass for compilation into public/css
+const files = fs.readdirSync(path.resolve(__dirname, 'resources', 'sass'), 'utf-8')  
+
+for (let file of files) {
+   mix.sass(`resources/sass/${file}`, 'public/css');
+}
