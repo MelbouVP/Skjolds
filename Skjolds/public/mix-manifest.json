@@ -1,6 +1,9 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/shop.css": "/css/shop.css",
+    "/css/shop-page.css": "/css/shop-page.css",
+    "/css/navbar.css": "/css/navbar.css",
     "/css/index-page.css": "/css/index-page.css",
-    "/css/app.css": "/css/app.css"
+    "/css/footer.css": "/css/footer.css",
+    "/css/app.css": "/css/app.css",
+    "/css/shop.css": "/css/shop.css"
 }

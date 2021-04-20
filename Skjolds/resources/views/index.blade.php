@@ -1,53 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        @include('components.head')
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/index-page.css') }}" >
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}" >
+        
 
     </head>
     <body class="index-page">
-        <nav class="navigation">
-            <div class="navigation__navbar">
-                <a href="" class="navbar__link">
-                    <li class="navbar__link--content">
-                        Home
-                    </li>
-                </a>
-                <a href="" class="navbar__link">
-                    <li class="navbar__link--content">
-                        Shop
-                    </li>
-                </a>
-                <a href="" class="navbar__link">
-                    <li class="navbar__link--content">
-                        Contact
-                    </li>
-                </a>
-            </div>
-            <div class="navigation__navbar">
-                <a href="" class="navbar__link">
-                    <img src="\images\Icon-user-alt.png" alt="Login button">
-                    <li class="navbar__link--content">
-                        Login
-                    </li>
-                </a>
-                <a href="" class="navbar__link">
-                    <div class="navbar__cart-button">
-                        <img src="\images\Icon-shopping-bag.png" alt="Shopping cart button">
-                        <div class="navbar__cart-button--items-counter">
-                            <p>0</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </nav>
+        
+        @include('components.navbar')
 
         <main>
             <section class="welcome-section">
@@ -221,53 +184,10 @@
                 </div>
             </section>
 
-            <footer class="page-footer">
-                <div class="footer__container">
 
-                    <div class="footer__social-media">
-                        <a href="" class="footer__social-media--link">
-                            <img src="\images\Icon-twitter.png" alt="Twitter icon">
-                        </a>
-                        <a href="" class="footer__social-media--link">
-                            <img src="\images\Icon-facebook.png" alt="Facebook icon">
-                        </a>
-                        <a href="" class="footer__social-media--link">
-                            <img src="\images\Icon-instagram.png" alt="Instagram icon">
-                        </a>
-                    </div>
+            @include('components.footer')
 
-                    <div class="footer__description">
-
-
-                        <div class="description__information">
-                            <div class="description__information--title">
-                                Skjolds clothing
-                            </div>
-                            <div class="description__information--address">
-                                skjolds.support@gmail.com
-                            </div>
-                            <div class="description__information--address">
-                                +431 4400 230 32
-                            </div>
-                            <div class="description__information--address">
-                                1 St. Olavs Pass, Oslo, Norway
-                            </div>
-                        </div>
-
-
-                        <div class="description__copyright">
-                            <p>
-                                © Copyright 2021 MelbouVP Design Inc.
-                            </p>
-                            <p>
-                                All rights reserved.
-                            </p>
-                        </div>
-
-
-                    </div>
-                </div>
-            </footer>
+            
         </main>
     </body>
 </html>
