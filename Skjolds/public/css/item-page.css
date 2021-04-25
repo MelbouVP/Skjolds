@@ -175,6 +175,12 @@
 .item-page__container .item__information form .item__information--item-options .item-options__quantity svg {
   margin: 0rem 0.5rem;
 }
+.item-page__container .item__information form .item__information--item-options .item-options__quantity svg:hover {
+  cursor: pointer;
+}
+.item-page__container .item__information form .item__information--item-options .item-options__quantity svg:hover path {
+  fill: gray;
+}
 .item-page__container .item__information--action-btn {
   display: flex;
   justify-content: center;

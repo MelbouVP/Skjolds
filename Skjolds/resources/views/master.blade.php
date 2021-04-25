@@ -17,11 +17,15 @@
 
     </head>
     
-    @include('components.navbar')
+    <body>
+        @include('components.navbar')
 
-    @yield('content')
-
-    @include('components.footer')
+        <main>
+            @yield('content')
+        </main>
+        
+        @include('components.footer')
+    </body>
 
     @yield('page-js-script')
 
