@@ -23,7 +23,7 @@
                 Login
             </li>
         </a>
-        <a href="" class="navbar__link">
+        <a href="/checkout" class="navbar__link">
             <div class="navbar__cart-button">
                 <img src="\images\Icon-shopping-bag.png" alt="Shopping cart button">
                 <div class="navbar__cart-button--items-counter">

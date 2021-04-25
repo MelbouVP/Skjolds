@@ -1,7 +1,305 @@
-.shop-page {
-  height: 90vh;
-}
+@charset "UTF-8";
 .shop-page__container {
   height: 100%;
   background: #f0f0f0;
+  display: flex;
+}
+.shop-page__container .filter {
+  width: 25%;
+  background: white;
+  box-shadow: 0 0 5px #000000bf;
+  -webkit-clip-path: inset(0px -5px 0px 0px);
+          clip-path: inset(0px -5px 0px 0px);
+}
+.shop-page__container .filter__container {
+  padding: 1rem 1.5rem;
+}
+.shop-page__container .filter__container .filter__header {
+  padding-bottom: 0.25rem;
+}
+.shop-page__container .filter__container .filter__header h1 {
+  color: #8c8c8c;
+  display: inline-block;
+  width: 70%;
+}
+.shop-page__container .filter__container .filter__header p {
+  color: #969696;
+  display: inline-block;
+}
+.shop-page__container .filter__container .filter__filter-options form {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__category {
+  padding: 1rem 0;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__category--title {
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid blue;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__category--checkbox {
+  padding: 0.3rem 1rem;
+  display: flex;
+  align-items: center;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__category--checkbox input[type=checkbox] {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__category--checkbox input[type=checkbox]:hover {
+  cursor: pointer;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__category--checkbox input[type=checkbox]:after {
+  content: " ";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__category--checkbox input[type=checkbox]:checked::after {
+  height: 100%;
+  width: 100%;
+  background-color: #e6e6e6;
+  border-radius: 0.1rem;
+  content: "✔";
+  color: #307ef2;
+  border: 1px solid gray;
+  font-size: 1.25rem;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__category--checkbox input[type=checkbox]:checked + label {
+  font-weight: bold;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__category--checkbox label {
+  padding: 0 0.5rem;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__category--checkbox:nth-of-type(2) {
+  padding-top: 1rem;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__size--title {
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid blue;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__size--options {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__size--options input[type=checkbox] {
+  display: none;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__size--options label:hover {
+  cursor: pointer;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__size--options label :checked + span {
+  background: #307ef2;
+  color: white;
+  font-weight: bold;
+  font-style: italic;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__size--options label span {
+  font-size: 0.9rem;
+  display: inline-block;
+  background: lightgrey;
+  border-radius: 0.2rem;
+  height: 2rem;
+  width: 2.25rem;
+  line-height: 2rem;
+  text-align: center;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__price--title {
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid blue;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__price--options {
+  padding: 1rem 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__price--options .price__options {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__price--options .price__options input {
+  width: 20%;
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  font-style: italic;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__price--options .price__options input::-webkit-outer-spin-button, .shop-page__container .filter__container .filter__filter-options form .filter-option__price--options .price__options input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--title {
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid blue;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--options {
+  padding: 1rem 1rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--options label input[type=checkbox] {
+  height: 1.75rem;
+  width: 1.75rem;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--options label input[type=checkbox]:hover {
+  cursor: pointer;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--options label input[type=checkbox]::after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.2rem;
+  height: 100%;
+  width: 100%;
+  content: " ";
+  border: 1px solid gray;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--options label input[type=checkbox]:checked::after {
+  content: "✔";
+  color: #307ef2;
+  border: 2px solid #307ef2;
+  font-size: 1.25rem;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--options .color__options--gray input[type=checkbox]:after {
+  background-color: #a0a0a0;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--options .color__options--black input[type=checkbox]:after {
+  background-color: #0f0f0f;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--options .color__options--blue input[type=checkbox]:after {
+  background-color: #1201ff;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--options .color__options--yellow input[type=checkbox]:after {
+  background-color: #ffd900;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--options .color__options--red input[type=checkbox]:after {
+  background-color: #cc0000;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter-option__color--options .color__options--green input[type=checkbox]:after {
+  background-color: #45ff34;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter__submit-btn {
+  padding: 1.5rem;
+  text-align: center;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter__submit-btn input[type=submit] {
+  background-color: blue;
+  border: none;
+  color: white;
+  width: 90%;
+  height: 100%;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0.5rem 1.5rem;
+  text-align: center;
+  box-shadow: 3px 3px 3px gray;
+  transition: ease 0.2s;
+  transition: 0.5s ease;
+}
+.shop-page__container .filter__container .filter__filter-options form .filter__submit-btn input[type=submit]:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+.shop-page__container .shop {
+  width: 75%;
+}
+.shop-page__container .shop__container {
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+.shop-page__container .shop__container .shop__item-card {
+  margin: 1.5rem;
+  height: 22rem;
+  width: 14rem;
+  box-shadow: 2px 2px 6px #000000bf;
+  transition: 0.5s ease;
+}
+.shop-page__container .shop__container .shop__item-card .item-card__image {
+  height: 70%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.shop-page__container .shop__container .shop__item-card .item-card__image img {
+  position: absolute;
+  height: 130%;
+  bottom: 0;
+  width: 100%;
+  top: -27%;
+}
+.shop-page__container .shop__container .shop__item-card .item-card__image--cart {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  background-color: rgba(0, 0, 255, 0.7);
+  border-radius: 50%;
+  top: 0.5rem;
+  left: 0.75rem;
+  transition: 0.5s ease;
+}
+.shop-page__container .shop__container .shop__item-card .item-card__image--cart svg {
+  transform: translateX(-7.5%);
+}
+.shop-page__container .shop__container .shop__item-card .item-card__image--cart:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 255, 0.85);
+  transform: scale(1.1);
+}
+.shop-page__container .shop__container .shop__item-card .item-card__description {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 30%;
+  padding: 0.75rem 0.25rem;
+  text-align: center;
+  border-top: 1px solid black;
+}
+.shop-page__container .shop__container .shop__item-card .item-card__description h4 {
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 0.75rem;
+}
+.shop-page__container .shop__container .shop__item-card .item-card__description .item-card__action-btn {
+  background-color: blue;
+  color: white;
+  text-decoration: none;
+  padding: 0.3rem 1.25rem;
+  text-align: center;
+  box-shadow: 3px 3px 3px gray;
+  transition: ease 0.2s;
+}
+.shop-page__container .shop__container .shop__item-card .item-card__description .item-card__action-btn:after {
+  content: "»";
+  position: absolute;
+  opacity: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.shop-page__container .shop__container .shop__item-card .item-card__description .item-card__action-btn:hover {
+  padding-right: 24px;
+  padding-left: 8px;
+  transform: scale(1.1);
+  background-color: #307ef2;
+}
+.shop-page__container .shop__container .shop__item-card .item-card__description .item-card__action-btn:hover:after {
+  opacity: 1;
+  right: 10px;
+}
+.shop-page__container .shop__container .shop__item-card .item-card__description p {
+  font-size: 18px;
+  font-style: italic;
+}
+.shop-page__container .shop__container .shop__item-card:hover {
+  transform: scale(1.025);
 }

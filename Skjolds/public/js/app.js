@@ -19087,6 +19087,19 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
+/***/ "./resources/sass/shop-page.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/shop-page.scss ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/sass/shop.scss":
 /*!**********************************!*\
   !*** ./resources/sass/shop.scss ***!
@@ -19139,10 +19152,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/sass/navbar.scss":
-/*!************************************!*\
-  !*** ./resources/sass/navbar.scss ***!
-  \************************************/
+/***/ "./resources/sass/item-page.scss":
+/*!***************************************!*\
+  !*** ./resources/sass/item-page.scss ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -19152,10 +19165,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/sass/shop-page.scss":
-/*!***************************************!*\
-  !*** ./resources/sass/shop-page.scss ***!
-  \***************************************/
+/***/ "./resources/sass/navbar.scss":
+/*!************************************!*\
+  !*** ./resources/sass/navbar.scss ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -19469,12 +19482,13 @@ process.umask = function() { return 0; };
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
-/******/ 			"css/shop-page": 0,
 /******/ 			"css/navbar": 0,
+/******/ 			"css/item-page": 0,
 /******/ 			"css/index-page": 0,
 /******/ 			"css/footer": 0,
 /******/ 			"css/app": 0,
-/******/ 			"css/shop": 0
+/******/ 			"css/shop": 0,
+/******/ 			"css/shop-page": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -19522,13 +19536,14 @@ process.umask = function() { return 0; };
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/shop-page","css/navbar","css/index-page","css/footer","css/app","css/shop"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/shop-page","css/navbar","css/index-page","css/footer","css/app","css/shop"], () => (__webpack_require__("./resources/sass/app.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/shop-page","css/navbar","css/index-page","css/footer","css/app","css/shop"], () => (__webpack_require__("./resources/sass/footer.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/shop-page","css/navbar","css/index-page","css/footer","css/app","css/shop"], () => (__webpack_require__("./resources/sass/index-page.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/shop-page","css/navbar","css/index-page","css/footer","css/app","css/shop"], () => (__webpack_require__("./resources/sass/navbar.scss")))
-/******/ 	__webpack_require__.O(undefined, ["css/shop-page","css/navbar","css/index-page","css/footer","css/app","css/shop"], () => (__webpack_require__("./resources/sass/shop-page.scss")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/shop-page","css/navbar","css/index-page","css/footer","css/app","css/shop"], () => (__webpack_require__("./resources/sass/shop.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/navbar","css/item-page","css/index-page","css/footer","css/app","css/shop","css/shop-page"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/navbar","css/item-page","css/index-page","css/footer","css/app","css/shop","css/shop-page"], () => (__webpack_require__("./resources/sass/app.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/navbar","css/item-page","css/index-page","css/footer","css/app","css/shop","css/shop-page"], () => (__webpack_require__("./resources/sass/footer.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/navbar","css/item-page","css/index-page","css/footer","css/app","css/shop","css/shop-page"], () => (__webpack_require__("./resources/sass/index-page.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/navbar","css/item-page","css/index-page","css/footer","css/app","css/shop","css/shop-page"], () => (__webpack_require__("./resources/sass/item-page.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/navbar","css/item-page","css/index-page","css/footer","css/app","css/shop","css/shop-page"], () => (__webpack_require__("./resources/sass/navbar.scss")))
+/******/ 	__webpack_require__.O(undefined, ["css/navbar","css/item-page","css/index-page","css/footer","css/app","css/shop","css/shop-page"], () => (__webpack_require__("./resources/sass/shop-page.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/navbar","css/item-page","css/index-page","css/footer","css/app","css/shop","css/shop-page"], () => (__webpack_require__("./resources/sass/shop.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

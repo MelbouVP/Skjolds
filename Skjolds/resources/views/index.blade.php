@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        
-        @include('components.head')
 
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/index-page.css') }}" >
-        
 
-    </head>
+@extends('master')
+
+@section('page-style-files')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/index-page.css') }}" >
+@endsection
+
+@section('content')
+    
     <body class="index-page">
-        
-        @include('components.navbar')
-
         <main>
             <section class="welcome-section">
 
@@ -30,14 +27,14 @@
                                 Release your inner passion through fashion.
                             </div>
                         </div>
-    
+
                         <div class="content__action-btn">
                             <a href="/shop" class="content__action-btn--link">
                                 Shop now
                             </a>
                         </div>
                     </div>
-    
+
                     <div class="welcome-section__banner-img">
                         <img src="/images/hero-img.png" alt="">
                     </div>
@@ -184,10 +181,8 @@
                 </div>
             </section>
 
-
-            @include('components.footer')
-
             
         </main>
     </body>
-</html>
+
+@endsection
