@@ -120,6 +120,7 @@
 }
 .checkout-page__container .checkout__container .checkout-cart__content .content__cart-item .cart-item__remove-btn {
   width: 10%;
+  padding-top: 1.5rem;
 }
 .checkout-page__container .checkout__container .checkout-cart__content .content__cart-item .cart-item__remove-btn svg {
   transition: 0.5s ease;
@@ -212,13 +213,8 @@
   padding: 0.5rem 0;
 }
 .checkout-page__container .checkout__container .checkout-summary__container .summary__content .summary__action-btn button {
-  display: flex;
-  align-items: center;
   background-color: blue;
   border: none;
-  color: white;
-  padding: 0.5rem 1.25rem;
-  font-weight: bold;
   box-shadow: 3px 3px 3px gray;
   transition: ease 0.2s;
 }
@@ -226,8 +222,19 @@
   transform: scale(1.05);
   cursor: pointer;
 }
-.checkout-page__container .checkout__container .checkout-summary__container .summary__content .summary__action-btn button span {
+.checkout-page__container .checkout__container .checkout-summary__container .summary__content .summary__action-btn button a {
+  display: flex;
+  align-content: center;
+  text-decoration: none;
+  color: white;
+  padding: 0.5rem 1.25rem;
+  width: 100%;
+  height: 100%;
+}
+.checkout-page__container .checkout__container .checkout-summary__container .summary__content .summary__action-btn button a span {
+  line-height: 1.1rem;
   padding: 0 0.75rem;
+  font-weight: bold;
 }
 .checkout-page__container .checkout__container .checkout-summary__container .summary__payment p {
   font-size: 0.9rem;

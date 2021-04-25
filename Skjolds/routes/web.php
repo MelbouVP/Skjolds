@@ -20,3 +20,5 @@ Route::get('/shop', fn() => view('shop'));
 Route::get('/shop/item', fn() => view('item'));
 
 Route::get('/checkout', fn() => view('checkout'));
+
+Route::get('/order', fn() => view('order'));

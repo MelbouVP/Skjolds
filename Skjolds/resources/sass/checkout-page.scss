@@ -146,6 +146,7 @@
 
                         .cart-item__remove-btn {
                             width: 10%;
+                            padding-top: 1.5rem;
 
                             svg {
                                 transition: .5s ease;
@@ -259,26 +260,34 @@
                             justify-content: center;
                             padding: .5rem 0;
 
-                            button {
-                                display: flex;
-                                align-items: center;
-                                background-color: blue;
-                                border: none;
-                                color: white;
-                                padding: .5rem 1.25rem;
-                                font-weight: bold;
+                                button {
+                                    background-color: blue;
+                                    border: none;
+                                    box-shadow: 3px 3px 3px gray;
+                                    transition: ease .2s;
+    
+                                    &:hover {
+                                        transform: scale(1.05);
+                                        cursor: pointer;
+                                    }
 
-                                box-shadow: 3px 3px 3px gray;
-                                transition: ease .2s;
+                                    a {
+                                        display: flex;
+                                        align-content: center;
+                                        text-decoration: none;
+                                        color: white;
+                                        padding: .5rem 1.25rem;
+                                        width: 100%;
+                                        height: 100%;
 
-                                &:hover {
-                                    transform: scale(1.05);
-                                    cursor: pointer;
-                                }
+                                        span {
+                                            line-height: 1.1rem;
+                                            padding: 0 .75rem;
+                                            font-weight: bold;
+                                        }
 
-                                span {
-                                    padding: 0 .75rem;
-                                }
+                                    }
+    
                             }
                         }
                     }

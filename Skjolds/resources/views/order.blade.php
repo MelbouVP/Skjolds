@@ -1,133 +1,84 @@
 @extends('master')
 
 @section('page-style-files')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/checkout-page.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/order-page.css') }}" >
 @endsection    
     
 
 @section('content')
-    <div class="checkout-page">
-        <div class="checkout-page__container">
+    <div class="order-page">
+        <div class="order-page__container">
 
-            <div class="checkout__container">
+            <div class="order__container">
 
-                <div class="checkout-cart">
-
-                    <div class="checkout-cart__header">
-                        <h1>Checkout</h1>
+                <div class="order-details">
+                    <div class="order-details__header">
+                        <h1>Order details</h1>
                     </div>
 
-                    <div class="checkout-cart__content">
-
-                        <div class="content__cart-item">
-                            <div class="cart-item__image">
-                                <img src="/images/Felicciti 2019 Off-shoulders Dress.jpg" alt="Women dress">
+                    <div class="order-details__buyer">
+                        
+                        <div class="buyer__details">
+                            <div>
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" placeholder="John">
                             </div>
-                            <div class="cart-item__summary">
-                                <div class="summary__price">
-                                    50.00€
-                                </div>
-                                <div class="summary__name">
-                                    <h3>Felicciti 2018 Off-shoulders Dress</h3>
-                                </div>
-                                <div class="summary__options">
-                                    <div class="summary__options--size">
-                                        <p>Size:</p>
-                                        <span>XS</span>
-                                    </div>
-                                    <div class="summary__options--color">
-                                        <p>Color:</p>
-                                        <span>Blue</span>
-                                    </div>
-                                    <div class="summary__options--quantity">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 11.115 18"><path d="M23.115,24.135l-6.87-6.885,6.87-6.885L21,8.25l-9,9,9,9Z" transform="translate(-12 -8.25)"/></svg>
-                                        <div class="quantity__count">1</div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 11.115 18"><path d="M12.885,24.51l6.87-6.885-6.87-6.885L15,8.625l9,9-9,9Z" transform="translate(-12.885 -8.625)"/></svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cart-item__remove-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><path d="M37.523,10.523l-3-3-12,12-12-12-3,3,12,12-12,12,3,3,12-12,12,12,3-3-12-12Z" transform="translate(-7.523 -7.523)" fill="#3d3d3d"/></svg>
+                            
+                            <div>
+                                <label for="surname">Surname</label>
+                                <input type="text" name="surname" id="surname" placeholder="Smith">
                             </div>
                         </div>
 
-                        <div class="content__cart-item">
-                            <div class="cart-item__image">
-                                <img src="images/Wachs 2016 men jacket.jpg" alt="Men jacket">
+                        <div class="buyer__contact">
+                            <div>
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" placeholder="john.smith@example.com">
                             </div>
-                            <div class="cart-item__summary">
-                                <div class="summary__price">
-                                    65.00€
-                                </div>
-                                <div class="summary__name">
-                                    <h3>Felicciti 2018 Off-shoulders Dress</h3>
-                                </div>
-                                <div class="summary__options">
-                                    <div class="summary__options--size">
-                                        <p>Size:</p>
-                                        <span>L</span>
-                                    </div>
-                                    <div class="summary__options--color">
-                                        <p>Color:</p>
-                                        <span>Blue</span>
-                                    </div>
-                                    <div class="summary__options--quantity">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 11.115 18"><path d="M23.115,24.135l-6.87-6.885,6.87-6.885L21,8.25l-9,9,9,9Z" transform="translate(-12 -8.25)"/></svg>
-                                        <div class="quantity__count">2</div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 11.115 18"><path d="M12.885,24.51l6.87-6.885-6.87-6.885L15,8.625l9,9-9,9Z" transform="translate(-12.885 -8.625)"/></svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cart-item__remove-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><path d="M37.523,10.523l-3-3-12,12-12-12-3,3,12,12-12,12,3,3,12-12,12,12,3-3-12-12Z" transform="translate(-7.523 -7.523)" fill="#3d3d3d"/></svg>
+                            
+                            <div>
+                                <label for="phone">Phone number</label>
+                                <input type="tel" name="phone" id="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="28930028">
                             </div>
                         </div>
 
-                        <div class="content__cart-item">
-                            <div class="cart-item__image">
-                                <img src="images/Roadmatia 2020 brown women trousers.jpg" alt="Woman trousers">
+                        <div class="buyer__delivery">
+                            <div>
+                                <label for="delivery_city">Delivery city</label>
+                                <input type="text" name="delivery_city" id="delivery_city">
                             </div>
-                            <div class="cart-item__summary">
-                                <div class="summary__price">
-                                    59.99€
-                                </div>
-                                <div class="summary__name">
-                                    <h3>Roadmatia 2020 brown women trousers</h3>
-                                </div>
-                                <div class="summary__options">
-                                    <div class="summary__options--size">
-                                        <p>Size:</p>
-                                        <span>S</span>
-                                    </div>
-                                    <div class="summary__options--color">
-                                        <p>Color:</p>
-                                        <span>Blue</span>
-                                    </div>
-                                    <div class="summary__options--quantity">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 11.115 18"><path d="M23.115,24.135l-6.87-6.885,6.87-6.885L21,8.25l-9,9,9,9Z" transform="translate(-12 -8.25)"/></svg>
-                                        <div class="quantity__count">1</div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 11.115 18"><path d="M12.885,24.51l6.87-6.885-6.87-6.885L15,8.625l9,9-9,9Z" transform="translate(-12.885 -8.625)"/></svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cart-item__remove-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><path d="M37.523,10.523l-3-3-12,12-12-12-3,3,12,12-12,12,3,3,12-12,12,12,3-3-12-12Z" transform="translate(-7.523 -7.523)" fill="#3d3d3d"/></svg>
+    
+                            <div>
+                                <label for="delivery_adress">Delivery adress</label>
+                                <input type="text" name="delivery_adress" id="delivery_adress">
                             </div>
                         </div>
 
+
                     </div>
 
-                    <div class="checkout-cart__continue-btn">
-                        <a href="/shop">
-                            Continue shopping
-                        </a>
-                    </div>
+                    <div class="order-details__payment-details">
+                        
+                        <div>
+                            <label for="card_name">Name on card</label>
+                            <input type="text" name="card_name" id="card_name" placeholder="John Smith">
+                        </div>
 
+                        <div>
+                            <label for="card_number">Credit card number</label>
+                            <input type="tel" name="card_number" id="card_number" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
+                        </div>
+
+                        <div>
+                            <label for="cvc_number">CVC</label>
+                            <input type="tel" name="cvc_number" id="cvc_number" maxlength="3" pattern="[0-3],{3}" placeholder="xxx">
+                        </div>
+
+                    </div>
                 </div>
 
-
-                <div class="checkout-summary">
-                    <div class="checkout-summary__container">
+                <div class="order-summary">
+                    <div class="order-summary__container">
 
                         <div class="summary__header">
                             <h2>Order summary</h2>
@@ -147,7 +98,7 @@
                                 <button type="submit">
                                     <a href="/order">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="19" viewBox="0 0 30 24"><path d="M30,6H6A2.977,2.977,0,0,0,3.015,9L3,27a2.99,2.99,0,0,0,3,3H30a2.99,2.99,0,0,0,3-3V9A2.99,2.99,0,0,0,30,6Zm0,21H6V18H30Zm0-15H6V9H30Z" transform="translate(-3 -6)" fill="#fff"/></svg>
-                                        <span>Checkout</span>
+                                        <span>Pay</span>
                                     </a>    
                                 </button>
                             </div>
@@ -173,10 +124,11 @@
 
                             </div>
                         </div>
+                    
                     </div>
-
                 </div>
             </div>
+
         </div>
     </div>
 @endsection

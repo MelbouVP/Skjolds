@@ -27,7 +27,7 @@
             <div class="navbar__cart-button">
                 <img src="\images\Icon-shopping-bag.png" alt="Shopping cart button">
                 <div class="navbar__cart-button--items-counter">
-                    <p>0</p>
+                    <p>4</p>
                 </div>
             </div>
         </a>
