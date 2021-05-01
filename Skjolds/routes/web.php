@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn() => view('index'));
+// Route::get('/', fn() => view('index'));
 
-Route::get('/shop', fn() => view('shop'));
+// Route::get('/shop', fn() => view('shop'));
 
-Route::get('/shop/item', fn() => view('item'));
+// Route::get('/shop/item', fn() => view('item'));
 
-Route::get('/checkout', fn() => view('checkout'));
+// Route::get('/checkout', fn() => view('checkout'));
 
-Route::get('/order', fn() => view('order'));
+// Route::get('/order', fn() => view('order'));
