@@ -71,6 +71,9 @@ class Kernel extends HttpKernel
      * The priority-sorted list of middleware.
      *
      * This forces non-global middleware to always be in the given order.
+     * 
+     * 
+     * passAuthToken added before Authentication in order to pass token inside cookie as Authorization header to Sanctum API
      *
      * @var array
      */

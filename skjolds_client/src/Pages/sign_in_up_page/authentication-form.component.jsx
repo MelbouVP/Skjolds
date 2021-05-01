@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import apiClient from '../../apiClient';
-import Cookies from 'universal-cookie';
+import { connect } from 'react-redux';
+import { registerStart, emailLogInStart } from '../../Redux/user/user.actions';
+
 
 import Login from './login.component';
 import Register from './register.component';
@@ -9,7 +10,7 @@ import Register from './register.component';
 import './authentication-form.scss'
 
 
-const AuthenticationForm = ({ history }) => {
+const AuthenticationForm = ({ history, registerStart, emailLogInStart }) => {
 
 
     // if route /login is true, Login components is displayed
@@ -26,29 +27,16 @@ const AuthenticationForm = ({ history }) => {
         
     },[history.location.pathname])
 
-    const handleLogin = (e) => {
+    const handleLogin = (e, loginData) => {
         e.preventDefault();
 
-        console.log('clicked')
+        emailLogInStart(loginData)
     }
     
     const handleRegister = (e, signUpData) => {
         e.preventDefault();
 
-        let { username, email, password, confirmPassword } = signUpData;
-
-        apiClient.get('/sanctum/csrf-cookie')
-            .then(response => {
-                apiClient.post('/api/register', {
-                    username,
-                    email,
-                    password,
-                    password_confirmation: confirmPassword
-                })
-            })
-            .then(response => {
-                console.log(response.data)
-            });
+        registerStart(signUpData);
     }
 
 
@@ -85,7 +73,7 @@ const AuthenticationForm = ({ history }) => {
                             showLogin ? 
                                 <Login handleLogin={handleLogin} /> 
                             : 
-                                <Register handleRegister ={handleRegister} />
+                                <Register handleRegister={handleRegister} />
                         }
                     </div>
 
@@ -97,4 +85,9 @@ const AuthenticationForm = ({ history }) => {
     )
 }
 
-export default AuthenticationForm;
+const mapDispatchToProps = dispatch =>({
+    registerStart: (registerData) => dispatch(registerStart(registerData)),
+    emailLogInStart: (loginData) => dispatch(emailLogInStart(loginData))
+})
+
+export default connect(null, mapDispatchToProps)(AuthenticationForm);

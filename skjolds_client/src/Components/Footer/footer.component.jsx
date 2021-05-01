@@ -12,41 +12,41 @@ const Footer = () => {
     
     
     return (
-        <footer class="page-footer">
-            <div class="footer__container">
+        <footer className="page-footer">
+            <div className="footer__container">
 
-                <div class="footer__social-media">
-                    <a href="/" class="footer__social-media--link">
+                <div className="footer__social-media">
+                    <a href="/" className="footer__social-media--link">
                         <img src={twitterIcon} alt="Twitter icon"/>
                     </a>
-                    <a href="/" class="footer__social-media--link">
+                    <a href="/" className="footer__social-media--link">
                         <img src={facebookIcon} alt="Facebook icon"/>
                     </a>
-                    <a href="/" class="footer__social-media--link">
+                    <a href="/" className="footer__social-media--link">
                         <img src={instagramIcon} alt="Instagram icon"/>
                     </a>
                 </div>
 
-                <div class="footer__description">
+                <div className="footer__description">
 
 
-                    <div class="description__information">
-                        <div class="description__information--title">
+                    <div className="description__information">
+                        <div className="description__information--title">
                             Skjolds clothing
                         </div>
-                        <div class="description__information--address">
+                        <div className="description__information--address">
                             skjolds.support@gmail.com
                         </div>
-                        <div class="description__information--address">
+                        <div className="description__information--address">
                             +431 4400 230 32
                         </div>
-                        <div class="description__information--address">
+                        <div className="description__information--address">
                             1 St. Olavs Pass, Oslo, Norway
                         </div>
                     </div>
 
 
-                    <div class="description__copyright">
+                    <div className="description__copyright">
                         <p>
                             © Copyright 2021 MelbouVP Design Inc.
                         </p>

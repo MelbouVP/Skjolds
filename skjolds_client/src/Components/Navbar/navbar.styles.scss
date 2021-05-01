@@ -30,39 +30,43 @@
     &__navbar:nth-of-type(2){
         justify-content: flex-end;
 
-        .navbar__link {
-            padding-right: 1.5rem;
+        .navbar__link--container {
+            display: flex;
 
 
-
-            &:hover {
-
-                 img {
-                     transform: scale(1.1);
-                 }
-            }
-
-            img {
-                height: 15px;
-                width: 15px;
+            .navbar__link {
                 transition: ease .2s;
+    
+                &:hover {
+    
+                     img {
+                         transform: scale(1.1);
+                     }
 
-            }
-            
-            &:nth-of-type(1){
-
-                img {
-                    margin-right: .75rem; 
-                    transition: ease .2s;
+                     svg {
+                        transform: scale(1.1);
+                     }
                 }
-            }
+    
+                img {
+                    margin-right: .5rem; 
+                    height: 15px;
+                    width: 15px;
+                    transition: ease .2s;
+    
+                }
 
-            &:nth-of-type(2){
-
+                svg {
+                    transition: ease .2s;
+                    margin-right: .4rem; 
+                }
+            
+    
                 .navbar__cart-button {
                     display: flex;
                     align-items: center;
                     position: relative;
+                    transition: ease .2s;
 
                     &--items-counter {
                         position: absolute;
@@ -70,21 +74,22 @@
                         justify-content: center;
                         align-items: center;
                         color: white;
-                        top: -.6rem;
-                        right: -1rem;
+                        top: -.75rem;
+                        right: -.5rem;
                         background: rgb(81, 54, 255);
                         border-radius: 50%;
                         height: 20px;
                         width: 15px;
+                    }
 
-                        // background: rgb(81, 54, 255);
-                        // border-radius: 50%;
-                        // top: -.75rem;
-                        // right: -1.2rem;
-                        // height: 22px;
-                        // width: 18px;
+                }
+
+                &:hover {
+                    .navbar__cart-button {
+                        transform: scale(1.1);
                     }
                 }
+                
             }
         }
     }

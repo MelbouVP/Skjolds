@@ -9,7 +9,7 @@ import './common.styles.scss';
 const Register = ({ handleRegister }) => {
 
     const [ signUpData, setSignUpData ] = useState({ 
-        displayName: '',
+        username: '',
         email: '',
         password: '',
         confirmPassword: ''

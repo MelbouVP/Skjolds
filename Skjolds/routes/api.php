@@ -22,6 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 // Protected routes
+// *See Kernel.php route priority for middleware explanation
+
 Route::group(['middleware' => ['passAuthToken','auth:sanctum',]], function () {
     Route::post('/product/create', [ProductController::class, 'store']);
     Route::put('/product/{product:id}', [ProductController::class, 'update']);
@@ -30,13 +32,6 @@ Route::group(['middleware' => ['passAuthToken','auth:sanctum',]], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-// Route::middleware(['passAuthToken','auth:sanctum'])->group(function () {
-//     Route::post('/product/create', [ProductController::class, 'store']);
-//     Route::put('/product/{product:id}', [ProductController::class, 'update']);
-//     Route::delete('/product/{product:id}', [ProductController::class, 'destroy']);
-//     Route::get('/products', [ProductController::class, 'index']);
-//     Route::post('/logout', [AuthController::class, 'logout']);
-// });
 
 // Public routes
 Route::post('/register', [AuthController::class, 'register']);
