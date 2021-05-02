@@ -25,6 +25,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->sentence(1),
             'description' => $this->faker->paragraph,
             'price' => $this->faker->randomFloat(2, 30, 130),
+            'image_path' => 'images/product/Felicciti 2019 Off-shoulders Dress.jpg'
         ];
     }
 }
