@@ -14,7 +14,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+
+        $products = Product::all();
+
+        // foreach ($products as $product) {
+        //     $product->image_path = asset('images/product/'. $product->image_path);
+        // };
+
+        return $products;
     }
 
     /**

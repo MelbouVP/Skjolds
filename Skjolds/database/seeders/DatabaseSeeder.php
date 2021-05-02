@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         
-        Product::factory(3)->create();
+        Product::factory(12)->create();
 
         // Book::truncate();
 

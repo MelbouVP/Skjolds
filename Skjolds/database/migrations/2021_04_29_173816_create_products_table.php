@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name', 50);
             $table->text('description');
             $table->decimal('price', $precision = 8, $scale = 2); // precision total amount of numbers (max 999k), scale - how many decimal places
+            $table->string('image_path');
             $table->timestamps();
-            // $table->string('image');
             // $table->foreignId('supplier_id);
 
             
