@@ -112,12 +112,13 @@
                                     display: none;
                                 }
 
-                                label {
+                                // label {
 
-                                    &:hover {
-                                        cursor: pointer;
-                                    }
-                                }
+                                //     &:hover {
+                                //         cursor: pointer;
+                                //         background: rgb(48, 126, 242);
+                                //     }
+                                // }
                                 
                                 label :checked + span {
                                     background: rgb(48, 126, 242);
@@ -135,6 +136,11 @@
                                     width: 2.25rem;
                                     line-height: 2rem;
                                     text-align: center;
+
+                                    &:hover {
+                                        cursor: pointer;
+                                        background: rgb(225, 225, 225);
+                                    }
                                 }
                             }
                         }
@@ -225,6 +231,14 @@
 
                                         &:after {
                                             background-color: rgb(160, 160, 160);
+
+                                        }
+
+                                        &:hover {
+                                            &:after {
+    
+                                                background-color: rgb(180, 180, 180);
+                                            }
                                         }
                                         
                                     }
@@ -236,6 +250,13 @@
                                         &:after {
                                             background-color: rgb(15, 15, 15);
                                         }
+
+                                        &:hover {
+                                            &:after {
+    
+                                                background-color: rgb(35, 35, 35);
+                                            }
+                                        }
                                         
                                     }
                                 }
@@ -245,6 +266,13 @@
 
                                         &:after {
                                             background-color: rgb(18, 1, 255);
+                                        }
+
+                                        &:hover {
+                                            &:after {
+    
+                                                background-color: rgb(38, 21, 255);
+                                            }
                                         }
                                         
                                     }
@@ -256,6 +284,13 @@
                                         &:after {
                                             background-color: rgb(255, 217, 0);
                                         }
+
+                                        &:hover {
+                                            &:after {
+    
+                                                background-color: rgb(255, 237, 20);
+                                            }
+                                        }
                                         
                                     }
                                 }
@@ -266,6 +301,13 @@
                                         &:after {
                                             background-color: rgb(204, 0, 0);
                                         }
+
+                                        &:hover {
+                                            &:after {
+    
+                                                background-color: rgb(224, 20, 20);
+                                            }
+                                        }
                                         
                                     }
                                 }
@@ -275,6 +317,13 @@
 
                                         &:after {
                                             background-color: rgb(69, 255, 52);
+                                        }
+
+                                        &:hover {
+                                            &:after {
+    
+                                                background-color: rgb(89, 255, 72);
+                                            }
                                         }
                                         
                                     }
