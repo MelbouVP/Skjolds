@@ -74,23 +74,55 @@ class AuthController extends Controller
             ], 401);
         };
 
-        // Check if user already has token, delete old tokens and issue new token
-        if( $user->tokens ){
-            $user->tokens()->delete();
-        };
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
+        $token = $this->issueToken($user);
 
         $response = [
             'user' => [
                 'email' => $user->email,
-                'username' => $user->username
+                'username' => $user->username,
+                'privileged' => $token['privilege']
             ],
         ];
 
         return response($response, 201)->cookie(
-            'auth_token', $token, null, '/', null, null, true
+            'auth_token', $token['data'], null, '/', null, null, true
         );
+    }
+
+
+    // issue auth tokens to users
+    public function issueToken(User $user)
+    {
+
+        // Check if user already has token, delete old tokens in order to issue new one
+        if( $user->tokens ){
+            $user->tokens()->delete();
+        };
+
+        // issue privileged token with abilities based on user role
+        if($user->role != 'user'){
+            return [
+                'data' => $this->issuePrivilegedToken($user),
+                'privilege' => true
+            ];
+        } else {
+            return [
+                'data' => $user->createToken('auth_token')->plainTextToken,
+                'privilege' => false
+            ];
+        }
+
+    }
+
+    public function issuePrivilegedToken(User $user)
+    {
+        switch ($user->role) {
+            case 'admin':
+              return $user->createToken('auth_token',['Product:crud'])->plainTextToken;
+              break;
+            default:
+                return $user->createToken('auth_token')->plainTextToken;
+          }
+
     }
 }
