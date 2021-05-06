@@ -3,7 +3,10 @@ import React from 'react';
 import './product-card.styles.scss';
 
 const ProductCard = ({ product }) => {
+
+    console.log(product);
     
+    console.log('mounted')
     
     return (
         <div className="shop__item-card">

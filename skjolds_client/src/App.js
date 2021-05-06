@@ -6,6 +6,13 @@ import HomePage from './Pages/homepage/homepage.component';
 import ShopPage from './Pages/shop/shop.component';
 import AuthenticationForm from './Pages/sign_in_up_page/authentication-form.component';
 import ProfilePage from './Pages/profile/profile-page.component';
+import ProtectedRoute from './Components/Protected-route/protected-route.component';
+import PrivilegedRoute from './Components/Privileged-route/privileged-route.component';
+
+import ProductCreate from './Components/Product-create/product-create.component';
+import ProductEdit from './Components/Product-edit/product-edit.component';
+
+import PanelView from './Components/Panel-view/panel-view.component';
 
 import Navbar from './Components/Navbar/navbar.component';
 import Footer from './Components/Footer/footer.component';
@@ -24,8 +31,24 @@ const App = () => {
           <Route exact path='/shop' component={ShopPage} />
           <Route exact path='/login' component={AuthenticationForm} />
           <Route exact path='/register' component={AuthenticationForm} />
-          <Route exact path='/profile' component={ProfilePage} />
-          {/* <Route exact path='/register' render={ () => <AuthenticationForm formContent={ <Register />} titleText={registerTitleText} subText={registerSubText}  /> } /> */}
+          <ProtectedRoute exact path='/profile'>
+            <ProfilePage />
+          </ProtectedRoute>
+          <PrivilegedRoute>
+            <Route exact path='/resources' >
+              <PanelView />
+            </Route>
+            <Route exact path='/resources/product/create' >
+              <ProductCreate />
+            </Route>
+            <Route exact path='/resources/product/edit/:id' >
+              <ProductEdit />
+            </Route>
+          </PrivilegedRoute>
+          {/* <PrivilegedRoute exact path='/resources/create' >
+          </PrivilegedRoute>
+          <PrivilegedRoute exact path='/resources/edit' >
+          </PrivilegedRoute> */}
         </Switch>
       <Footer />
     </div>

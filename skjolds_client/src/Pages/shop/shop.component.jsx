@@ -12,10 +12,10 @@ import './shop.styles.scss';
 const ShopPage = ({ products, fetchInitialProductsStart }) => {
 
     useEffect(() => {
-        if(!products){
+        // if(!products){
             fetchInitialProductsStart()
-        }
-    },[products,fetchInitialProductsStart])
+        // }
+    },[fetchInitialProductsStart])
 
     
     const productsList = products ? 

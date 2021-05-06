@@ -15,4 +15,6 @@ class Product extends Model
         'price',
         'image_path'
     ];
+
+    protected $hidden = array('created_at', 'updated_at');
 }

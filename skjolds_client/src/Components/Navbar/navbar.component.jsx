@@ -67,6 +67,11 @@ const Navbar = ({ isAuthenticated, logOutStart }) => {
                                         Logout
                                     </li>
                                 </Link>
+                                <Link to='/profile' className="navbar__link" >
+                                    <li className="navbar__link--content">
+                                        Profile
+                                    </li>
+                                </Link>
                             </div>
                         :
                             <div className="navbar__link--container">

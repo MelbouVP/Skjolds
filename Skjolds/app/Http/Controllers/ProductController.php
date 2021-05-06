@@ -44,15 +44,26 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = $request->validate([
-            'name' => 'required|string|max:60',
-            'description' => 'required',
-            'price' => 'required|numeric|between:1,129.99'
+
+        
+        $fields = $this->validateData($request);
+            
+        // $data = $request->all();
+        // error_log( print_r($data, TRUE) ); 
+        
+        $path = $request->file('image')->store('product','public');
+
+
+        $product = Product::create([
+            'name' => $fields['name'],
+            'description' => $fields['description'],
+            'price' => $fields['price'],
+            'image_path' => 'images/' . $path
         ]);
 
-        $this->create($attributes);
+        return response('Success', 201);
 
-        // return Product::create($attributes);
+
     }
 
     /**
@@ -72,9 +83,12 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+
+        $product = Product::find($id);
+
+        return response($product, 201);
     }
 
     /**
@@ -84,20 +98,25 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
 
-        $attributes = $request->validate([
-            'name' => 'required|string|max:60',
-            'description' => 'required',
-            'price' => 'required|numeric|between:1,129.99'
+        $fields = $this->validateData($request);
+        
+        $product = Product::find($id);
+
+        unlink($product->image_path);
+
+        $path = $request->file('image')->store('product','public');
+
+        $product->update([
+            'name' => $fields['name'],
+            'description' => $fields['description'],
+            'price' => $fields['price'],
+            'image_path' => 'images/' . $path
         ]);
 
-
-        $product = Product::find($product->id);
-        $product->update($attributes);
-
-        return $product;
+        return response($product, 201);
     }
 
     /**
@@ -120,5 +139,15 @@ class ProductController extends Controller
     public function search($name)
     {
         return Product::where('name','like', '%'.$name.'%')->get();
+    }
+
+    public function validateData(Request $request)
+    {
+        return $request->validate([
+            'name' => 'required|string|max:50',
+            'description' => 'required',
+            'price' => 'required|numeric|between:1,129.99',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048' // max limits upload size e.g. 2048 kB = 2 Mb
+        ]);
     }
 }

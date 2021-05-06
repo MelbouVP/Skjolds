@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -25,13 +26,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // *See Kernel.php route priority for middleware explanation
 
 Route::group(['middleware' => ['passAuthToken','auth:sanctum',]], function () {
-    Route::post('/product/create', [ProductController::class, 'store']);
-    Route::put('/product/{product:id}', [ProductController::class, 'update']);
-    Route::delete('/product/{product:id}', [ProductController::class, 'destroy']);
     Route::get('/products', [ProductController::class, 'index']);
+    Route::post('/product/create', [ProductController::class, 'store']);
+    Route::get('/product/edit/{product:id}', [ProductController::class, 'edit']);
+    Route::delete('/product/{product:id}', [ProductController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    
+    
+    Route::get('/resources/index', [AdminController::class, 'index']);
 });
 
+Route::put('/product/update/{id}', [ProductController::class, 'update']);
 
 // Public routes
 Route::post('/register', [AuthController::class, 'register']);

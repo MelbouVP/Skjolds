@@ -1,0 +1,43 @@
+.panel-page {
+    min-height: 90vh;
+    background: rgb(240, 240, 240);
+
+    &__container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+
+        .panel-page__models {
+            display: flex;
+            flex-direction: column;
+            width: 15%;
+            div {
+                padding: 1rem;
+                button {
+                    padding: .5rem 1rem;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .panel-page__data {
+            width: 85%;
+
+            .data-list__container {
+                display: flex;
+                flex-direction: column;
+                padding-top: 5rem;
+
+                .data__container {
+                    display: flex;
+                }
+            }
+        }
+
+        
+    }
+}

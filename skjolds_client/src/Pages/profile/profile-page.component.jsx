@@ -1,9 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './profile-page.styles.scss';
+import { connect } from 'react-redux';
 
-const ProfilePage = () => {
+import { selectIsPrivileged } from '../../Redux/user/user.select.js';
+
+import './profile-page.styles.scss';
+import { createStructuredSelector } from 'reselect';
+
+const ProfilePage = ({ isPrivileged}) => {
 
 
     return (
@@ -12,15 +17,24 @@ const ProfilePage = () => {
                 <div className="profile-page__header">
                     <h1>Profile</h1>
                 </div>
-                <div className='product-panel'>
-                    <button>
-                        <Link to='/product/create'>Create new product</Link>
-                    </button>
-                </div>
+                {
+                    isPrivileged ?
+                        <div className='product-panel'>
+                            <button>
+                                <Link to='/resources/'>Records</Link>
+                            </button>
+                        </div>
+                    :
+                        null
+                }
             </div>
         </section>
     )
 }
 
-export default ProfilePage;
+const mapStateToProps = createStructuredSelector({
+    isPrivileged: selectIsPrivileged
+})
+
+export default connect(mapStateToProps)(ProfilePage);
 
