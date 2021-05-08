@@ -16,7 +16,7 @@ import apiClient from '../../apiClient';
 
 const getProducts = () => {
 
-    apiClient.get('/api/products')
+    apiClient.get('/api/product/54')
         .then(response => {
             console.log(response)
         })

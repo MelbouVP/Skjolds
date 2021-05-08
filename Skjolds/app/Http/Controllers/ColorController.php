@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
 use Illuminate\Http\Request;
 
-use Illuminate\Container\Container;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\File;
-
-class AdminController extends Controller
+class ColorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,29 +14,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        
-
-        $models = collect(File::allFiles(app_path()))
-            ->map(function ($item) { // get list of all model names, returns collections that match Models/ namespace
-                $path = $item->getRelativePathName();
-
-                if(str_contains ( $path, 'Models')) { // remove Models/ namespace and .php extension from Model name
-                    
-                    $string = substr($path, 7, -4);
-
-                    if($string !== 'User'){ // skip User model for now
-                        return $string;
-                    }
-
-                };
-            })
-            ->filter(fn($item) => $item) // returns collection with not null values
-            ->toArray(); // convert collection to array
-
-        $models = array_values($models); // starts array from index 0
+        $colors = Color::simplePaginate(15);
 
 
-        return response($models, 201);
+        return $colors;
     }
 
     /**

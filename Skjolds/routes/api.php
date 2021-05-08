@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\SizeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,8 +29,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['passAuthToken','auth:sanctum',]], function () {
     Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/colors', [ColorController::class, 'index']);
+    Route::get('/sizes', [SizeController::class, 'index']);
+
     Route::post('/product/create', [ProductController::class, 'store']);
     Route::get('/product/edit/{product:id}', [ProductController::class, 'edit']);
+    Route::put('/product/update/{id}', [ProductController::class, 'update']);
     Route::delete('/product/{product:id}', [ProductController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
     
@@ -36,7 +42,6 @@ Route::group(['middleware' => ['passAuthToken','auth:sanctum',]], function () {
     Route::get('/resources/index', [AdminController::class, 'index']);
 });
 
-Route::put('/product/update/{id}', [ProductController::class, 'update']);
 
 // Public routes
 Route::post('/register', [AuthController::class, 'register']);

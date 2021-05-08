@@ -74,7 +74,13 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return Product::find($product->id);
+        $product = Product::with('colors', 'sizes')->find($product->id);
+
+        $properties = Product::with('colors')->get();
+
+        // error_log( print_r($properties, TRUE) ); 
+
+        return response($product, 201);
     }
 
     /**

@@ -16,5 +16,16 @@ class Product extends Model
         'image_path'
     ];
 
-    protected $hidden = array('created_at', 'updated_at');
+    protected $hidden = ['pivot', 'created_at', 'updated_at'];
+
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class);
+    }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class);
+    }
+    
 }
