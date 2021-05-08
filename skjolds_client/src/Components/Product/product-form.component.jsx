@@ -70,11 +70,17 @@ const ProductForm = ({ handleSubmit, editRecordData, hasContentLoaded }) => {
                         </div>
                         <div className="product__image--preview">
                             {
-                                editRecordData && hasContentLoaded ? 
-                                    <img src={`http://localhost:8000/${editRecordData.image_path}`} alt='Product' />
+
+                                editRecordData ?
+                                    (
+                                        picturePreview ? 
+                                            <img src={picturePreview} alt="Uploaded product" value={picturePreview}/>
+                                        :
+                                            <img src={`http://localhost:8000/${editRecordData.image_path}`} alt='Product' />
+                                    )
                                 :
                                     (
-                                        picturePreview ?
+                                        picturePreview ? 
                                             <img src={picturePreview} alt="Uploaded product" value={picturePreview}/>
                                         :
                                             null
