@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
 
-        $products = Product::simplePaginate(3);
+        $products = Product::simplePaginate(15);
 
         // foreach ($products as $product) {
         //     $product->image_path = asset('images/product/'. $product->image_path);

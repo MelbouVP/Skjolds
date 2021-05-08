@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 
-import './product-edit.styles.scss';
 
-import history from '../../history';
-import apiClient from '../../apiClient';
+import './product.styles.scss';
 
-const ProductEdit = () => {
+import { editRecordStart } from '../../Redux/admin/admin.actions';
+import { selectCurrentRecord, selectHasLoaded } from '../../Redux/admin/admin.select';
+import PageSpinner from '../Spinners/page-spinner.component';
 
-    const [productHasLoaded, setProductHasLoaded] = useState(false)
-
+const ProductEdit = ({ currentRecord, hasContentLoaded, editRecordStart}) => {
+    console.log('rendered')
     const [ productData, setProductData ] = useState({ 
         name: '',
         description: '',
         price: 0,
-        image: null
+        image: {}
     })
-    console.log(productData);
 
-    const { name, description, price, image } = productData;
-
-    console.log(image);
+    useEffect(() => {
+        setProductData(currentRecord)
+    },[currentRecord])
 
     const [picturePreview, setPicturePreview] = useState('')
 
@@ -31,66 +32,29 @@ const ProductEdit = () => {
     const handleImage = e => {
 
         setPicturePreview(URL.createObjectURL(e.target.files[0]));
-        setProductData({...productData, image : e.target.files[0]})
+        setProductData({...productData, image: e.target.files[0]})
     }
 
     const handleSubmit = (e) => {
 
         e.preventDefault();
-        console.log('submit1');
         
         const formData = new FormData();
 
-        const data = {}
 		for (const property in productData) {
             formData.append(property, productData[property]);
         }
 
-        
-        
-		formData.forEach((value, property) => data[property] = value)
-
-        // formData.forEach((value, key) => console.log(key, value));
-        console.log(data)
-
         formData.append("_method", "put");
 
-        apiClient.get('/sanctum/csrf-cookie').then( response => {
-                console.log(response);
-                apiClient.post(`/api/product/update/${productData.id}`, formData)
-                    .then( response => {
-                        console.log(response)
-                        if (response.status === 201){
-                            history.push('/resources/')
-                        }
-                    }
-                )
-            }
-        )
+        editRecordStart(formData)
 
     }
 
-
-    useEffect(() => {
-        let slug = history.location.pathname;
-        
-        let productID = slug.slice(24);
-
-        console.log('fetching data')
-        apiClient.get(`/api/product/edit/${productID}`).then( response => {
-            setProductData(response.data)
-            setProductHasLoaded(true)
-        })
-    },[])
-
-
-
-
     return (
-        <div>
+        <section className="product-page">
             {
-                productHasLoaded ? 
-                    <section className="product-page">
+                hasContentLoaded ?
                         <div className="product-page__container">
                             
                             <div className="product__container">
@@ -98,17 +62,17 @@ const ProductEdit = () => {
                                 <form className="product__form" onSubmit={handleSubmit}>
                                     <div className="product__name" >
                                         <label htmlFor="name">Product name:</label>
-                                        <input type="text" name="name" max='50' value={name} onChange={handleChange} />
+                                        <input type="text" name="name" max='50' value={productData.name || ''} onChange={handleChange} />
                                     </div>
             
                                     <div className="product__description" >
                                         <label htmlFor="description">Product description:</label>
-                                        <textarea name="description" rows="4" cols="50" value={description} onChange={handleChange} />
+                                        <textarea name="description" rows="4" cols="50" value={productData.description || ''} onChange={handleChange} />
                                     </div>
             
                                     <div className="product__price" >
                                         <label htmlFor="price">Product price:</label>
-                                        <input type="number" name="price" step="1" min='1' max='129.99' value={price} onChange={handleChange} />
+                                        <input type="number" name="price" step="1" min='1' max='129.99' value={productData.price || 0} onChange={handleChange} />
                                     </div>
             
                                     <div className="product__image">
@@ -119,9 +83,9 @@ const ProductEdit = () => {
                                         <div className="product__image--preview">
                                             {
                                                 picturePreview ?
-                                                    <img src={picturePreview} alt="" value={picturePreview}/>
+                                                    <img src={picturePreview} alt="Uploaded product"/>
                                                 :
-                                                    null
+                                                    <img src={`http://localhost:8000/${currentRecord.image_path}`} alt="Product"/>
                                             }
                                         </div>
                                     </div>
@@ -131,12 +95,21 @@ const ProductEdit = () => {
                                 
                             </div>
                         </div>
-                    </section>
                 :
-                    null
+                <PageSpinner />
             }
-        </div>
+        </section>
     )
 }
 
-export default ProductEdit;
+
+const mapStateToProps = createStructuredSelector({
+    currentRecord: selectCurrentRecord,
+    hasContentLoaded: selectHasLoaded
+})
+
+const mapDispatchToProps = dispatch => ({
+    editRecordStart: (data) => dispatch(editRecordStart(data))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductEdit);

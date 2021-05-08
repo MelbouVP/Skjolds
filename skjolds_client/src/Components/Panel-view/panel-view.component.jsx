@@ -1,64 +1,77 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import apiClient from '../../apiClient';
 import RecordsList from '../Records-list/records-list.component';
+import PageSpinner from '../Spinners/page-spinner.component';
+
+import { fetchModelListStart, changeCurrentModel } from '../../Redux/admin/admin.actions';
+import { selectModelList, selectCurrentModel, selectHasLoaded } from '../../Redux/admin/admin.select';
 
 import './panel-view.styles.scss';
 
-const PanelView = () => {
-
-
-    const [modelList, setModelList] = useState();
-    const [modelName, setModelName] = useState('');
+const PanelView = ({ modelList, currentModel, fetchModelListStart, changeCurrentModel, hasLoaded }) => {
     
     useEffect(() => {
-            apiClient.get('/sanctum/csrf-cookie').then( response => {
-                apiClient.get('/api/resources/index')
-                    .then( response => {
-                        setModelList(response.data)
-                })
-            })
-    },[setModelList])
+        if(modelList.length === 0){
+            fetchModelListStart()
+        }
+    },[modelList, fetchModelListStart])
 
 
-    const changeCurrentModel = (e) => {
+    const handleModelChange = (e) => {
         let model = e.target.value.toLowerCase();
-        setModelName(model);
+
+        if(currentModel !== model) {
+            changeCurrentModel(model); // triggers redux saga action - fetches records for respective model
+        }
     }
 
     let modelsListComponent = modelList ? modelList.map( (name, index) => 
-            <div key={index}>
-                <button onClick={changeCurrentModel} value={`${name}`}> {`${name}`} </button>
+            <div key={index} className={name.toLowerCase() === currentModel ? 'highlight' : ''}>
+                <button onClick={handleModelChange} value={`${name}`}> {`${name}`} </button>
             </div>)
         : 
             null
-        
+
 
     return (
         <section className="panel-page">
-                    <div className="panel-page__container">
-                        <aside className="panel-page__models">
-                            {
-                                modelsListComponent
-                            }
-                        </aside>
-                        {
-                            modelName ?
-                                <div className="panel-page__data">
-                                    <div className="data-list__container">
-                                        <div className="data__container">
-                                            <RecordsList currentModel={modelName} />
+                    {
+                        hasLoaded || modelList.length > 0 ?
+                            <div className="panel-page__container">
+                                <aside className="panel-page__models">
+                                    {
+                                        modelsListComponent
+                                    }
+                                </aside>
+                                {
+                                    currentModel ?
+                                        <div className="panel-page__data">
+                                            <RecordsList />
                                         </div>
-                                    </div>
-                                </div>
-                            :
-                                null
+                                    :
+                                        null
 
-                        }
-                    </div>
+                                }
+                            </div>
+                        :
+                            <PageSpinner />
+                    }
         </section>
     )
 }
 
-export default PanelView;
+const mapStateToProps = createStructuredSelector({
+    modelList: selectModelList,
+    currentModel: selectCurrentModel,
+    hasLoaded: selectHasLoaded
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchModelListStart: () => dispatch(fetchModelListStart()),
+    changeCurrentModel: (modelName) => dispatch(changeCurrentModel(modelName))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(PanelView);
 

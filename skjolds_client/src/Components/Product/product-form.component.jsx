@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 
-import apiClient from '../../apiClient';
+import './product.styles.scss';
 
-import './product-create.styles.scss';
-
-const ProductCreate = () => {
+const ProductForm = ({ handleSubmit }) => {
 
     const [ productData, setProductData ] = useState({ 
         name: '',
@@ -12,10 +10,8 @@ const ProductCreate = () => {
         price: 0,
         image: null
     })
-
-    const { name, description, price } = productData;
-
     const [picturePreview, setPicturePreview] = useState('')
+
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -77,17 +73,17 @@ const ProductCreate = () => {
                     <form className="product__form" onSubmit={handleSubmit} >
                         <div className="product__name" >
                             <label htmlFor="name">Product name:</label>
-                            <input type="text" name="name" max='50' value={name} onChange={handleChange} />
+                            <input type="text" name="name" max='50' value={productData.name} onChange={handleChange} />
                         </div>
 
                         <div className="product__description" >
                             <label htmlFor="description">Product description:</label>
-                            <textarea name="description" rows="4" cols="50" value={description} onChange={handleChange} />
+                            <textarea name="description" rows="4" cols="50" value={productData.description} onChange={handleChange} />
                         </div>
 
                         <div className="product__price" >
                             <label htmlFor="price">Product price:</label>
-                            <input type="number" name="price" step="1" min='1' max='129.99' value={price} onChange={handleChange} />
+                            <input type="number" name="price" step="1" min='1' max='129.99' value={productData.price} onChange={handleChange} />
                         </div>
 
                         <div className="product__image">
@@ -114,5 +110,5 @@ const ProductCreate = () => {
     )
 }
 
-export default ProductCreate;
+export default ProductForm;
 

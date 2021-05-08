@@ -1,7 +1,23 @@
 
+.data-list__container {
+
+    .data__container {
+        display: flex;
+        flex-direction: column;
+        overflow-x: scroll;
+    }
+}
+
+
+section {
+    width: 100%;
+}
+
+
 table {
-    table-layout: fixed;
-    width: 90%;
+    // table-layout: fixed;
+    width: 100%;
+    overflow-x: scroll;
 }
 
 tr {
@@ -14,8 +30,9 @@ th {
 }
 
 td {
+    width: 2rem;
     text-align: center;
-    max-width: .5rem;
+    max-width: 12rem;
     padding: .5rem;
     white-space: nowrap;
     overflow: hidden;         /* <- this does seem to be required */
