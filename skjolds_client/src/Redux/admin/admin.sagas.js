@@ -2,7 +2,7 @@ import { takeLatest, select, put, all, call } from 'redux-saga/effects';
 import AdminActionTypes from './admin.types';
 
 import apiClient from '../../apiClient';
-// import history from '../../history';
+import history from '../../history';
 
 import { selectCurrentModel, selectCurrentRecord, selectRecordsData } from './admin.select';
 
@@ -181,6 +181,7 @@ function* editRecord({ payload }){
                 }
             });
 
+            history.push('/resources');
             yield put(editRecordSuccess(newRecordsList));
         } else {
             throw new Error("Couldn't edit record.");

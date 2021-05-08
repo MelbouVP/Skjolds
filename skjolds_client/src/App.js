@@ -9,8 +9,7 @@ import ProfilePage from './Pages/profile/profile-page.component';
 import ProtectedRoute from './Components/Protected-route/protected-route.component';
 import PrivilegedRoute from './Components/Privileged-route/privileged-route.component';
 
-import ProductCreate from './Components/Product/product-create.component';
-import ProductEdit from './Components/Product/product-edit.component';
+import Product from './Components/Product/product.component';
 
 import PanelView from './Components/Panel-view/panel-view.component';
 
@@ -36,10 +35,10 @@ const App = () => {
           </ProtectedRoute>
           <PrivilegedRoute>
             <Route path='/resources/product/edit/:id' >
-              <ProductEdit />
+              <Product type={'edit'} />
             </Route>
             <Route exact path='/resources/product/create' >
-              <ProductCreate />
+              <Product type={'create'} />
             </Route>
             <Route exact path='/resources/' >
               <PanelView />
