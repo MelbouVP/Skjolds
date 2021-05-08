@@ -104,17 +104,27 @@ class ProductController extends Controller
         $fields = $this->validateData($request);
         
         $product = Product::find($id);
+        
+        
+        if(request()->hasFile('image')){
+            unlink($product->image_path);
+    
+            $path = $request->file('image')->store('product','public');
 
-        unlink($product->image_path);
+            $product->update([
+                'name' => $fields['name'],
+                'description' => $fields['description'],
+                'price' => $fields['price'],
+                'image_path' => 'images/' . $path
+            ]);
 
-        $path = $request->file('image')->store('product','public');
-
-        $product->update([
-            'name' => $fields['name'],
-            'description' => $fields['description'],
-            'price' => $fields['price'],
-            'image_path' => 'images/' . $path
-        ]);
+        } else {
+            $product->update([
+                'name' => $fields['name'],
+                'description' => $fields['description'],
+                'price' => $fields['price']
+            ]);
+        }
 
         return response($product, 201);
     }
@@ -144,10 +154,11 @@ class ProductController extends Controller
     public function validateData(Request $request)
     {
         return $request->validate([
-            'name' => 'required|string|max:50',
-            'description' => 'required',
-            'price' => 'required|numeric|between:1,129.99',
-            'image' => 'required|mimes:png,jpg,jpeg|max:2048' // max limits upload size e.g. 2048 kB = 2 Mb
+            'name' => $request->isMethod('put') ? 'string|max:50' : 'required|string|max:50',
+            'description' => $request->isMethod('put') ? '' : 'required',
+            'price' => $request->isMethod('put') ? 'numeric|between:1,129.99' : 'required|numeric|between:1,129.99',
+            'image' => $request->isMethod('put') ? 'mimes:png,jpg,jpeg|max:2048' : 'required|mimes:png,jpg,jpeg|max:2048'// max limits upload size e.g. 2048 kB = 2 Mb
         ]);
+
     }
 }
