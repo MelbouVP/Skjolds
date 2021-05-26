@@ -136,7 +136,7 @@ Design mock-up consists of main components of e-commerce website:
 **1. Shop page**
 
 <p align="center">
-  <img src="https://s3.gifyu.com/images/Web-1920--2.png" width="549" height="610"/>
+  <img src="https://s3.gifyu.com/images/shop-page.png" />
 </p>
 <br/>
 <br/>
