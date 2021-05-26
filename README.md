@@ -65,6 +65,7 @@ Below layout of main database components can be seen (rough sketch). Additional 
 
 The project will be implemented through MVC paradigm, where following components will be utilised: 
 <br/>
+
 Models:
 *	User
 *	Order
@@ -72,6 +73,7 @@ Models:
 *	Item
 *	Shopping cart
 <br/>
+
 Views:
 *	View for home page.
 *	View for shop page where all individual items are listed and filter options can be aplied.
@@ -82,6 +84,7 @@ Views:
 *	View to update shopping item in database.
 *	View to shopping items from database.
 <br/>
+
 Controllers:
 *	ProductsController with methods for displaying items (index), creating new item (create), saving item (store), editing item (edit) and updating it (update) and deleting an item (destroy) as well as searching/filtering items (search).
 *	CartController with methods for displaying cart items (index), adding new item (create) and persisting it (store), adjusting quantities of items in shopping cart (edit) and updating them (update), and removal of items from shopping cart. (destroy).
@@ -104,11 +107,13 @@ Unauthenticated user:
 *	Won’t be able to proceed to payment page and pay for their order.
 *	Upon leaving the website, shopping-cart won’t be saved and will reset.
 <br/>
+
 Authenticated user:
 *	Same abilities as unauthenticated user.
 *	Able to proceed to payment page and pay for their order.
 *	Upon leaving the website, shoping-cart will be saved in it’s current state.
 <br/>
+
 Administrator:
 *	Same abilities as authenticated visitor
 *	Able to add/remove items from web-shop.
@@ -131,7 +136,7 @@ Design mock-up consists of main components of e-commerce website:
 **1. Shop page**
 
 <p align="center">
-  <img src="https://s3.gifyu.com/images/Web-1920--2.png" width="805" height="800"/>
+  <img src="https://s3.gifyu.com/images/Web-1920--2.png" width="805" height="500"/>
 </p>
 <br/>
 <br/>
@@ -139,7 +144,7 @@ Design mock-up consists of main components of e-commerce website:
 **2. Item page**
 
 <p align="center">
-  <img src="https://s3.gifyu.com/images/Item-page.png" width="805" height="800"/>
+  <img src="https://s3.gifyu.com/images/Item-page.png" width="805" height="500"/>
 </p>
 <br/>
 <br/>
@@ -147,13 +152,13 @@ Design mock-up consists of main components of e-commerce website:
 **3. Checkout/order page**
 
 <p align="center">
-  <img src="https://s3.gifyu.com/images/Checkout-page.png" width="805" height="800"/>
+  <img src="https://s3.gifyu.com/images/Checkout-page.png" width="805" height="500"/>
 </p>
 <br/>
 <br/>
 
 <p align="center">
-  <img src="https://s3.gifyu.com/images/Order-details-page.png" width="805" height="800"/>
+  <img src="https://s3.gifyu.com/images/Order-details-page.png" width="805" height="500"/>
 </p>
 <br/>
 <br/>
