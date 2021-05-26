@@ -13,11 +13,24 @@ import './product.styles.scss';
 const Product = ({ type, currentRecord, hasContentLoaded, editRecordStart, createRecordStart }) => {
 
     const handleSubmit = (productData) => {
+
+        console.log(productData);
         
         const formData = new FormData();
 
-		for (const property in productData) {
-            formData.append(property, productData[property]);
+		for (let property in productData) {
+
+            if ( Array.isArray(productData[property]) || typeof property === 'object' ) {
+                // property = productData[property].forEach( data => JSON.stringify(data), {type : 'application/json'})
+                formData.append(
+                    property, 
+                    JSON.stringify(productData[property])
+                );// or just
+                // property = productData[property].forEach( data => console.log(JSON.stringify(data)))
+
+            } else {
+                formData.append(property, productData[property]);
+            }
         }
 
         // formData.forEach((value, key) => console.log(key, value));

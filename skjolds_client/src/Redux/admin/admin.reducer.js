@@ -18,6 +18,7 @@ const adminReducer = (state = INITIAL_STATE, action) => {
         case AdminActionTypes.FETCH_RECORDS_START:
         case AdminActionTypes.FETCH_MODEL_LIST_START:
         case AdminActionTypes.FETCH_INDIVIDUAL_RECORD_START:
+        case AdminActionTypes.DELETE_RECORD_START:
             return {
                 ...state,
                 hasLoaded: false
@@ -41,7 +42,8 @@ const adminReducer = (state = INITIAL_STATE, action) => {
                 records: {
                     ...state.records,
                     data: action.payload
-                }
+                },
+                hasLoaded: true
             }
         case AdminActionTypes.CREATE_RECORD_SUCCESS:
             return {

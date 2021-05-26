@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Models\Color;
 
 class ProductController extends Controller
 {
@@ -15,7 +17,9 @@ class ProductController extends Controller
     public function index()
     {
 
-        $products = Product::simplePaginate(15);
+        // $products = Product::with('colors','sizes')->simplePaginate(15);
+
+        $products = Product::simplePaginate(50);
 
         // foreach ($products as $product) {
         //     $product->image_path = asset('images/product/'. $product->image_path);
@@ -45,11 +49,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        
-        $fields = $this->validateData($request);
-            
         // $data = $request->all();
         // error_log( print_r($data, TRUE) ); 
+        
+        $fields = $this->validateData($request);
+        $colors = $this->validateColor($request['colors']);
+        error_log( print_r($colors, TRUE) ); 
+        // $sizes = $this->validateSize($request['sizes']);
         
         $path = $request->file('image')->store('product','public');
 
@@ -60,6 +66,16 @@ class ProductController extends Controller
             'price' => $fields['price'],
             'image_path' => 'images/' . $path
         ]);
+
+        foreach($colors as $color) {
+            $product->colors()->attach($color['id']);
+        }
+
+        // foreach($sizes as $size) {
+        //     $product->sizes()->attach($size['id']);
+        // }
+
+        
 
         return response('Success', 201);
 
@@ -92,7 +108,7 @@ class ProductController extends Controller
     public function edit($id)
     {
 
-        $product = Product::find($id);
+        $product = Product::with('colors', 'sizes')->findOrFail($id);
 
         return response($product, 201);
     }
@@ -163,8 +179,50 @@ class ProductController extends Controller
             'name' => $request->isMethod('put') ? 'string|max:50' : 'required|string|max:50',
             'description' => $request->isMethod('put') ? '' : 'required',
             'price' => $request->isMethod('put') ? 'numeric|between:1,129.99' : 'required|numeric|between:1,129.99',
-            'image' => $request->isMethod('put') ? 'mimes:png,jpg,jpeg|max:2048' : 'required|mimes:png,jpg,jpeg|max:2048'// max limits upload size e.g. 2048 kB = 2 Mb
+            'image' => $request->isMethod('put') ? 'mimes:png,jpg,jpeg|max:2048' : 'required|mimes:png,jpg,jpeg|max:2048',// max limits upload size e.g. 2048 kB = 2 Mb
+            'colors' => 'required',
+            'sizes' => 'required'
         ]);
 
     }
+
+    
+    /**
+     * 
+     *
+     * @param  \App\Models\Color  $color
+     */
+    public function validateColor($requestColors)
+    {
+
+        $colors = json_decode($requestColors, true);
+        
+        foreach($colors as $color) {
+            
+            $color_id = $color['id'];
+            
+            if( !Color::where('id', $color_id)->first() ){
+                return Response::json('Something went wrong', 422);
+            }
+        }
+
+        return $colors;
+
+    }
+
+    // public function validateSize($requestSizes)
+    // {
+
+    //     $sizes = json_decode($requestSizes, true);
+
+    //     foreach($sizes as $size) {
+            
+    //         if(!Size::where('id', $size['id'])->exists()){
+    //             return response('Provided invalid data', 422);
+    //         }
+    //     }
+
+    //     return $sizes;
+    // }
+
 }
