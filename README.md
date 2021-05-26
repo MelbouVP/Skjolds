@@ -121,7 +121,8 @@ Administrator:
 ## User authentification
 Users will be able to register and authenticate by using a local registration and authentication system. 
 <br/>
-System interface
+
+## Design mock-up
 Design mock-up has been developed using Adobe XD, which highlights the aforementioned core functionality. It must be noted that design mock-up is not the final product, therefore small changes in design can be implemented during development phase.
 <br/>
 
@@ -131,7 +132,7 @@ Design mock-up consists of main components of e-commerce website:
 *	Item page.
 *	Checkout/order page.
 
-## Design mock-up
+<br>
 
 **1. Shop page**
 
