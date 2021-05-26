@@ -4,18 +4,15 @@ Skjolds is a small e-commerce website, which provides users with possibility to 
 
 **PROJECT STATUS:  Work-In-Progress**
 
-Currently outline of project is provided.
 ## Project Outline
 
 Project will consist of developing a small e-commerce website, which will be involved in sales of clothes for both men and women. Users of the website will be able to choose clothes among different categories such as hats, pants, shoes and upper-body clothes such as t-shirts, sweaters and jackets. Users will be able to pay for items using a credit card. 
 
 <img src="https://s3.gifyu.com/images/Front-page.png" />
 
-**Application live-demo can be seen at ...*
-
 ## Table of contents 
 * [Team of developers](#team-of-developers)
-* [Main functionality (MVP)](#main-functionality-(mvp))
+* [Main functionality (MVP)](#main-functionality-mvp)
 * [Data registry](#data-registry)
 * [MVC](#mvc)
 * [User roles](#user-roles)
@@ -51,7 +48,9 @@ As mentioned, the project will be developed as an e-commerce website, where user
 ## Data registry
 The data will be held in main components: User, Order, Category, Item, Shopping cart.
 <br/>
+<br/>
 The web-shop contains multiple categories where in each category there is particular piece of clothing item. Users chooses a clothing item that they wish to buy and the item is added to their shopping cart. After user is finished browsing web-shop, he/she proceeds to checkout and pays for items within the shopping cart – all of the payment information is shown in order information.
+<br/>
 <br/>
 Below layout of main database components can be seen (rough sketch). Additional data components are to be added to support main components, for example, Item_sizing component could be added to support Item component and provide user with ability to choose clothing size. 
 
@@ -65,12 +64,14 @@ Below layout of main database components can be seen (rough sketch). Additional 
 ## MVC
 
 The project will be implemented through MVC paradigm, where following components will be utilised: 
+<br/>
 Models:
 *	User
 *	Order
 *	Category
 *	Item
 *	Shopping cart
+<br/>
 Views:
 *	View for home page.
 *	View for shop page where all individual items are listed and filter options can be aplied.
@@ -80,6 +81,7 @@ Views:
 *	View to create shopping item for database.
 *	View to update shopping item in database.
 *	View to shopping items from database.
+<br/>
 Controllers:
 *	ProductsController with methods for displaying items (index), creating new item (create), saving item (store), editing item (edit) and updating it (update) and deleting an item (destroy) as well as searching/filtering items (search).
 *	CartController with methods for displaying cart items (index), adding new item (create) and persisting it (store), adjusting quantities of items in shopping cart (edit) and updating them (update), and removal of items from shopping cart. (destroy).
@@ -101,10 +103,12 @@ Unauthenticated user:
 *	Visit checkout page.
 *	Won’t be able to proceed to payment page and pay for their order.
 *	Upon leaving the website, shopping-cart won’t be saved and will reset.
+<br/>
 Authenticated user:
 *	Same abilities as unauthenticated user.
 *	Able to proceed to payment page and pay for their order.
 *	Upon leaving the website, shoping-cart will be saved in it’s current state.
+<br/>
 Administrator:
 *	Same abilities as authenticated visitor
 *	Able to add/remove items from web-shop.
@@ -127,7 +131,7 @@ Design mock-up consists of main components of e-commerce website:
 **1. Shop page**
 
 <p align="center">
-  <img src="https://s3.gifyu.com/images/Web-1920--2.png" width="805" height="341"/>
+  <img src="https://s3.gifyu.com/images/Web-1920--2.png" width="805" height="800"/>
 </p>
 <br/>
 <br/>
@@ -135,7 +139,7 @@ Design mock-up consists of main components of e-commerce website:
 **2. Item page**
 
 <p align="center">
-  <img src="https://s3.gifyu.com/images/Item-page.png" width="805" height="341"/>
+  <img src="https://s3.gifyu.com/images/Item-page.png" width="805" height="800"/>
 </p>
 <br/>
 <br/>
@@ -143,13 +147,13 @@ Design mock-up consists of main components of e-commerce website:
 **3. Checkout/order page**
 
 <p align="center">
-  <img src="https://s3.gifyu.com/images/Checkout-page.png" width="805" height="341"/>
+  <img src="https://s3.gifyu.com/images/Checkout-page.png" width="805" height="800"/>
 </p>
 <br/>
 <br/>
 
 <p align="center">
-  <img src="https://s3.gifyu.com/images/Order-details-page.png" width="805" height="341"/>
+  <img src="https://s3.gifyu.com/images/Order-details-page.png" width="805" height="800"/>
 </p>
 <br/>
 <br/>
