@@ -48,10 +48,6 @@ const adminReducer = (state = INITIAL_STATE, action) => {
         case AdminActionTypes.CREATE_RECORD_SUCCESS:
             return {
                 ...state,
-                currentModel: '',
-                records: {
-                    data: []
-                },
                 hasLoaded: true
             }
         case AdminActionTypes.EDIT_RECORD_SUCCESS:

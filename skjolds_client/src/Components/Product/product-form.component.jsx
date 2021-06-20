@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { colors, clotheSizes, shoeSizes } from './productProperties'
 
 import './product.styles.scss';
 
@@ -17,25 +19,99 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
         }
     )
     
-    const [productColors, setProductColors] = useState([
-            { id: 1, color_name: 'black', isAdded: false },
-            { id: 2, color_name: 'grey', isAdded: false },
-            { id: 3, color_name: 'blue', isAdded: false },
-            { id: 4, color_name: 'red', isAdded: false },
-            { id: 5, color_name: 'yellow', isAdded: false },
-            { id: 6, color_name: 'green', isAdded: false },
-    ])
+    const [productColors, setProductColors] = useState(colors)
 
-    const [productSizes, setProductSizes] = useState([
-        { id: 1, size_value: 'XS', isAdded: false },
-        { id: 2, size_value: 'S', isAdded: false },
-        { id: 3, size_value: 'M', isAdded: false },
-        { id: 4, size_value: 'L', isAdded: false },
-        { id: 5, size_value: 'XL', isAdded: false },
-        { id: 6, size_value: 'XXL', isAdded: false },
-    ])
+    const [productSizes, setProductSizes] = useState(clotheSizes)
+
+    const [sizeType, setSizeType] = useState('clothes')
 
     const [picturePreview, setPicturePreview] = useState('')
+
+
+    useEffect(() => {
+        
+        if(editRecordData){
+
+            const updatedColors = productColors.map( color => {
+
+
+                let colorExists = false
+
+                editRecordData.colors.forEach(existingColor => {
+                    if(color.color_name === existingColor.color_name){
+                        colorExists = true
+                    }
+                })
+
+
+                if(colorExists){
+
+                    return {...color, isAdded: !color.isAdded}
+                }
+
+
+                return color
+            })
+
+
+            setProductColors(updatedColors);
+        }
+
+    },[])
+
+    useEffect(() => {
+        
+        if(editRecordData){
+
+            const updatedSizes = productSizes.map( size => {
+
+
+                let sizeExists = false
+
+                editRecordData.sizes.forEach(existingSize => {
+                    if(size.size_value === existingSize.size_value){
+                        sizeExists = true
+                    }
+                })
+
+
+                if(sizeExists){
+
+                    return {...size, isAdded: !size.isAdded}
+                }
+
+
+                return size
+            })
+
+
+            setProductSizes(updatedSizes);
+        }
+
+    },[sizeType])
+
+
+    useEffect(() => {
+        if(editRecordData){
+            const ProductIsShoe = editRecordData.sizes.find(size => size.size_type === 'shoes')
+
+            if(ProductIsShoe){
+                setSizeType('shoes')
+                setProductSizes(shoeSizes)
+            }
+        }
+    }, [editRecordData, setSizeType, setProductSizes])
+
+
+    // useEffect(() => {
+    //     if(editRecordData){
+
+    //         const blob = URL.createObjectURL(new Blob([`http://localhost:8000/${editRecordData.image_path}`], {type: 'image/svg+xml'}))
+
+
+    //         setPicturePreview(blob);
+    //     }
+    // },[])
 
 
     const handleChange = (event) => {
@@ -89,6 +165,21 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
         })
     }
 
+    const handleSizeTypeChange = (e) => {
+
+        const { value } = e.target
+
+        if(value === 'clothes') {
+            setSizeType('clothes')
+            setProductSizes(clotheSizes)
+        } else if ( value === 'shoes'){
+            setSizeType('shoes')
+            setProductSizes(shoeSizes)
+        }
+
+        
+    }
+
     const handleSizeChange = (e) => {
         const isChecked = e.target.checked;
         const sizeValue = e.target.value;
@@ -134,6 +225,7 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
             </div>
         )
     })
+    
 
     const sizesComponent = productSizes.map( (size, index) => {
 
@@ -183,6 +275,12 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
                     </div>
 
                     <div className="product__options" >
+                        <label htmlFor="size_type">Choose size type:</label>
+
+                        <select id="size_type" value={sizeType} onChange={handleSizeTypeChange}>
+                            <option value="clothes">Clothes</option>
+                            <option value="shoes" >Shoes</option>
+                        </select>
                         {
                             sizesComponent
                         }

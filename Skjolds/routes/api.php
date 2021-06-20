@@ -28,7 +28,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // *See Kernel.php route priority for middleware explanation
 
 Route::group(['middleware' => ['passAuthToken','auth:sanctum',]], function () {
-    Route::get('/products', [ProductController::class, 'index']);
     Route::get('/colors', [ColorController::class, 'index']);
     Route::get('/sizes', [SizeController::class, 'index']);
 
@@ -47,5 +46,6 @@ Route::group(['middleware' => ['passAuthToken','auth:sanctum',]], function () {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/products', [ProductController::class, 'index']);
 Route::get('/product/{product:id}', [ProductController::class, 'show']);
 Route::get('/product/search/{name}', [ProductController::class, 'search']);
