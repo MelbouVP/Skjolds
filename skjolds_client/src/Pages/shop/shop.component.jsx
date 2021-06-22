@@ -1,22 +1,89 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { fetchInitialProductsStart } from '../../Redux/shop/shop.actions.js';
-import { selectInitialProducts } from '../../Redux/shop/shop.select';
+import { fetchInitialProductsStart, fetchFilteredProductsStart, clearShopFilter } from '../../Redux/shop/shop.actions.js';
+import { selectInitialProducts, selectFilteredProducts, selectHasShopContentLoaded } from '../../Redux/shop/shop.select';
 
 import ProductCard from '../../Components/Product-card/product-card.component';
+import Spinner from '../../Components/Spinners/page-spinner.component';
 
 import './shop.styles.scss';
 
-const ShopPage = ({ products, fetchInitialProductsStart }) => {
+const ShopPage = ({ 
+    products, 
+    filteredProducts, 
+    hasShopLoaded,
+    fetchInitialProductsStart, 
+    fetchFilteredProductsStart,
+    clearShopFilter
+    }) => {
+
+
+    const [ filterProperties, setFilterProperties ] = useState({ 
+            category: [],
+            size: [],
+            min_price: null,
+            max_price: null,
+            color: []
+    });
 
     useEffect(() => {
-        // if(!products){
-            fetchInitialProductsStart()
-        // }
-    },[fetchInitialProductsStart])
+        fetchInitialProductsStart();
+    },[fetchInitialProductsStart]);
 
+
+    const handleChange = (event) => {
+
+        const { name, value } = event.target;
+
+        let data;
+
+        if( Array.isArray(filterProperties[name])){
+            if(filterProperties[name].indexOf(value) === -1) {
+                
+                data = { ...filterProperties, [name]: [...filterProperties[name], value]}
+                setFilterProperties({ ...filterProperties, [name]: [...filterProperties[name], value]});
+            } else {
+                
+                const updatedData = filterProperties[name].filter(data => data !== value);
+                data = {...filterProperties, [name]: updatedData}
+    
+                setFilterProperties({...filterProperties, [name]: updatedData});
+    
+            }
+        } else {
+            data = {...filterProperties, [name]: value}
+            setFilterProperties({...filterProperties, [name]: value});
+        }
+
+
+        submitFilter(data)
+    }
+    
+    const clearFilter = () => {
+
+        setFilterProperties({ 
+            category: [],
+            size: [],
+            min_price: null,
+            max_price: null,
+            color: []
+        });
+
+
+        document.querySelectorAll('input').forEach(input => input.checked = false)
+
+        // dispatch redux action to change view from filtered products to shop products
+        clearShopFilter();
+
+    }
+
+    
+    const submitFilter = (data) => {
+        
+        fetchFilteredProductsStart(data)
+    }
     
     const productsList = products ? 
         products.map( (product) => 
@@ -24,6 +91,13 @@ const ShopPage = ({ products, fetchInitialProductsStart }) => {
         )
     :
         null
+
+    const filteredProductsList = filteredProducts ?
+        filteredProducts.map( (product) => 
+            <ProductCard key={product.id} product={product} />
+        )
+    :
+        <div  className="product__not-found">No such products were found</div> 
 
     return (
         <div className="shop-page">
@@ -33,10 +107,11 @@ const ShopPage = ({ products, fetchInitialProductsStart }) => {
                     <div className="filter__container">
                         <div className="filter__header">
                             <h1>Filter</h1>
-                            <p>clear filter</p>
+                            <p onClick={clearFilter}>clear filter</p>
                         </div>
-                        <div className="filter__filter-options">
-                            <form action="">
+                        <div className="filter__filter-options" >
+                            <form onChange={handleChange}>
+
                                 <div className="filter-option__category">
                                     <div className="filter-option__category--title">
                                         <h3>
@@ -44,8 +119,8 @@ const ShopPage = ({ products, fetchInitialProductsStart }) => {
                                         </h3>
                                     </div>
 
-                                    <div className="filter-option__category--checkbox">
-                                        <input type="checkbox" name="category" id="men" value="men" />
+                                    <div className="filter-option__category--checkbox" >
+                                        <input type="checkbox" name="category" id="men" value="men"/>
                                         <label htmlFor="men">Men</label>
                                     </div>
 
@@ -144,7 +219,7 @@ const ShopPage = ({ products, fetchInitialProductsStart }) => {
 
                                     <div className="filter-option__color--options">
                                         <label htmlFor="gray" className="color__options--gray">
-                                            <input type="checkbox" name="color" id="gray" value="gray" />
+                                            <input type="checkbox" name="color" id="grey" value="grey" />
                                         </label>
 
                                         <label htmlFor="black" className="color__options--black">
@@ -170,11 +245,6 @@ const ShopPage = ({ products, fetchInitialProductsStart }) => {
 
                                 </div>
 
-
-                                <div className="filter__submit-btn">
-                                    <input type="submit" value="Submit" />
-                                </div>
-
                             </form>
                         </div>
                     </div>
@@ -184,7 +254,17 @@ const ShopPage = ({ products, fetchInitialProductsStart }) => {
                     <div className="shop__container">
 
                         {
-                            productsList
+                            hasShopLoaded ?
+                                (
+                                    filteredProducts ?
+    
+                                        filteredProductsList
+                                    :
+                                        productsList
+                                )
+
+                            :
+                                <Spinner />
                         }
 
                     </div>
@@ -197,11 +277,15 @@ const ShopPage = ({ products, fetchInitialProductsStart }) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-    products: selectInitialProducts
+    products: selectInitialProducts,
+    filteredProducts: selectFilteredProducts,
+    hasShopLoaded: selectHasShopContentLoaded
 })
 
 const mapDispatchToProps = dispatch =>({
-    fetchInitialProductsStart: () => dispatch(fetchInitialProductsStart())
+    fetchInitialProductsStart: () => dispatch(fetchInitialProductsStart()),
+    fetchFilteredProductsStart: (filteredProperties) => dispatch(fetchFilteredProductsStart(filteredProperties)),
+    clearShopFilter: () => dispatch(clearShopFilter())
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(ShopPage);

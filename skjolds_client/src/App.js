@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 
 import HomePage from './Pages/homepage/homepage.component';
 import ShopPage from './Pages/shop/shop.component';
+import ProductDescriptionPage from './Pages/product-description-page/product-description-page.component'
 import AuthenticationForm from './Pages/sign_in_up_page/authentication-form.component';
 import ProfilePage from './Pages/profile/profile-page.component';
 import ProtectedRoute from './Components/Protected-route/protected-route.component';
@@ -30,6 +31,7 @@ const App = () => {
           <Route exact path='/shop' component={ShopPage} />
           <Route exact path='/login' component={AuthenticationForm} />
           <Route exact path='/register' component={AuthenticationForm} />
+          <Route exact path='/product/:id' component={ProductDescriptionPage} />
           <ProtectedRoute exact path='/profile'>
             <ProfilePage />
           </ProtectedRoute>

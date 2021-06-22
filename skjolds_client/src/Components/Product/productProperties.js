@@ -29,3 +29,12 @@ export const shoeSizes = [
     { id: 15, size_value: '52', isAdded: false }
 ]
 
+export const categories = [
+    { id: 1, category_name: 'men', isAdded: false },
+    { id: 2, category_name: 'women', isAdded: false },
+    { id: 3, category_name: 'upper-body', isAdded: false },
+    { id: 4, category_name: 'pants', isAdded: false },
+    { id: 5, category_name: 'hats', isAdded: false },
+    { id: 6, category_name: 'shoes', isAdded: false }
+]
+

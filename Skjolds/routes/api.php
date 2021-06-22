@@ -46,6 +46,8 @@ Route::group(['middleware' => ['passAuthToken','auth:sanctum',]], function () {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/product/{product:id}', [ProductController::class, 'show']);
 Route::get('/product/search/{name}', [ProductController::class, 'search']);
+Route::post('/products/filter', [ProductController::class, 'filter']);

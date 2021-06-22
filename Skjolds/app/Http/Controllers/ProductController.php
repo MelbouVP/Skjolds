@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Product, Color, Size};
+use App\Models\{Category, Product, Color, Size};
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Error;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,9 +18,9 @@ class ProductController extends Controller
     public function index()
     {
 
-        // $products = Product::with('colors','sizes')->simplePaginate(15);
+        $products = Product::with('colors','sizes', 'categories')->simplePaginate(15);
 
-        $products = Product::simplePaginate(50);
+        // $products = Product::simplePaginate(50);
 
         // foreach ($products as $product) {
         //     $product->image_path = asset('images/product/'. $product->image_path);
@@ -56,6 +55,7 @@ class ProductController extends Controller
         
         $fields = $this->validateData($request);
 
+        $categories = $this->validateCategory($request['categories']);
         $colors = $this->validateColor($request['colors']);
         $sizes = $this->validateSize($request['sizes']);
         
@@ -77,6 +77,9 @@ class ProductController extends Controller
             $product->sizes()->attach($size['id']);
         }
 
+        foreach($categories as $category) {
+            $product->categories()->attach($category['id']);
+        }
         
 
         return response('Success', 201);
@@ -94,10 +97,6 @@ class ProductController extends Controller
     {
         $product = Product::with('colors', 'sizes')->find($product->id);
 
-        $properties = Product::with('colors')->get();
-
-        // error_log( print_r($properties, TRUE) ); 
-
         return response($product, 201);
     }
 
@@ -110,7 +109,7 @@ class ProductController extends Controller
     public function edit($id)
     {
 
-        $product = Product::with('colors', 'sizes')->findOrFail($id);
+        $product = Product::with('colors', 'sizes', 'categories')->findOrFail($id);
 
         return response($product, 201);
     }
@@ -124,8 +123,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        
         $fields = $this->validateData($request);
+        Log::info($fields);
+        $categories = $this->validateCategory($request['categories']);
         $colors = $this->validateColor($request['colors']);
         $sizes = $this->validateSize($request['sizes']);
         
@@ -152,6 +153,10 @@ class ProductController extends Controller
             ]);
         }
 
+        $product->categories()->detach();
+        foreach($categories as $category) {
+            $product->categories()->attach($category['id']);
+        }
 
         $product->colors()->detach();
         foreach($colors as $color) {
@@ -188,6 +193,22 @@ class ProductController extends Controller
         return Product::where('name','like', '%'.$name.'%')->get();
     }
 
+    public function filter(Request $request)
+    {
+        $filledInput = array_filter($request->all());
+
+        
+        $products = Product::filter($filledInput)->simplePaginate(50);
+
+
+        // Log::info($products);
+
+        return response($products, 201);
+    }
+
+
+
+
     public function validateData(Request $request)
     {
 
@@ -196,6 +217,7 @@ class ProductController extends Controller
             'description' => $request['description'],
             'price' => json_decode($request['price']),
             'image' => $request['image'],
+            'categories' => json_decode($request['categories']),
             'colors' => json_decode($request['colors']),
             'sizes' => json_decode($request['sizes']),
         ];
@@ -206,17 +228,39 @@ class ProductController extends Controller
             'description' => $request->isMethod('put') ? '' : 'required',
             'price' => $request->isMethod('put') ? 'numeric|between:1,129.99' : 'required|numeric|between:1,129.99',
             'image' => $request->isMethod('put') ? '' : 'required|mimes:png,jpg,jpeg|max:2048',// max limits upload size e.g. 2048 kB = 2 Mb
+            'categories' => 'array|required',
             'colors' => 'array|required',
             'sizes' => 'array|required'
         ])->validate();
 
     }
 
+
+    /**
+     * 
+     *
+     * @param 
+     */
+    public function validateCategory($requestCategories)
+    {
+
+        $categories = json_decode($requestCategories, true);
+
+        foreach($categories as $category) {
+            
+            if(!Category::where('id', $category['id'])->exists()){
+                return response('Provided invalid data', 422);
+            }
+        }
+
+        return $categories;
+    }
+
     
     /**
      * 
      *
-     * @param  \App\Models\Color  $color
+     * @param 
      */
     public function validateColor($requestColors)
     {
@@ -236,6 +280,11 @@ class ProductController extends Controller
 
     }
 
+    /**
+     * 
+     *
+     * @param 
+     */
     public function validateSize($requestSizes)
     {
 
@@ -250,5 +299,6 @@ class ProductController extends Controller
 
         return $sizes;
     }
+
 
 }

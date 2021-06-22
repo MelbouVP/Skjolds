@@ -22,6 +22,7 @@ const PanelView = ({ modelList, currentModel, fetchModelListStart, changeCurrent
     const handleModelChange = (e) => {
         let model = e.target.value.toLowerCase();
 
+
         if(currentModel !== model) {
             changeCurrentModel(model); // triggers redux saga action - fetches records for respective model
         }

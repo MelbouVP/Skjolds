@@ -15,3 +15,27 @@ export const fetchInitialProductsFailure = (error) => ({
     payload: error
 })
 
+export const fetchFilteredProductsStart = (filterProperties) => ({
+    type: ShopActionTypes.FETCH_FILTERED_SHOP_PRODUCTS_START,
+    payload: filterProperties
+})
+
+export const fetchFilteredProductsSuccess = (productsData) => ({
+    type: ShopActionTypes.FETCH_FILTERED_SHOP_PRODUCTS_SUCCESS,
+    payload: productsData
+})
+
+export const fetchFilteredProductsFailure = (error) => ({
+    type: ShopActionTypes.FETCH_FILTERED_SHOP_PRODUCTS_FAILURE,
+    payload: error
+})
+
+export const clearShopFilter = () => ({
+    type: ShopActionTypes.CLEAR_SHOP_FILTER
+})
+
+export const changeCurrentlyViewedProduct = (productData) => ({
+    type: ShopActionTypes.CHANGE_CURRENTLY_VIEWED_PRODUCT,
+    payload: productData
+})
+

@@ -51,6 +51,7 @@ function* onFetchModelList(){
 function* fetchRecords({ payload }){
     // payload is model name
     yield put(fetchRecordsStart());
+    console.log(payload);
 
     try {
         yield apiClient.get('/sanctum/csrf-cookie');

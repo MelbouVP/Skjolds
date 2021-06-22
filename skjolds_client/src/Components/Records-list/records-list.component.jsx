@@ -14,6 +14,8 @@ import { selectCurrentModel, selectHasLoaded, selectRecordsData } from '../../Re
 import './records-list.styles.scss';
 
 const RecordsList = ({ hasContentLoaded, currentModel, recordsData, deleteRecordStart, fetchIndividualRecordStart }) => {
+    
+
 
     const handleRowEdit = (recordID) => {
         history.push(`/resources/${currentModel}/edit/${recordID}`);
@@ -24,22 +26,38 @@ const RecordsList = ({ hasContentLoaded, currentModel, recordsData, deleteRecord
         deleteRecordStart(recordID);
     }
             
-    let tableHeaders = recordsData.length ? Object.keys(recordsData[0]) : [];        
-    let tableHeadersComponent = tableHeaders.map( (headerName,index) => <th key={index} > {headerName}</th>)
+    const tableHeaders = recordsData.length ? Object.keys(recordsData[0]) : [];        
+    const tableHeadersComponent = tableHeaders.map( (headerName,index) => {
 
-    let tableDataComponent = recordsData.length ? recordsData.map( (data, index) => {
+        if(!Array.isArray(recordsData[0][headerName])){
+            return <th key={index} > {headerName}</th>
+        } else {
+            return false
+        }
+
+    })
+
+    const tableDataComponent = recordsData.length ? recordsData.map( (data, index) => {
         
-        let cellData =  tableHeaders.map( (header, index) =>
-            <td key={index} >{data[header]}</td>
+        const cellData =  tableHeaders.map( (header, index) => {
+
+            if(!Array.isArray(data[header])){
+                return (<td key={index} >{data[header]}</td>)
+            } else {
+                return false
+            }
+        })
+
+        return (
+            <tr key={index}>
+                {
+                    cellData
+                }
+                <td><button onClick={() => handleRowEdit(data.id)}>Edit</button></td>
+                <td><button onClick={() => handleRowDelete(data.id)}>Delete</button></td>
+            </tr>
         )
 
-        return <tr key={index}>
-            {
-                cellData
-            }
-            <td><button onClick={() => handleRowEdit(data.id)}>Edit</button></td>
-            <td><button onClick={() => handleRowDelete(data.id)}>Delete</button></td>
-        </tr>
         })
     :
         null

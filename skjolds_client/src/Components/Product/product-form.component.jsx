@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { colors, clotheSizes, shoeSizes } from './productProperties'
+import { colors, clotheSizes, shoeSizes, categories } from './productProperties'
 
 import './product.styles.scss';
 
@@ -13,11 +13,14 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
             name: '',
             description: '',
             price: 0,
+            categories: [],
             colors: [],
             sizes: [],
             image: null
         }
     )
+    
+    const [productCategories, setProductCategories] = useState(categories)
     
     const [productColors, setProductColors] = useState(colors)
 
@@ -27,6 +30,37 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
 
     const [picturePreview, setPicturePreview] = useState('')
 
+    useEffect(() => {
+        
+        if(editRecordData){
+
+            const updatedCategories = productCategories.map( category => {
+
+
+                let categoryExists = false
+
+                editRecordData.categories.forEach(existingCategory => {
+                    if(category.category_name === existingCategory.category_name){
+                        categoryExists = true
+                    }
+                })
+
+
+                if(categoryExists){
+
+                    return {...category, isAdded: !category.isAdded}
+                }
+
+
+                return category
+            })
+
+
+            setProductCategories(updatedCategories);
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     useEffect(() => {
         
@@ -57,6 +91,7 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
             setProductColors(updatedColors);
         }
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     useEffect(() => {
@@ -88,6 +123,7 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
             setProductSizes(updatedSizes);
         }
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[sizeType])
 
 
@@ -128,15 +164,7 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
     const submitData = e => {
         e.preventDefault();
 
-        handleSubmit(productData);
-        // setProductData({ 
-        //     name: '',
-        //     description: '',
-        //     price: 0,
-        //     image: null
-        // });
-        // setPicturePreview('')
-        
+        handleSubmit(productData);        
     }
 
     const handleColorChange = (e) => {
@@ -206,6 +234,34 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
         })
     }
 
+    console.log(productData)
+    const handleCategoryChange = (e) => {
+        const isChecked = e.target.checked;
+        const categoryValue = e.target.value;
+        const categoryID = parseInt(e.target.id)
+
+        let updatedCategoriesList = productCategories
+            .map( (category) => category.category_name === categoryValue ? 
+                    category.isAdded ? {...category, isAdded: false } : {...category, isAdded: true }
+                : 
+                    category
+        )
+        setProductCategories(updatedCategoriesList);
+
+        let newAddedCategories = []
+
+    
+        isChecked ?
+                newAddedCategories = productData.categories.concat([{ id: categoryID, category_name: categoryValue }])
+            :
+                newAddedCategories = productData.categories.filter(category => category.category_name !== categoryValue)
+        
+        setProductData({
+            ...productData,
+            categories: newAddedCategories
+        })
+    }
+
 
     const colorsComponent = productColors.map( (color, index) => {
 
@@ -245,6 +301,25 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
             </div>
         )
     })
+
+    const categoriesComponent = productCategories.map( (category, index) => {
+
+        return (
+            <div className="product__category" key={index} >
+                <label htmlFor={category.category_name}>
+                    <input 
+                        type="checkbox" 
+                        name={category.category_name} 
+                        value={category.category_name} 
+                        id={category.id}
+                        checked={category.isAdded} 
+                        onChange={(e) => handleCategoryChange(e)} 
+                    />
+                    {category.category_name}
+                </label>
+            </div>
+        )
+    })
     
 
     return (
@@ -254,6 +329,18 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
 
                 <form className="product__form" onSubmit={submitData} >
                     <div className="product__name" >
+                        {
+                            editRecordData ?
+                                <p>Product ID: 
+                                    <strong>
+                                        {
+                                            editRecordData.id
+                                        }
+                                    </strong>
+                                </p>
+                            :
+                                null
+                        }
                         <label htmlFor="name">Product name:</label>
                         <input type="text" name="name" max='50' value={productData.name} onChange={handleChange} />
                     </div>
@@ -266,6 +353,12 @@ const ProductForm = ({ handleSubmit, editRecordData }) => {
                     <div className="product__price" >
                         <label htmlFor="price">Product price:</label>
                         <input type="number" name="price" step="0.01" min='1' max='129.99' value={productData.price} onChange={handleChange} />
+                    </div>
+
+                    <div className="product__options" >
+                        {
+                            categoriesComponent
+                        }
                     </div>
 
                     <div className="product__options" >
