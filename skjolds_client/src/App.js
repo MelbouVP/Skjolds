@@ -2,6 +2,9 @@ import React from 'react';
 
 import { Route, Switch } from "react-router-dom";
 
+import ErrorPage from './Pages/error-page/error-page.component';
+import ErrorBoundary from './Components/Error-boundary/error-boundary.component';
+
 import HomePage from './Pages/homepage/homepage.component';
 import ShopPage from './Pages/shop/shop.component';
 import ProductDescriptionPage from './Pages/product-description-page/product-description-page.component'
@@ -26,31 +29,28 @@ const App = () => {
     <div className="App">
       <ScrollTop />
       <Navbar/>
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route exact path='/shop' component={ShopPage} />
-          <Route exact path='/login' component={AuthenticationForm} />
-          <Route exact path='/register' component={AuthenticationForm} />
-          <Route exact path='/product/:id' component={ProductDescriptionPage} />
-          <ProtectedRoute exact path='/profile'>
-            <ProfilePage />
-          </ProtectedRoute>
-          <PrivilegedRoute>
-            <Route path='/resources/product/edit/:id' >
-              <Product type={'edit'} />
-            </Route>
-            <Route exact path='/resources/product/create' >
-              <Product type={'create'} />
-            </Route>
-            <Route exact path='/resources/' >
-              <PanelView />
-            </Route>
-          </PrivilegedRoute>
-          {/* <PrivilegedRoute exact path='/resources/create' >
-          </PrivilegedRoute>
-          <PrivilegedRoute exact path='/resources/edit' >
-          </PrivilegedRoute> */}
-        </Switch>
+        <ErrorBoundary>
+          <Switch>
+              <Route exact path='/' component={HomePage} />
+              <Route exact path='/shop' component={ShopPage} />
+              <Route exact path='/login' component={AuthenticationForm} />
+              <Route exact path='/register' component={AuthenticationForm} />
+              <Route exact path='/product/:id' component={ProductDescriptionPage} />
+              <ProtectedRoute exact path='/profile' component={ProfilePage} />
+              <Route path="/page-not-found" component={ErrorPage} />
+              <PrivilegedRoute>
+                <Route path='/resources/product/edit/:id' >
+                  <Product type={'edit'} />
+                </Route>
+                <Route exact path='/resources/product/create' >
+                  <Product type={'create'} />
+                </Route>
+                <Route exact path='/resources/' >
+                  <PanelView />
+                </Route>
+              </PrivilegedRoute>
+          </Switch>
+        </ErrorBoundary>
       <Footer />
     </div>
   );

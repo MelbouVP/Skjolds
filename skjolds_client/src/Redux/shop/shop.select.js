@@ -32,3 +32,8 @@ export const selectCurrentProduct = createSelector(
     shop => shop.currentProduct
 )
 
+export const selectShopError = createSelector(
+    [selectShop],
+    shop => shop.error
+)
+

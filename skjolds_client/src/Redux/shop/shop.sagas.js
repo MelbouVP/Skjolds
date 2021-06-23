@@ -2,12 +2,15 @@ import { takeLatest, put, all, call, delay } from 'redux-saga/effects';
 import ShopActionTypes from './shop.types';
 
 import apiClient from '../../apiClient';
+import history from '../../history';
 
 import { 
     fetchInitialProductsSuccess, 
     fetchInitialProductsFailure, 
     fetchFilteredProductsSuccess, 
-    fetchFilteredProductsFailure 
+    fetchFilteredProductsFailure,
+    fetchProductDataSuccess,
+    fetchProductDataFailure
 } 
 from './shop.actions';
 
@@ -57,9 +60,34 @@ function* onFetchFilteredProducts(){
     )
 }
 
+function* fetchProductData({ payload }){
+    console.log(payload)
+
+    try {
+
+        const response = yield apiClient.get(`/api/product/${payload}`)
+        console.log(response)
+
+        yield put(fetchProductDataSuccess(response.data));
+
+    } catch (error) {
+        yield history.push('/page-not-found')
+        yield put(fetchProductDataFailure(error));
+    }
+}
+
+
+function* onFetchProductData(){
+    yield takeLatest(
+        ShopActionTypes.FETCH_PRODUCT_DATA_START,
+        fetchProductData
+    )
+}
+
 export function* shopSagas() {
     yield all([
         call(onFetchInitialProducts),
-        call(onFetchFilteredProducts)
+        call(onFetchFilteredProducts),
+        call(onFetchProductData)
     ]);
 }

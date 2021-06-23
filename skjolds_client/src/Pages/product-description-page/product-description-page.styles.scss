@@ -1,6 +1,11 @@
 
 .item-page {
 
+    &__spinner {
+        display: flex;
+        justify-content: center;
+    }
+
     &__container {
         height: 100vh;
         background: rgb(240, 240, 240);

@@ -32,6 +32,7 @@ const shopReducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
         case ShopActionTypes.FETCH_FILTERED_SHOP_PRODUCTS_START:
         case ShopActionTypes.FETCH_INITIAL_SHOP_PRODUCTS_START:
+        case ShopActionTypes.FETCH_PRODUCT_DATA_START:
             return {
                 ...state,
                 hasLoaded: false
@@ -50,6 +51,7 @@ const shopReducer = (state = INITIAL_STATE, action) => {
             }
         case ShopActionTypes.FETCH_INITIAL_SHOP_PRODUCTS_FAILURE:
         case ShopActionTypes.FETCH_FILTERED_SHOP_PRODUCTS_FAILURE:
+        case ShopActionTypes.FETCH_PRODUCT_DATA_FAILURE:
             return {
                 ...state,
                 hasLoaded: true,
@@ -61,8 +63,10 @@ const shopReducer = (state = INITIAL_STATE, action) => {
                 filtered_products: INITIAL_STATE.filtered_products
             }
         case ShopActionTypes.CHANGE_CURRENTLY_VIEWED_PRODUCT:
+        case ShopActionTypes.FETCH_PRODUCT_DATA_SUCCESS:
             return {
                 ...state,
+                hasLoaded: true,
                 currentProduct: action.payload
             }
         default:

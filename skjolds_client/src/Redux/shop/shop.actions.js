@@ -39,3 +39,18 @@ export const changeCurrentlyViewedProduct = (productData) => ({
     payload: productData
 })
 
+export const fetchProductDataStart = (recordID) => ({
+    type: ShopActionTypes.FETCH_PRODUCT_DATA_START,
+    payload: recordID
+})
+
+export const fetchProductDataSuccess = (recordData) => ({
+    type: ShopActionTypes.FETCH_PRODUCT_DATA_SUCCESS,
+    payload: recordData
+})
+
+export const fetchProductDataFailure = (errorMsg) => ({
+    type: ShopActionTypes.FETCH_PRODUCT_DATA_FAILURE,
+    payload: errorMsg
+})
+
