@@ -7,14 +7,20 @@ import { fetchProductDataStart } from '../../Redux/shop/shop.actions';
  
 import { selectCurrentProduct, selectHasShopContentLoaded } from '../../Redux/shop/shop.select';
 
+import { addItem } from '../../Redux/cart/cart.actions'
+
 import PageSpinner from '../../Components/Spinners/page-spinner.component';
 
 
 import './product-description-page.styles.scss';
 
-const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, match : { params } }) => {
+const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, addItem, match : { params } }) => {
 
-    const [productAttributes, setProductAttributes] = useState({})
+    const [productAttributes, setProductAttributes] = useState({
+        size: null,
+        color: null,
+        quantity: 1
+    })
     
     useEffect(() => {
         
@@ -22,17 +28,63 @@ const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, m
             fetchProduct(params.id)
         }
 
+        if(productData){
+            setProductAttributes({
+                ...productAttributes,
+                color: productData.colors[0].color_name,
+                size: productData.sizes[0].size_name
+            })
+        }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [productData])
 
     const redirect =() => {
 
         console.log('click')
     }
 
+    const handleChange = (e) => {
+        setProductAttributes({
+            ...productAttributes,
+            [e.target.name]: e.target.value
+        })
+    }
 
-    const handleSubmit = () => {
+    const incrementItem = () => {
+        console.log('click')
+        setProductAttributes({
+            ...productAttributes,
+            quantity: productAttributes.quantity + 1
+        })
+    }
 
+    const decrementItem = () => {
+        
+        if(productAttributes.quantity >= 2){
+            setProductAttributes({
+                ...productAttributes,
+                quantity: productAttributes.quantity - 1
+            })
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(productAttributes)
+
+        addItem({
+            id: productData.id,
+            name: productData.name,
+            price: productData.price,
+            description :productData.description,
+            image_path: productData.image_path,
+            selectedAttributes: [
+                productAttributes.size,
+                productAttributes.color
+            ],
+            quantity: productAttributes.quantity
+        })
     }
 
     const categoryList = productData ?
@@ -49,11 +101,16 @@ const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, m
 
     const sizeList = productData ?
         productData.sizes.map( (size) => {
-            console.log(size)
 
             return (
                 <label htmlFor={`${size.size_name}`}>
-                    <input type="radio" name="size" id={`${size.size_name}`} value={`${size.size_name}`} />
+                    <input 
+                        type="radio" 
+                        name="size" 
+                        id={`${size.size_name}`} 
+                        value={`${size.size_name}`} 
+                        defaultChecked={productData.sizes[0].size_name === size.size_name ? true : false}
+                    />
                     <span>{`${size.size_value}`}</span>
                 </label>
             )
@@ -63,11 +120,16 @@ const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, m
 
     const colorList = productData ?
         productData.colors.map( (color) => {
-            console.log(color)
 
             return (
                 <label htmlFor={color.color_name} className={`color__options--${color.color_name}`}>
-                    <input type="radio" name="color" id={color.color_name} value={color.color_name}  />
+                    <input 
+                        type="radio" 
+                        name="color" 
+                        id={color.color_name} 
+                        value={color.color_name}
+                        defaultChecked={productData.colors[0].color_name === color.color_name ? true : false}  
+                    />
                 </label>
             )
         })
@@ -112,7 +174,7 @@ const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, m
                                 </p>
                             </div>
 
-                            <form onSubmit={handleSubmit}>
+                            <form onSubmit={handleSubmit} onChange={handleChange}>
                                 <div className="item__information--item-options">
 
                                     <div className="item-options__size">
@@ -131,9 +193,18 @@ const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, m
 
                                     <div className="item-options__quantity">
                                         <p>Quantity</p>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 11.115 18"><path d="M23.115,24.135l-6.87-6.885,6.87-6.885L21,8.25l-9,9,9,9Z" transform="translate(-12 -8.25)"/></svg>
-                                        <div className="quantity__count">1</div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 11.115 18"><path d="M12.885,24.51l6.87-6.885-6.87-6.885L15,8.625l9,9-9,9Z" transform="translate(-12.885 -8.625)"/></svg>
+                                        {
+                                            productAttributes.quantity === 1 ?
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 11.115 18" style={{visibility: 'hidden'}}><path d="M23.115,24.135l-6.87-6.885,6.87-6.885L21,8.25l-9,9,9,9Z" transform="translate(-12 -8.25)"/></svg>
+                                            :
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 11.115 18" onClick={decrementItem} ><path d="M23.115,24.135l-6.87-6.885,6.87-6.885L21,8.25l-9,9,9,9Z" transform="translate(-12 -8.25)" /></svg>
+                                        }
+                                        <div className="quantity__count">
+                                            {
+                                                productAttributes.quantity
+                                            }
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 11.115 18"  onClick={incrementItem}><path d="M12.885,24.51l6.87-6.885-6.87-6.885L15,8.625l9,9-9,9Z" transform="translate(-12.885 -8.625)"/></svg>
                                     </div>
                                 </div>
 
@@ -178,7 +249,8 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchProduct: (recordID) => dispatch(fetchProductDataStart(recordID)) 
+    fetchProduct: (recordID) => dispatch(fetchProductDataStart(recordID)),
+    addItem: (product) => dispatch(addItem(product))
 })
 
 

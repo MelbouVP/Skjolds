@@ -22,17 +22,17 @@ class Product extends Model
 
     public function colors()
     {
-        return $this->belongsToMany(Color::class);
+        return $this->belongsToMany(Color::class)->orderBy('id', 'ASC');
     }
 
     public function sizes()
     {
-        return $this->belongsToMany(Size::class);
+        return $this->belongsToMany(Size::class)->orderBy('id', 'ASC');
     }
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class)->orderBy('id', 'ASC');
     }
 
 

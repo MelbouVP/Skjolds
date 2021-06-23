@@ -1,15 +1,19 @@
 export const addItemToCart = (cartItems, cartItemToAdd) => {
 
+    const selectedAttributesID = createAttributesKey(cartItemToAdd.selectedAttributes)
+    cartItemToAdd = {...cartItemToAdd, selectedAttributesID}
+
+
     // Check if item to be added already exists in state
     const cartItemExists = cartItems.find(cartItem => 
-        cartItem.name === cartItemToAdd.name
+        cartItem.name === cartItemToAdd.name &&
+        cartItem.selectedAttributesID === cartItemToAdd.selectedAttributesID
     )
+
 
     // Create unique attributes key for cart item to be added
     // in order to differentiate items in the cart not only by name but 
     // also by selected attribute combination
-    const selectedAttributesID = createAttributesKey(cartItemToAdd.selectedAttributes)
-    cartItemToAdd = {...cartItemToAdd, selectedAttributesID}
 
 
     // If item to be added to the cart already exists increment it
@@ -26,13 +30,8 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
                 cartItem.selectedAttributesID === cartItemToAdd.selectedAttributesID
             ){
 
-                return {...cartItem, quantity: cartItem.quantity + 1}
-            } else if (
-                cartItem.name === cartItemToAdd.name && 
-                cartItem.selectedAttributesID !== cartItemToAdd.selectedAttributesID
-            ){
-                return {...cartItemToAdd, quantity: 1 }
-            }   else {
+                return cartItemToAdd
+            }  else {
                 return cartItem
             }
 
@@ -40,7 +39,7 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
     }
 
     // if item doesnt exist then return it with quantity of 1
-    return [...cartItems, {...cartItemToAdd, quantity: 1}]
+    return [...cartItems, {...cartItemToAdd}]
 
 }
 
@@ -128,14 +127,12 @@ const createAttributesKey = (attributes) => {
 
     return attributes.map( attribute => {
 
+        console.log(attribute)
+
         let attributeKey = ''
 
-        for(let i = 0; i < attribute.name.length; i += 4){
-            attributeKey += attribute.name[i]
-        }
-
-        for(let i = 0; i < attribute.value.length; i++){
-            attributeKey += attribute.value[i]
+        for(let i = 0; i < attribute.length; i += 2){
+            attributeKey += attribute[i]
         }
         
         return attributeKey

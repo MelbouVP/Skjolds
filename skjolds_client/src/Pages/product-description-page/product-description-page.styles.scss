@@ -11,6 +11,7 @@
         background: rgb(240, 240, 240);
         display: flex;
         padding: 2rem;
+        user-select: none;
 
         .item__visual {
             width: 40%;

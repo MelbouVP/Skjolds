@@ -103,6 +103,9 @@ const ShopPage = ({
     :
         <div  className="product__not-found">No such products were found</div> 
 
+
+    console.log(filterProperties)
+
     return (
         <div className="shop-page">
             <div className="shop-page__container">
@@ -124,7 +127,13 @@ const ShopPage = ({
                                     </div>
 
                                     <div className="filter-option__category--checkbox" >
-                                        <input type="checkbox" name="category" id="men" value="men"/>
+                                        <input 
+                                            type="checkbox" 
+                                            name="category" 
+                                            id="men" 
+                                            value="men" 
+                                            // defaultChecked={filterProperties.category.find(category => category === 'men')}
+                                        />
                                         <label htmlFor="men">Men</label>
                                     </div>
 

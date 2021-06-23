@@ -96,8 +96,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
 
-        Log::info($product);
         $product = Product::with('colors', 'sizes', 'categories')->find($product->id);
+        Log::info($product);
 
         return response($product, 201);
     }
@@ -200,7 +200,7 @@ class ProductController extends Controller
         $filledInput = array_filter($request->all());
 
         
-        $products = Product::filter($filledInput)->simplePaginate(50);
+        $products = Product::filter($filledInput)->with('colors','sizes', 'categories')->simplePaginate(50);
 
 
         // Log::info($products);
