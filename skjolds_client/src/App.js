@@ -2,11 +2,14 @@ import React from 'react';
 
 import { Route, Switch } from "react-router-dom";
 
-import ErrorPage from './Pages/error-page/error-page.component';
+import ErrorPage from './Pages/errorpage/error-page.component';
 import ErrorBoundary from './Components/Error-boundary/error-boundary.component';
 
 import HomePage from './Pages/homepage/homepage.component';
 import ShopPage from './Pages/shop/shop.component';
+import CartPage from './Pages/Cart-page/cart-page.component';
+import CheckoutPage from './Pages/Checkout-page/checkout-page.component';
+
 import ProductDescriptionPage from './Pages/product-description-page/product-description-page.component'
 import AuthenticationForm from './Pages/sign_in_up_page/authentication-form.component';
 import ProfilePage from './Pages/profile/profile-page.component';
@@ -36,7 +39,13 @@ const App = () => {
               <Route exact path='/login' component={AuthenticationForm} />
               <Route exact path='/register' component={AuthenticationForm} />
               <Route exact path='/product/:id' component={ProductDescriptionPage} />
-              <ProtectedRoute exact path='/profile' component={ProfilePage} />
+              <ProtectedRoute exact path='/profile'>
+                <ProfilePage />
+              </ProtectedRoute>
+              <ProtectedRoute exact path='/checkout'>
+                <CheckoutPage />
+              </ProtectedRoute>
+              <Route exact path='/cart' component={CartPage } />
               <Route path="/page-not-found" component={ErrorPage} />
               <PrivilegedRoute>
                 <Route path='/resources/product/edit/:id' >

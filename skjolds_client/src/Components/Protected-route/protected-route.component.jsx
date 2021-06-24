@@ -7,10 +7,13 @@ import { selectIsAuthenticated } from '../../Redux/user/user.select';
 
 const ProtectedRoute = ({ children, isAuthenticated, ...rest }) => {
     return (
-      <Route {...rest} render={() => {
+      <Route {...rest} render={({location}) => {
         return isAuthenticated === true
           ? children
-          : <Redirect to='/login' />
+          : <Redirect to={{
+            pathname: "/login",
+            state: { from: location }
+          }} />
       }} />
     )
 }

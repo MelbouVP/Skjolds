@@ -32,7 +32,7 @@ const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, a
             setProductAttributes({
                 ...productAttributes,
                 color: productData.colors[0].color_name,
-                size: productData.sizes[0].size_name
+                size: productData.sizes[0].size_value
             })
         }
 
@@ -44,7 +44,10 @@ const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, a
         console.log('click')
     }
 
+    console.log(productAttributes)
+
     const handleChange = (e) => {
+
         setProductAttributes({
             ...productAttributes,
             [e.target.name]: e.target.value
@@ -108,8 +111,8 @@ const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, a
                         type="radio" 
                         name="size" 
                         id={`${size.size_name}`} 
-                        value={`${size.size_name}`} 
-                        defaultChecked={productData.sizes[0].size_name === size.size_name ? true : false}
+                        value={`${size.size_value}`} 
+                        defaultChecked={productData.sizes[0].size_value === size.size_value ? true : false}
                     />
                     <span>{`${size.size_value}`}</span>
                 </label>

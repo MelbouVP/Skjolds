@@ -6,7 +6,7 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 
     // Check if item to be added already exists in state
     const cartItemExists = cartItems.find(cartItem => 
-        cartItem.name === cartItemToAdd.name &&
+        cartItem.id === cartItemToAdd.id &&
         cartItem.selectedAttributesID === cartItemToAdd.selectedAttributesID
     )
 
@@ -26,7 +26,7 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
             //  and item quantity has to be reset back to 1
             
             if(
-                cartItem.name === cartItemToAdd.name && 
+                cartItem.id === cartItemToAdd.id && 
                 cartItem.selectedAttributesID === cartItemToAdd.selectedAttributesID
             ){
 
@@ -46,8 +46,10 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 // return all cart items where name and attribute combination doesnt match the item that has to be removed
 export const removeItemFromCart = (cartItems, cartItemToRemove) => {
     return cartItems.filter(cartItem => 
-        cartItem.name !== cartItemToRemove.name && 
-        cartItem.selectedAttributesID !== cartItemToRemove.selectedAttributesID
+        (cartItem.id !== cartItemToRemove.id && 
+        cartItem.selectedAttributesID !== cartItemToRemove.selectedAttributesID) ||
+        (cartItem.id === cartItemToRemove.id && 
+        cartItem.selectedAttributesID !== cartItemToRemove.selectedAttributesID)
     )
 }
 
@@ -57,7 +59,7 @@ export const incrementItem = (cartItems, cartItemToIncrement) => {
     return cartItems.map(cartItem => {
 
         if(
-            cartItem.name === cartItemToIncrement.name &&
+            cartItem.id === cartItemToIncrement.id &&
             cartItem.selectedAttributesID === cartItemToIncrement.selectedAttributesID
         ) {
             return {...cartItem, quantity: cartItem.quantity + 1}
@@ -83,7 +85,7 @@ export const decrementItem = (cartItems, cartItemToDecrement) => {
     return cartItems.map(cartItem => {
         
         if(
-            cartItem.name === cartItemToDecrement.name &&
+            cartItem.id === cartItemToDecrement.id &&
             cartItem.selectedAttributesID === cartItemToDecrement.selectedAttributesID
         ) {
             return {...cartItem, quantity: cartItem.quantity - 1}
@@ -97,7 +99,7 @@ export const decrementItem = (cartItems, cartItemToDecrement) => {
 export const changeCartItemAttribute = (cartItems, cartItemToChange) => {
     // find the cart item, whose attributes have to be changed
     const existingCartItem = cartItems.find(cartItem => 
-        cartItem.name === cartItemToChange.name
+        cartItem.id === cartItemToChange.id
     )
 
     // generete new attribute key
@@ -107,7 +109,7 @@ export const changeCartItemAttribute = (cartItems, cartItemToChange) => {
     return cartItems.map( cartItem => {
         
         // update cart item with newly selected attributes and new attributes key
-        if(cartItem.name === existingCartItem.name){
+        if(cartItem.id === existingCartItem.id){
             return {
                 ...existingCartItem, 
                 selectedAttributes: cartItemToChange.attributes,

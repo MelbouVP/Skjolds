@@ -48,7 +48,7 @@ export function* emailLogIn({ payload : { email, password }}){
         })
 
         yield put(logInSuccess(userData.data));
-        history.push('/')
+        history.push(`${history.location.state.from.pathname}`)
 
     } catch (error) {
         yield put(logInFailure(error))

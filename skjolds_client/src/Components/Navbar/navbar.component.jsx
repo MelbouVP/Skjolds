@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { logOutStart } from '../../Redux/user/user.actions';
 import { selectIsAuthenticated } from '../../Redux/user/user.select';
+import { selectCartItemCount } from '../../Redux/cart/cart.select'
 
 import userIcon from "../../Assets/images/Icon-user-alt.png"
 import cartIcon from "../../Assets/images/Icon-shopping-bag.png"
@@ -23,7 +24,7 @@ const getProducts = () => {
 }
 
 
-const Navbar = ({ isAuthenticated, logOutStart }) => {
+const Navbar = ({ isAuthenticated, logOutStart, cartItemCount }) => {
 
     return (
         <nav className="navigation">
@@ -96,11 +97,15 @@ const Navbar = ({ isAuthenticated, logOutStart }) => {
                             </div>
                     }
                 <div className="navbar__link--container">
-                    <Link to="/checkout" className="navbar__link">
+                    <Link to="/cart" className="navbar__link">
                         <div className="navbar__cart-button">
                             <img src={cartIcon} alt="Shopping cart button" />
                             <div className="navbar__cart-button--items-counter">
-                                <p>4</p>
+                                <p>
+                                    {
+                                        cartItemCount
+                                    }
+                                </p>
                             </div>
                         </div>
                     </Link>
@@ -111,7 +116,8 @@ const Navbar = ({ isAuthenticated, logOutStart }) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-    isAuthenticated: selectIsAuthenticated
+    isAuthenticated: selectIsAuthenticated,
+    cartItemCount: selectCartItemCount
 })
 
 const mapDispatchToProps = dispatch => ({
