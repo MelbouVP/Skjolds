@@ -2,7 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
+import apiClient from '../../apiClient';
 import history from '../../history'
+
+import { loadStripe } from "@stripe/stripe-js";
 
 
 import { selectCartItems, selectCartTotal } from '../../Redux/cart/cart.select'
@@ -21,11 +24,44 @@ import { ReactComponent as ApplePayIcon } from '../../Assets/icons/ApplePay.svg'
 
 import './cart-page.styles.scss';
 
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+
 const CartPage = ({ cartItems, cartTotal, removeItem, incrementItem, decrementItem }) => {
 
 
     const handleRedirect = (productID) => {
         history.push(`/product/${productID}`)
+    }
+
+    const handleClick = async (event) => {
+
+        const stripe = await stripePromise;
+
+        const response = await apiClient.post("/api/payment", {
+            items: {
+                ...cartItems
+            }
+        });
+
+        // console.log(response)
+
+        const session = await response.data;
+
+        console.log(session);
+
+        // When the customer clicks on the button, redirect them to Checkout.
+        const result = await stripe.redirectToCheckout({
+            sessionId: session.id,
+        });
+
+        if (result.error) {
+            // If `redirectToCheckout` fails due to a browser or network
+            // error, display the localized error message to your customer
+            // using `result.error.message`.
+        }
+
+        console.log(result)
+
     }
 
     const cartItemsList = cartItems.length ? 
@@ -145,11 +181,11 @@ const CartPage = ({ cartItems, cartTotal, removeItem, incrementItem, decrementIt
                                        }€
                                    </p>
                                <div className="summary__action-btn">
-                                   <button type="submit">
-                                       <Link to='/checkout'>
+                                   <button type='button' onClick={handleClick}>
+                                       <div>
                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="19" viewBox="0 0 30 24"><path d="M30,6H6A2.977,2.977,0,0,0,3.015,9L3,27a2.99,2.99,0,0,0,3,3H30a2.99,2.99,0,0,0,3-3V9A2.99,2.99,0,0,0,30,6Zm0,21H6V18H30Zm0-15H6V9H30Z" transform="translate(-3 -6)" fill="#fff"/></svg>
                                            <span>Checkout</span>
-                                       </Link>    
+                                       </div>    
                                    </button>
                                </div>
                            </div>

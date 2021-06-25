@@ -25,8 +25,6 @@ import Footer from './Components/Footer/footer.component';
 import ScrollTop from './Components/ScrollTop/scrolltop.component';
 
 
-
-
 const App = () => {
   return (
     <div className="App">
