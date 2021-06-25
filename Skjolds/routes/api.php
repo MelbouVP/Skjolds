@@ -54,3 +54,5 @@ Route::get('/product/search/{name}', [ProductController::class, 'search']);
 Route::post('/products/filter', [ProductController::class, 'filter']);
 
 Route::post('/payment', [PaymentController::class, 'makePayment']);
+Route::post('/payment-success', [PaymentController::class, 'confirmPayment']);
+
