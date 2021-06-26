@@ -32,6 +32,16 @@ export const selectCurrentProduct = createSelector(
     shop => shop.currentProduct
 )
 
+export const selectFilterProperties = createSelector(
+    [selectShop],
+    shop => shop.filterData.filterProperties
+)
+
+export const selectIsFilterEmpty = createSelector(
+    [selectShop],
+    shop => shop.filterData.filterIsEmpty
+)
+
 export const selectShopError = createSelector(
     [selectShop],
     shop => shop.error

@@ -6,13 +6,14 @@ import { createStructuredSelector } from 'reselect';
 import { selectIsAuthenticated } from '../../Redux/user/user.select';
 
 const ProtectedRoute = ({ children, isAuthenticated, ...rest }) => {
-    return (
-      <Route {...rest} render={({location}) => {
+  return (
+    <Route {...rest} render={({location}) => {
+        console.log(location)
         return isAuthenticated === true
           ? children
           : <Redirect to={{
             pathname: "/login",
-            state: { from: location }
+            state: { from: location.pathname }
           }} />
       }} />
     )

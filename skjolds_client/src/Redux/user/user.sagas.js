@@ -48,7 +48,13 @@ export function* emailLogIn({ payload : { email, password }}){
         })
 
         yield put(logInSuccess(userData.data));
-        history.push(`${history.location.state.from.pathname}`)
+        
+        if(history.location.state){
+            console.log(history.location.state.from)
+            history.push(`${history.location.state.from}`)
+        } else {
+            history.push('/')
+        }
 
     } catch (error) {
         yield put(logInFailure(error))

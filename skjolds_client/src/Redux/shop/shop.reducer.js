@@ -4,7 +4,7 @@ const INITIAL_STATE = {
     hasLoaded: true,
     initial_products: {
         current_page: null,
-        data: null,
+        data: [],
         first_page_url: null,
         from: null,
         next_page_url: null,
@@ -15,7 +15,7 @@ const INITIAL_STATE = {
     },
     filtered_products: {
         urrent_page: null,
-        data: null,
+        data: [],
         first_page_url: null,
         from: null,
         next_page_url: null,
@@ -23,6 +23,16 @@ const INITIAL_STATE = {
         per_page: null,
         prev_page_url: null,
         to: null
+    },
+    filterData: {
+        filterProperties: {
+            category: [],
+            size: [],
+            min_price: null,
+            max_price: null,
+            color: []
+        },
+        filterIsEmpty: true
     },
     currentProduct: null,
     error: null
@@ -60,7 +70,22 @@ const shopReducer = (state = INITIAL_STATE, action) => {
         case ShopActionTypes.CLEAR_SHOP_FILTER:
             return {
                 ...state,
-                filtered_products: INITIAL_STATE.filtered_products
+                filtered_products: INITIAL_STATE.filtered_products,
+                filterData: {
+                    filterProperties: INITIAL_STATE.filterData.filterProperties,
+                    filterIsEmpty: true
+                }
+            }
+        case ShopActionTypes.CHANGE_SHOP_FILTER_DATA:
+            return {
+                ...state,
+                filterData: {
+                    filterProperties: {
+                        ...state.filterData.filterProperties,
+                        ...action.payload
+                    },
+                    filterIsEmpty: false
+                }
             }
         case ShopActionTypes.CHANGE_CURRENTLY_VIEWED_PRODUCT:
         case ShopActionTypes.FETCH_PRODUCT_DATA_SUCCESS:

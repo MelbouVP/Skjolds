@@ -13,6 +13,11 @@ export const selectIsAuthenticated = createSelector(
     user => user.isAuthenticated
 );
 
+export const selectIsCurrentlyAuthenticating = createSelector(
+    [selectUser],
+    user => user.isCurrentlyAuthenticating
+);
+
 export const selectIsPrivileged = createSelector(
     [selectUserData],
     user => user.privileged

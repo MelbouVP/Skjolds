@@ -1,14 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import history from '../../history.js';
 
-import { fetchInitialProductsStart, fetchFilteredProductsStart, clearShopFilter } from '../../Redux/shop/shop.actions.js';
-import { selectInitialProducts, selectFilteredProducts, selectHasShopContentLoaded } from '../../Redux/shop/shop.select';
+
+import { 
+    fetchInitialProductsStart, 
+    fetchFilteredProductsStart, 
+    clearShopFilter,
+    changeShopFilterData
+} from '../../Redux/shop/shop.actions.js';
+
+import { 
+    selectInitialProducts, 
+    selectFilteredProducts, 
+    selectHasShopContentLoaded,
+    selectFilterProperties,
+    selectIsFilterEmpty
+} from '../../Redux/shop/shop.select';
 
 import ProductCard from '../../Components/Product-card/product-card.component';
 import Spinner from '../../Components/Spinners/page-spinner.component';
 
 import './shop.styles.scss';
+
 
 const ShopPage = ({ 
     products, 
@@ -16,67 +31,74 @@ const ShopPage = ({
     hasShopLoaded,
     fetchInitialProductsStart, 
     fetchFilteredProductsStart,
-    clearShopFilter
+    clearShopFilter,
+    changeShopFilterData,
+    filterIsEmpty,
+    filterData,
+    location
     }) => {
 
 
-    const [ filterProperties, setFilterProperties ] = useState({ 
-            category: [],
-            size: [],
-            min_price: null,
-            max_price: null,
-            color: []
-    });
-
     useEffect(() => {
-        if(!products){
-            fetchInitialProductsStart();
-        }
 
+        
+        const params = new URLSearchParams(location.search); 
+        const categoryName = params.get('category')
+
+        if(categoryName){
+            clearShopFilter();
+            
+            const data = { category: [categoryName]}
+
+            history.replace('/shop');
+
+            return submitFilter(data)
+        }
+        
+        if(!products.length){
+            return fetchInitialProductsStart();
+        }
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
 
     const handleChange = (event) => {
 
+        console.log('click');
+
         const { name, value } = event.target;
 
         let data;
 
-        if( Array.isArray(filterProperties[name])){
-            if(filterProperties[name].indexOf(value) === -1) {
+        if( Array.isArray(filterData[name])){
+            if(filterData[name].indexOf(value) === -1) {
                 
-                data = { ...filterProperties, [name]: [...filterProperties[name], value]}
-                setFilterProperties({ ...filterProperties, [name]: [...filterProperties[name], value]});
+                data = { ...filterData, [name]: [...filterData[name], value]}
+                changeShopFilterData({ ...filterData, [name]: [...filterData[name], value]});
             } else {
                 
-                const updatedData = filterProperties[name].filter(data => data !== value);
-                data = {...filterProperties, [name]: updatedData}
+                const updatedData = filterData[name].filter(data => data !== value);
+                data = {...filterData, [name]: updatedData}
     
-                setFilterProperties({...filterProperties, [name]: updatedData});
+                changeShopFilterData({...filterData, [name]: updatedData});
     
             }
         } else {
-            data = {...filterProperties, [name]: value}
-            setFilterProperties({...filterProperties, [name]: value});
+            data = {...filterData, [name]: value}
+            changeShopFilterData({...filterData, [name]: value});
         }
 
 
         submitFilter(data)
     }
+
     
     const clearFilter = () => {
 
-        setFilterProperties({ 
-            category: [],
-            size: [],
-            min_price: null,
-            max_price: null,
-            color: []
-        });
-
-
-        document.querySelectorAll('input').forEach(input => input.checked = false)
+        if(!products.length){
+            fetchInitialProductsStart()
+        }
 
         // dispatch redux action to change view from filtered products to shop products
         clearShopFilter();
@@ -85,7 +107,7 @@ const ShopPage = ({
 
     
     const submitFilter = (data) => {
-        
+        changeShopFilterData(data);
         fetchFilteredProductsStart(data)
     }
     
@@ -96,15 +118,14 @@ const ShopPage = ({
     :
         null
 
-    const filteredProductsList = filteredProducts ?
+    const filteredProductsList = filteredProducts.length ?
         filteredProducts.map( (product) => 
             <ProductCard key={product.id} product={product} />
         )
     :
-        <div  className="product__not-found">No such products were found</div> 
+        <div className="shop__product-not-found">No such products were found.</div> 
 
 
-    console.log(filterProperties)
 
     return (
         <div className="shop-page">
@@ -117,7 +138,7 @@ const ShopPage = ({
                             <p onClick={clearFilter}>clear filter</p>
                         </div>
                         <div className="filter__filter-options" >
-                            <form onChange={handleChange}>
+                            <form>
 
                                 <div className="filter-option__category">
                                     <div className="filter-option__category--title">
@@ -132,33 +153,69 @@ const ShopPage = ({
                                             name="category" 
                                             id="men" 
                                             value="men" 
-                                            // defaultChecked={filterProperties.category.find(category => category === 'men')}
+                                            checked={filterData.category.find(category => category === 'men') ? true : false}
+                                            onChange={handleChange}
                                         />
                                         <label htmlFor="men">Men</label>
                                     </div>
 
                                     <div className="filter-option__category--checkbox">
-                                        <input type="checkbox" name="category" id="women" value="women" />
+                                        <input 
+                                            type="checkbox"
+                                            name="category" 
+                                            id="women" 
+                                            value="women" 
+                                            checked={filterData.category.find(category => category === 'women') ? true : false}
+                                            onChange={handleChange}
+                                        />
                                         <label htmlFor="women">Women</label>
                                     </div>
 
                                     <div className="filter-option__category--checkbox">
-                                        <input type="checkbox" name="category" id="upper-body" value="upper-body" />
+                                        <input 
+                                            type="checkbox" 
+                                            name="category" 
+                                            id="upper-body" 
+                                            value="upper-body" 
+                                            checked={filterData.category.find(category => category === 'upper-body') ? true : false}
+                                            onChange={handleChange}
+                                        />
                                         <label htmlFor="upper-body">Upper-body</label>
                                     </div>
 
                                     <div className="filter-option__category--checkbox">
-                                        <input type="checkbox" name="category" id="pants" value="pants" />
+                                        <input 
+                                            type="checkbox" 
+                                            name="category" 
+                                            id="pants" 
+                                            value="pants" 
+                                            checked={filterData.category.find(category => category === 'pants') ? true : false}
+                                            onChange={handleChange}
+                                        />
                                         <label htmlFor="pants">Pants</label>
                                     </div>
 
                                     <div className="filter-option__category--checkbox">
-                                        <input type="checkbox" name="category" id="hats" value="hats" />
+                                        <input 
+                                            type="checkbox" 
+                                            name="category" 
+                                            id="hats" 
+                                            value="hats" 
+                                            checked={filterData.category.find(category => category === 'hats') ? true : false}    
+                                            onChange={handleChange}
+                                        />
                                         <label htmlFor="hats">Hats</label>
                                     </div>
 
                                     <div className="filter-option__category--checkbox">
-                                        <input type="checkbox" name="category" id="shoes" value="shoes" />
+                                        <input 
+                                            type="checkbox" 
+                                            name="category" 
+                                            id="shoes" 
+                                            value="shoes" 
+                                            checked={filterData.category.find(category => category === 'shoes') ? true : false}   
+                                            onChange={handleChange} 
+                                        />
                                         <label htmlFor="shoes">Shoes</label>
                                     </div>
                                 </div>
@@ -172,32 +229,74 @@ const ShopPage = ({
 
                                     <div className="filter-option__size--options">
                                         <label htmlFor="extra-small">
-                                            <input type="checkbox" name="size" id="extra-small" value="extra-small" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="size" 
+                                                id="extra-small" 
+                                                value="extra-small" 
+                                                checked={filterData.size.find(size => size === 'extra-small') ? true : false}
+                                                onChange={handleChange}
+                                                />
                                             <span>XS</span>
                                         </label>
 
                                         <label htmlFor="small">
-                                            <input type="checkbox" name="size" id="small" value="small" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="size" 
+                                                id="small" 
+                                                value="small" 
+                                                checked={filterData.size.find(size => size === 'small') ? true : false}
+                                                onChange={handleChange}
+                                            />
                                             <span>S</span>
                                         </label>
 
                                         <label htmlFor="medium">
-                                            <input type="checkbox" name="size" id="medium" value="medium" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="size" 
+                                                id="medium" 
+                                                value="medium" 
+                                                checked={filterData.size.find(size => size === 'medium') ? true : false}
+                                                onChange={handleChange}
+                                            />
                                             <span>M</span>
                                         </label>
 
                                         <label htmlFor="large">
-                                            <input type="checkbox" name="size" id="large" value="large" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="size" 
+                                                id="large" 
+                                                value="large" 
+                                                checked={filterData.size.find(size => size === 'large') ? true : false}
+                                                onChange={handleChange}
+                                            />
                                             <span>L</span>
                                         </label>
 
                                         <label htmlFor="extra-large">
-                                            <input type="checkbox" name="size" id="extra-large" value="extra-large" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="size" 
+                                                id="extra-large" 
+                                                value="extra-large" 
+                                                checked={filterData.size.find(size => size === 'extra-large') ? true : false}
+                                                onChange={handleChange}
+                                            />
                                             <span>XL</span>
                                         </label>
 
                                         <label htmlFor="extra-extra-large">
-                                            <input type="checkbox" name="size" id="extra-extra-large" value="extra-extra-large" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="size" 
+                                                id="extra-extra-large" 
+                                                value="extra-extra-large" 
+                                                checked={filterData.size.find(size => size === 'extra-extra-large') ? true : false}
+                                                onChange={handleChange}
+                                            />
                                             <span>XXL</span>
                                         </label>
                                     </div>
@@ -215,9 +314,27 @@ const ShopPage = ({
                                     <div className="filter-option__price--options">
 
                                         <div className="price__options">
-                                            <input type="number" name="min_price" id="min-price" min="10" max="250" placeholder="10" />
+                                            <input 
+                                                type="number" 
+                                                name="min_price" 
+                                                id="min-price" 
+                                                min="10" 
+                                                max="250" 
+                                                placeholder="10" 
+                                                value={filterData.min_price ? filterData.min_price : ''}
+                                                onChange={handleChange}
+                                            />
                                             <p>-</p>
-                                            <input type="number"  name="max_price" id="max-price" min="10" max="250" placeholder="250" />
+                                            <input 
+                                                type="number"  
+                                                name="max_price" 
+                                                id="max-price" 
+                                                min="10" 
+                                                max="250"
+                                                placeholder="250" 
+                                                value={filterData.max_price ? filterData.max_price : ''}
+                                                onChange={handleChange}
+                                            />
                                         </div>
 
                                     </div>
@@ -232,27 +349,69 @@ const ShopPage = ({
 
                                     <div className="filter-option__color--options">
                                         <label htmlFor="gray" className="color__options--gray">
-                                            <input type="checkbox" name="color" id="grey" value="grey" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="color" 
+                                                id="grey" 
+                                                value="grey"
+                                                checked={filterData.color.find(color => color === 'grey') ? true : false}
+                                                onChange={handleChange}    
+                                            />
                                         </label>
 
                                         <label htmlFor="black" className="color__options--black">
-                                            <input type="checkbox" name="color" id="black" value="black" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="color" 
+                                                id="black" 
+                                                value="black" 
+                                                checked={filterData.color.find(color => color === 'black') ? true : false}
+                                                onChange={handleChange} 
+                                            />
                                         </label>
                                         
                                         <label htmlFor="blue" className="color__options--blue">
-                                            <input type="checkbox" name="color" id="blue" value="blue" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="color" 
+                                                id="blue" 
+                                                value="blue" 
+                                                checked={filterData.color.find(color => color === 'blue') ? true : false}
+                                                onChange={handleChange} 
+                                            />
                                         </label>
 
                                         <label htmlFor="yellow" className="color__options--yellow">
-                                            <input type="checkbox" name="color" id="yellow" value="yellow" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="color" 
+                                                id="yellow" 
+                                                value="yellow" 
+                                                checked={filterData.color.find(color => color === 'yellow') ? true : false}
+                                                onChange={handleChange} 
+                                            />
                                         </label>
 
                                         <label htmlFor="red" className="color__options--red">
-                                            <input type="checkbox" name="color" id="red" value="red" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="color" 
+                                                id="red" 
+                                                value="red" 
+                                                checked={filterData.color.find(color => color === 'red') ? true : false}
+                                                onChange={handleChange} 
+                                            />
                                         </label>
 
                                         <label htmlFor="green" className="color__options--green">
-                                            <input type="checkbox" name="color" id="green" value="green" />
+                                            <input 
+                                                type="checkbox" 
+                                                name="color" 
+                                                id="green" 
+                                                value="green" 
+                                                checked={filterData.color.find(color => color === 'green') ? true : false}
+                                                onChange={handleChange} 
+                                            />
                                         </label>
                                     </div>
 
@@ -269,11 +428,11 @@ const ShopPage = ({
                         {
                             hasShopLoaded ?
                                 (
-                                    filteredProducts ?
+                                    filterIsEmpty ?
     
-                                        filteredProductsList
-                                    :
                                         productsList
+                                    :
+                                        filteredProductsList
                                 )
 
                             :
@@ -292,13 +451,16 @@ const ShopPage = ({
 const mapStateToProps = createStructuredSelector({
     products: selectInitialProducts,
     filteredProducts: selectFilteredProducts,
-    hasShopLoaded: selectHasShopContentLoaded
+    hasShopLoaded: selectHasShopContentLoaded,
+    filterData: selectFilterProperties,
+    filterIsEmpty: selectIsFilterEmpty
 })
 
 const mapDispatchToProps = dispatch =>({
     fetchInitialProductsStart: () => dispatch(fetchInitialProductsStart()),
     fetchFilteredProductsStart: (filteredProperties) => dispatch(fetchFilteredProductsStart(filteredProperties)),
-    clearShopFilter: () => dispatch(clearShopFilter())
+    clearShopFilter: () => dispatch(clearShopFilter()),
+    changeShopFilterData: (filterData) => dispatch(changeShopFilterData(filterData))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(ShopPage);

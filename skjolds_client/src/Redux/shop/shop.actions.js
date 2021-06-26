@@ -34,6 +34,11 @@ export const clearShopFilter = () => ({
     type: ShopActionTypes.CLEAR_SHOP_FILTER
 })
 
+export const changeShopFilterData = (filterProperties) => ({
+    type: ShopActionTypes.CHANGE_SHOP_FILTER_DATA,
+    payload: filterProperties
+})
+
 export const changeCurrentlyViewedProduct = (productData) => ({
     type: ShopActionTypes.CHANGE_CURRENTLY_VIEWED_PRODUCT,
     payload: productData

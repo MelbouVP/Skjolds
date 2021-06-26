@@ -1,6 +1,7 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Route, Switch } from "react-router-dom";
+import { createStructuredSelector } from 'reselect';
 
 import ErrorPage from './Pages/errorpage/error-page.component';
 import ErrorBoundary from './Components/Error-boundary/error-boundary.component';
@@ -23,44 +24,75 @@ import PanelView from './Components/Panel-view/panel-view.component';
 import Navbar from './Components/Navbar/navbar.component';
 import Footer from './Components/Footer/footer.component';
 import ScrollTop from './Components/ScrollTop/scrolltop.component';
+import PageSpinner from './Components/Spinners/page-spinner.component';
+
+import { selectIsCurrentlyAuthenticating } from './Redux/user/user.select';
+import { selectIsOrderProcessing } from './Redux/order/order.select';
+import { checkCartSessionStorage } from './Redux/cart/cart.actions';
 
 
-const App = () => {
+
+import './App.scss';
+
+const App = ({ isUserAuthenticating, isOrderProcessing, checkCartSessionStorage }) => {
+
+
+  useEffect(() => {
+    
+    checkCartSessionStorage()
+
+  }, [])
+
   return (
     <div className="App">
       <ScrollTop />
-      <Navbar/>
-        <ErrorBoundary>
-          <Switch>
-              <Route exact path='/' component={HomePage} />
-              <Route exact path='/shop' component={ShopPage} />
-              <Route exact path='/login' component={AuthenticationForm} />
-              <Route exact path='/register' component={AuthenticationForm} />
-              <Route exact path='/product/:id' component={ProductDescriptionPage} />
-              <ProtectedRoute exact path='/profile'>
-                <ProfilePage />
-              </ProtectedRoute>
-              <ProtectedRoute exact path='/checkout'>
-                <CheckoutPage />
-              </ProtectedRoute>
-              <Route exact path='/cart' component={CartPage } />
-              <Route path="/page-not-found" component={ErrorPage} />
-              <PrivilegedRoute>
-                <Route path='/resources/product/edit/:id' >
-                  <Product type={'edit'} />
-                </Route>
-                <Route exact path='/resources/product/create' >
-                  <Product type={'create'} />
-                </Route>
-                <Route exact path='/resources/' >
-                  <PanelView />
-                </Route>
-              </PrivilegedRoute>
-          </Switch>
-        </ErrorBoundary>
-      <Footer />
+
+      {
+        !isUserAuthenticating && !isOrderProcessing ? 
+          <>
+            <Navbar />
+              <ErrorBoundary>
+                <Switch>
+                    <Route exact path='/' component={HomePage} />
+                    <Route exact path='/shop' component={ShopPage} />
+                    <Route exact path='/login' component={AuthenticationForm} />
+                    <Route exact path='/register' component={AuthenticationForm} />
+                    <Route exact path='/product/:id' component={ProductDescriptionPage} />
+                    <Route exact path='/checkout' component={CheckoutPage} />
+                    <Route exact path='/cart' component={CartPage} />
+                    <ProtectedRoute exact path='/profile'>
+                      <ProfilePage />
+                    </ProtectedRoute>
+                    <PrivilegedRoute exact path='/resources/product/edit/:id'>
+                        <Product type={'edit'} />
+                    </PrivilegedRoute>
+                    <PrivilegedRoute exact path='/resources/product/create'>
+                        <Product type={'create'} />
+                    </PrivilegedRoute>
+                    <PrivilegedRoute exact path='/resources/'>
+                      <PanelView />
+                    </PrivilegedRoute>
+                    <Route path="*" component={ErrorPage} />
+                </Switch>
+              </ErrorBoundary>
+            <Footer />
+          </>
+        :
+          <div className="page-spinner">
+            <PageSpinner />
+          </div>
+      }
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = createStructuredSelector({
+  isUserAuthenticating: selectIsCurrentlyAuthenticating,
+  isOrderProcessing: selectIsOrderProcessing 
+})
+
+const mapDispatchToProps = dispatch => ({
+  checkCartSessionStorage: () => dispatch(checkCartSessionStorage())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

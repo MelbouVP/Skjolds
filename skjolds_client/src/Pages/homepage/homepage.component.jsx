@@ -79,9 +79,9 @@ const HomePage = () => {
                                         <p>Skjolds offers newest collections that follow newest trends within male fashion.</p>
                                     </div>
                                     <div className="description__action-btn">
-                                        <a href="/" className="description__action-btn--link" >
+                                        <Link to="/shop?category=men" className="description__action-btn--link" >
                                             Browse
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="gender-card__gender-img">
@@ -103,9 +103,9 @@ const HomePage = () => {
                                         <p>Find the inner passion in women's collections.</p>
                                     </div>
                                     <div className="description__action-btn">
-                                        <a href="/" className="description__action-btn--link" >
+                                        <Link to="/shop?category=women" className="description__action-btn--link" >
                                             Browse
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="gender-card__gender-img">

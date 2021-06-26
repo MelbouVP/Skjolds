@@ -36,6 +36,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 cartItems: decrementItem(state.cartItems, action.payload)
             }
+        case CartActionTypes.RETRIEVE_CART_SESSION_STORAGE:
+            return {
+                ...state,
+                cartItems: action.payload
+            }
         case CartActionTypes.CHANGE_CART_ITEM_ATTRIBUTE:
             return {
                 ...state,

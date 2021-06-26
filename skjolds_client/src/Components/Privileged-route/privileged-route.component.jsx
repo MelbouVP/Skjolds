@@ -1,5 +1,6 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect, Route } from 'react-router-dom'
+
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -7,13 +8,13 @@ import { selectIsPrivileged} from '../../Redux/user/user.select';
 
 const PrivilegedRoute = ({ children, isPrivileged, ...rest }) => {
     return (
-      <div>
-        {
-          isPrivileged === true
-            ? children
-            : <Redirect to='/' />
-        }
-      </div>
+      <Route {...rest} render={({location}) => {
+        return isPrivileged === true
+          ? children
+          : <Redirect to={{
+            pathname: "/"
+          }} />
+      }} />
     )
 }
 

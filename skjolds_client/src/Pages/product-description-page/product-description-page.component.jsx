@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import history from '../../history';
 
 
 import { fetchProductDataStart } from '../../Redux/shop/shop.actions';
@@ -39,9 +40,9 @@ const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, a
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [productData])
 
-    const redirect =() => {
+    const redirect = (categoryName) => {
 
-        console.log('click')
+        history.push(`/shop?category=${categoryName}`);
     }
 
     console.log(productAttributes)
@@ -94,9 +95,9 @@ const ProductDescriptionPage = ({ productData, fetchProduct, hasContentLoaded, a
         productData.categories.map( (category,index) => {
 
             if(index === 0 || index === productData.categories.length){
-                return <span onClick={() => redirect()} > {category.category_name}</span>
+                return <span onClick={() => redirect(category.category_name)} > {category.category_name}</span>
             } else {
-                return <span onClick={() => redirect()}>, {category.category_name}</span>
+                return <span onClick={() => redirect(category.category_name)}>, {category.category_name}</span>
             }
         })
     :
