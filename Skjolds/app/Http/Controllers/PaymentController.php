@@ -54,7 +54,7 @@ class PaymentController extends Controller
                                         'https://s6.gifyu.com/images/Felicciti-2019-Off-shoulders-Dress.jpg'
                                     ],
                                     'metadata' => [
-                                        'product_id' => $item['id'],
+                                        'productID' => $item['id'],
                                         'size' => $item['selectedAttributes'][0],
                                         'color' => $item['selectedAttributes'][1],
                                         'quantity' => $item['quantity'],
@@ -113,6 +113,7 @@ class PaymentController extends Controller
             $product = \Stripe\Product::retrieve($item->price->product);
 
             $orderData['line_items'][] = [
+                'productID' => $product->metadata->productID,
                 'name' => $product->name,
                 'images' => $product->images,
                 'size' => $product->metadata->size,
@@ -122,7 +123,19 @@ class PaymentController extends Controller
             ];
         }
 
+        $this->saveOrderDetails($orderData);
+
         return response($orderData, 201);
+
+    }
+
+
+    public function saveOrderDetails($data)
+    {
+
+        $order = new OrderController();
+
+        $order->store($data);
 
     }
 

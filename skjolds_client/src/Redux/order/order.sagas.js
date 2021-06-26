@@ -6,9 +6,6 @@ import { selectCartItems } from '../cart/cart.select';
 import { selectIsAuthenticated, selectUserData } from '../user/user.select';
 import { orderPaymentFailure, orderPaymentSuccess } from './order.actions';
 
-
-
-
 import apiClient from '../../apiClient';
 import history from '../../history';
 
@@ -33,6 +30,7 @@ function* orderPayment({ payload }){
         }
 
         const cartItems = yield select(selectCartItems);
+        const userData = yield select(selectUserData);
 
         console.log(cartItems);
 
@@ -42,7 +40,7 @@ function* orderPayment({ payload }){
             items: {
                 ...cartItems
             },
-            userId: 1
+            userId: userData.email
         });
 
         console.log(response);
