@@ -158,7 +158,12 @@ const CartPage = ({ cartItems, cartTotal, removeItem, incrementItem, decrementIt
                                <div className="summary__action-btn">
                                    <button type='button' onClick={handleClick}>
                                        <div>
-                                           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="19" viewBox="0 0 30 24"><path d="M30,6H6A2.977,2.977,0,0,0,3.015,9L3,27a2.99,2.99,0,0,0,3,3H30a2.99,2.99,0,0,0,3-3V9A2.99,2.99,0,0,0,30,6Zm0,21H6V18H30Zm0-15H6V9H30Z" transform="translate(-3 -6)" fill="#fff"/></svg>
+                                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                            <rect x="5" y="11" width="14" height="10" rx="2" />
+                                            <circle cx="12" cy="16" r="1" />
+                                            <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
+                                        </svg>
                                            <span>Pay</span>
                                        </div>    
                                    </button>

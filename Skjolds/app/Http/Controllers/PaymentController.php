@@ -30,11 +30,12 @@ class PaymentController extends Controller
             'line_items' => $items,
             'mode' => 'payment',
             'success_url' => $DOMAIN . '/checkout?success=true&session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => $DOMAIN . '/cart',
+            'cancel_url' => $DOMAIN . '/',
             'metadata' => [
                 'userID' => $request['userId']
             ]
         ]);
+
 
         return response(json_encode(['id' => $checkout_session->id]), 200);
   
@@ -85,7 +86,14 @@ class PaymentController extends Controller
             return response('The server could not understand the request.', 400);
         }
 
+        
         $customer = Customer::retrieve($session->customer);
+        Log::info($customer);
+        Log::info($session);
+
+
+        // payment intent: $session->payment_intent see stripe docs
+
 
         $lineItem = $session->allLineItems($request['sessionId']);
 
@@ -96,7 +104,7 @@ class PaymentController extends Controller
             'payment_status' => $session->payment_status,
             'userID' => $session->metadata->userID,
             'customer_name' => $session->shipping->name,
-            'customer_adress' => [
+            'customer_address' => [
                 'country' => $session->shipping->address->country,
                 'city' => $session->shipping->address->city,
                 'street' => $session->shipping->address->line1,

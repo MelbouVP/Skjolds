@@ -1,0 +1,255 @@
+
+// Variables
+$primary-color: #1779ba;
+$secondary-color: #0b386f;
+$gray:  #9b9b9b;
+$light-gray: #eeeeee;
+$medium-gray: #c8c3be;
+$dark-gray: #96918c;
+$black: #322d28;
+$white: #f3f3f3;
+$body-background: #ffffff;
+$body-font-color: $black;
+
+$sans: 'Montserrat', sans-serif;
+$serif: 'Lora', Georgia, serif;
+
+
+.invoice-id {
+    text-align: left;
+}
+
+.logo {
+    text-align: right;
+
+    img {
+        height: 6rem;
+        width: 6rem;
+    }
+
+    div {
+        padding-right: 1.5rem;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+
+    .button {
+        vertical-align: middle;
+        -webkit-appearance: none;
+        border: 1px solid transparent;
+        border-radius: 0;
+        -webkit-transition: background-color .25s ease-out,color .25s ease-out;
+        transition: background-color .25s ease-out,color .25s ease-out;
+        font-size: .9rem;
+        line-height: 1;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 1rem;
+        height: 3rem;
+        width: 10rem;
+    }
+
+    .redirect-btn {
+        border: 1px solid #080808;
+        color: black;
+        background-color: transparent;
+        text-decoration: none;
+
+        svg {
+            margin: 0 0.35rem;
+        }
+
+        &:hover {
+
+            color: gray;
+            border-color: gray;
+
+            svg {
+                stroke: gray;
+            }
+        }
+    }
+
+    .print-btn {
+        background-color: #1779ba;
+        color: #fefefe;
+
+        svg {
+            margin: 0 0.35rem;
+        }
+
+        &:hover {
+            background-color: #115c8d;
+        }
+    }
+}
+
+
+.invoice-container {
+    background-color: white;
+    padding: 3rem;
+}
+
+.customer {
+    text-align: left;
+}
+
+.invoide-id {
+    text-align: left;
+}
+
+header.top-bar {
+  h1 {
+    font-family: $sans;
+  }
+}
+
+main {
+    padding-top: 1rem;
+    padding-bottom:  4rem;
+  min-height: calc(100vh - 107px);
+  .inner-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}
+
+table.invoice {
+  background: #fff;
+  .num {
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: .8em;
+  }
+  tr, td {
+    background: #fff;
+    font-weight: 400;
+    color: $body-font-color;
+  }
+  tr {
+    &.header {
+      td {
+        img {
+          max-width: 300px;
+        }
+        h2 {
+          font-family: $sans;
+          font-weight: 200;
+          font-size: 2rem;
+          color: $primary-color;
+        }
+      }
+    }
+    &.intro {
+      td {
+        &:nth-child(2) {
+          text-align: right;
+        }
+      }
+    }
+    &.details {
+      > td { 
+        padding-top: 4rem; 
+        padding-bottom: 0; 
+      }
+      td, th {
+        &.id,
+        &.qty {
+          text-align: center;
+        }
+        &:last-child {
+          text-align: right;
+        }
+      }
+      table {
+        thead, tbody {
+          position: relative;
+          &:after {
+            content: '';
+            height: 1px;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            margin-top: -1px;
+            background: $medium-gray;
+          }
+        }
+      }
+    }
+    &.totals {
+      td {
+        padding-top: .75rem;
+      }
+      table {
+        tr {
+          td {
+            padding-top:0;
+            padding-bottom:0;
+            &:nth-child(1) {
+              font-weight: 500;
+            }
+            &:nth-child(2) {
+              text-align: right;
+              font-weight: 200;
+            }
+          }
+          &:nth-last-child(2) {
+            
+            td {
+              padding-bottom: .5em;
+              &:last-child {
+                position: relative;
+                &:after {
+                  content: '';
+                  height: 4px;
+                  width: 110%;
+                  border-top: 1px solid $primary-color;
+                  border-bottom: 1px solid $primary-color;
+                  position: relative;
+                  right: 0;
+                  bottom: -.575rem;
+                  display: block;
+                }
+              }
+            }
+            
+          }
+          &.total {
+            td {
+              font-size: 1.2em;
+              padding-top: .5em;
+              font-weight: 700;
+              &:last-child {
+                font-weight: 700;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.additional-info {
+    padding: 1rem 2rem;
+
+    h4 {
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: $primary-color;
+        padding-bottom: 1rem;
+    }
+}
