@@ -1,5 +1,5 @@
 import React, { useState }from 'react';
-
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import './common.styles.scss';
@@ -7,6 +7,8 @@ import './common.styles.scss';
 
 const Login = ({ handleLogin }) => {
 
+
+    const { t } = useTranslation();
     const [ loginData, setLoginData ] = useState({ 
         email: '',
         password: ''
@@ -37,7 +39,7 @@ const Login = ({ handleLogin }) => {
                 />
 
                 <Link to="/" className="common__link">
-                    Forgot your password?
+                    {t('Login.forgot-password')}
                 </Link>
                 
                 <button 
@@ -45,13 +47,13 @@ const Login = ({ handleLogin }) => {
                     className="common__submit-btn" 
                     onClick={ (e) => handleLogin(e, loginData) } 
                     >
-                        Login
+                        {t('Login.login')}
                 </button>
                 
                 <Link to="/register" className="common__link">
-                    Don't have an account?
+                    {t('Login.dont-have-account')}
                     <span className="common__link--blue">
-                        Register!
+                        {t('Login.register')}
                     </span>
                 </Link>
             </form>

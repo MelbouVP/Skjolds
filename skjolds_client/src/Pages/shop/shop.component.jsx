@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import history from '../../history.js';
@@ -38,6 +39,8 @@ const ShopPage = ({
     location
     }) => {
 
+
+    const { t } = useTranslation();    
 
     useEffect(() => {
 
@@ -123,7 +126,7 @@ const ShopPage = ({
             <ProductCard key={product.id} product={product} />
         )
     :
-        <div className="shop__product-not-found">No such products were found.</div> 
+        <div className="shop__product-not-found">{t('Shop.products-not-found')}</div> 
 
 
 
@@ -134,8 +137,12 @@ const ShopPage = ({
                 <aside className="filter">
                     <div className="filter__container">
                         <div className="filter__header">
-                            <h1>Filter</h1>
-                            <p onClick={clearFilter}>clear filter</p>
+                            <h1>
+                                {t('Shop.filter.header_text-1')}
+                            </h1>
+                            <p onClick={clearFilter}>
+                                {t('Shop.filter.header_text-2')}
+                            </p>
                         </div>
                         <div className="filter__filter-options" >
                             <form>
@@ -143,7 +150,7 @@ const ShopPage = ({
                                 <div className="filter-option__category">
                                     <div className="filter-option__category--title">
                                         <h3>
-                                            Category
+                                            {t('Shop.filter.options.category.title')}
                                         </h3>
                                     </div>
 
@@ -156,7 +163,9 @@ const ShopPage = ({
                                             checked={filterData.category.find(category => category === 'men') ? true : false}
                                             onChange={handleChange}
                                         />
-                                        <label htmlFor="men">Men</label>
+                                        <label htmlFor="men">
+                                            {t('Shop.filter.options.category.men')}
+                                        </label>
                                     </div>
 
                                     <div className="filter-option__category--checkbox">
@@ -168,7 +177,9 @@ const ShopPage = ({
                                             checked={filterData.category.find(category => category === 'women') ? true : false}
                                             onChange={handleChange}
                                         />
-                                        <label htmlFor="women">Women</label>
+                                        <label htmlFor="women">
+                                            {t('Shop.filter.options.category.women')}
+                                        </label>
                                     </div>
 
                                     <div className="filter-option__category--checkbox">
@@ -180,7 +191,9 @@ const ShopPage = ({
                                             checked={filterData.category.find(category => category === 'upper-body') ? true : false}
                                             onChange={handleChange}
                                         />
-                                        <label htmlFor="upper-body">Upper-body</label>
+                                        <label htmlFor="upper-body">
+                                            {t('Shop.filter.options.category.upper-body')}
+                                        </label>
                                     </div>
 
                                     <div className="filter-option__category--checkbox">
@@ -192,7 +205,9 @@ const ShopPage = ({
                                             checked={filterData.category.find(category => category === 'pants') ? true : false}
                                             onChange={handleChange}
                                         />
-                                        <label htmlFor="pants">Pants</label>
+                                        <label htmlFor="pants">
+                                            {t('Shop.filter.options.category.pants')}
+                                        </label>
                                     </div>
 
                                     <div className="filter-option__category--checkbox">
@@ -204,7 +219,9 @@ const ShopPage = ({
                                             checked={filterData.category.find(category => category === 'hats') ? true : false}    
                                             onChange={handleChange}
                                         />
-                                        <label htmlFor="hats">Hats</label>
+                                        <label htmlFor="hats">
+                                            {t('Shop.filter.options.category.hats')}
+                                        </label>
                                     </div>
 
                                     <div className="filter-option__category--checkbox">
@@ -216,14 +233,16 @@ const ShopPage = ({
                                             checked={filterData.category.find(category => category === 'shoes') ? true : false}   
                                             onChange={handleChange} 
                                         />
-                                        <label htmlFor="shoes">Shoes</label>
+                                        <label htmlFor="shoes">
+                                            {t('Shop.filter.options.category.shoes')}
+                                        </label>
                                     </div>
                                 </div>
 
                                 <div className="filter-option__size">
                                     <div className="filter-option__size--title">
                                         <h3>
-                                            Size
+                                            {t('Shop.filter.options.size.title')}
                                         </h3>
                                     </div>
 
@@ -237,7 +256,9 @@ const ShopPage = ({
                                                 checked={filterData.size.find(size => size === 'extra-small') ? true : false}
                                                 onChange={handleChange}
                                                 />
-                                            <span>XS</span>
+                                            <span>
+                                                {t('Shop.filter.options.size.extra-small')}
+                                            </span>
                                         </label>
 
                                         <label htmlFor="small">
@@ -249,7 +270,9 @@ const ShopPage = ({
                                                 checked={filterData.size.find(size => size === 'small') ? true : false}
                                                 onChange={handleChange}
                                             />
-                                            <span>S</span>
+                                            <span>
+                                                {t('Shop.filter.options.size.small')}
+                                            </span>
                                         </label>
 
                                         <label htmlFor="medium">
@@ -261,7 +284,9 @@ const ShopPage = ({
                                                 checked={filterData.size.find(size => size === 'medium') ? true : false}
                                                 onChange={handleChange}
                                             />
-                                            <span>M</span>
+                                            <span>
+                                                {t('Shop.filter.options.size.medium')}
+                                            </span>
                                         </label>
 
                                         <label htmlFor="large">
@@ -273,7 +298,9 @@ const ShopPage = ({
                                                 checked={filterData.size.find(size => size === 'large') ? true : false}
                                                 onChange={handleChange}
                                             />
-                                            <span>L</span>
+                                            <span>
+                                                {t('Shop.filter.options.size.large')}
+                                            </span>
                                         </label>
 
                                         <label htmlFor="extra-large">
@@ -285,7 +312,9 @@ const ShopPage = ({
                                                 checked={filterData.size.find(size => size === 'extra-large') ? true : false}
                                                 onChange={handleChange}
                                             />
-                                            <span>XL</span>
+                                            <span>
+                                                {t('Shop.filter.options.size.extra-large')}
+                                            </span>
                                         </label>
 
                                         <label htmlFor="extra-extra-large">
@@ -297,7 +326,9 @@ const ShopPage = ({
                                                 checked={filterData.size.find(size => size === 'extra-extra-large') ? true : false}
                                                 onChange={handleChange}
                                             />
-                                            <span>XXL</span>
+                                            <span>
+                                                {t('Shop.filter.options.size.extra-extra-large')}
+                                            </span>
                                         </label>
                                     </div>
 
@@ -307,7 +338,7 @@ const ShopPage = ({
                                 <div className="filter-option__price">
                                     <div className="filter-option__price--title">
                                         <h3>
-                                            Price
+                                            {t('Shop.filter.options.price.title')}
                                         </h3>
                                     </div>
 
@@ -343,7 +374,7 @@ const ShopPage = ({
                                 <div className="filter-option__color">
                                     <div className="filter-option__color--title">
                                         <h3>
-                                            Color
+                                            {t('Shop.filter.options.color.title')}
                                         </h3>
                                     </div>
 

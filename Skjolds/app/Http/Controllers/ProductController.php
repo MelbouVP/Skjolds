@@ -20,6 +20,8 @@ class ProductController extends Controller
 
         $products = Product::with('colors','sizes', 'categories')->simplePaginate(15);
 
+        // Log::info($products);
+
         // $products = Product::simplePaginate(50);
 
         // foreach ($products as $product) {
@@ -97,7 +99,7 @@ class ProductController extends Controller
     {
 
         $product = Product::with('colors', 'sizes', 'categories')->find($product->id);
-        Log::info($product);
+        // Log::info($product);
 
         return response($product, 201);
     }

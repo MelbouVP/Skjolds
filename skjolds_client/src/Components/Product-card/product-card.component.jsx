@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import history from '../../history';
 
@@ -8,6 +9,8 @@ import { changeCurrentlyViewedProduct } from '../../Redux/shop/shop.actions';
 import './product-card.styles.scss';
 
 const ProductCard = ({ product, changeViewedProduct }) => {
+
+    const { t } = useTranslation();
 
     const showProduct = () => {
         history.push(`/product/${product.id}`);
@@ -25,9 +28,9 @@ const ProductCard = ({ product, changeViewedProduct }) => {
                 <div className="item-card__description">
                     <h4>{product.name}</h4>
                     <button href="shop/item" className="item-card__action-btn" onClick={showProduct}>
-                        Browse
+                        {t('Product-card.link')}
                     </button>
-                    <p>{ product.price }</p>
+                    <p>{ product.price }€</p>
                 </div>
             </div>
     )

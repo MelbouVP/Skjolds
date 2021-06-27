@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ReactDOMServer from 'react-dom/server'
 import { Link } from 'react-router-dom';
 
@@ -10,6 +11,8 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
 
     console.log(invoiceData);
 
+    const { t } = useTranslation();
+
     const handleClick = () => {
 
         const invoice = document.querySelector('.invoice-container');
@@ -17,7 +20,7 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
     }
 
 
-
+    
     const date = new Date(invoiceData.order_date*1000)
 
     const lineItems = invoiceData.line_items.map(item => {
@@ -34,9 +37,9 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                     }
                 </td>
                 <td>
-                    color: {item.color} 
+                    {t('Invoice.color')}: {item.color} 
                     <br />
-                    size: {item.size}
+                    {t('Invoice.size')}: {item.size}
                 </td>
                 <td class="qty">
                     {
@@ -63,7 +66,7 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <polyline points="15 6 9 12 15 18" />
                         </svg>
-                        Go back to {redirectUrl ? redirectUrl : 'shop'}
+                        {t('Invoice.go-back')}
                     </Link>
                     <button class="button print-btn" onClick={handleClick}>
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-printer" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -72,7 +75,7 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                             <path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4" />
                             <rect x="7" y="13" width="10" height="8" rx="2" />
                         </svg>
-                        Print Invoice
+                        {t('Invoice.print-invoice')}
                     </button>
                 </header>
                 <section class="row">
@@ -81,10 +84,10 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                         <tr class="header">
                             <td class="invoice-id">
                                 <h2>
-                                    Invoice
+                                    {t('Invoice.invoice')}
                                 </h2>
-                                <span class="num">
-                                    Order #
+                                <span>
+                                    {t('Invoice.invoice-nr')} #
                                     {
                                         invoiceData.orderID
                                     }
@@ -99,11 +102,13 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                         </tr>
                         <tr class="intro">
                             <td class="customer">
-                            Hello, {
-                                invoiceData.customer_name
-                            }
+                            {t('Invoice.greeting')}, <span>
+                                    {
+                                        invoiceData.customer_name
+                                    }!
+                                </span>
                             <br></br>
-                            Thank you for your order.
+                                {t('Invoice.thank-you')}
                             </td>
                             <td class="text-right">
                                     {
@@ -116,11 +121,21 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                             <table>
                                 <thead>
                                 <tr>
-                                    <th class="desc">Item name</th>
-                                    <th class="id">Item ID</th>
-                                    <th class="qty">Options</th>
-                                    <th class="qty">Quantity</th>
-                                    <th class="amt">Subtotal</th>
+                                    <th class="desc">
+                                        {t('Invoice.item-name')}
+                                    </th>
+                                    <th class="id">
+                                        {t('Invoice.item-id')}
+                                    </th>
+                                    <th class="qty">
+                                        {t('Invoice.item-options')}
+                                    </th>
+                                    <th class="qty">
+                                        {t('Invoice.item-quantity')}
+                                    </th>
+                                    <th class="amt">
+                                        {t('Invoice.item-subtotal')}
+                                    </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -136,30 +151,38 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                             <td>
                             <table>
                                 <tr class="subtotal">
-                                <td class="num">Subtotal</td>
-                                <td class="num">
-                                    {
-                                        (invoiceData.order_total_amount / 100).toFixed(2)
-                                    }
-                                    €
-                                </td>
+                                    <td class="num">
+                                        {t('Invoice.subtotal')}
+                                    </td>
+                                    <td class="num">
+                                        {
+                                            (invoiceData.order_total_amount / 100).toFixed(2)
+                                        }
+                                        €
+                                    </td>
                                 </tr>
                                 <tr class="fees">
-                                <td class="num">Shipping & Handling</td>
-                                <td class="num">0.00€</td>
+                                    <td class="num">
+                                        {t('Invoice.shipping-handling')}
+                                    </td>
+                                    <td class="num">0.00€</td>
                                 </tr>
                                 <tr class="tax">
-                                <td class="num">Tax (0%)</td>
-                                <td class="num">0.00€</td>
+                                    <td class="num">
+                                        {t('Invoice.tax')} (0%)
+                                    </td>
+                                    <td class="num">0.00€</td>
                                 </tr>
                                 <tr class="total">
-                                <td>Total</td>
-                                <td>
-                                    {
-                                        (invoiceData.order_total_amount / 100).toFixed(2)
-                                    }
-                                    €
-                                </td>
+                                    <td>
+                                        {t('Invoice.tax')}
+                                    </td>
+                                    <td>
+                                        {
+                                            (invoiceData.order_total_amount / 100).toFixed(2)
+                                        }
+                                        €
+                                    </td>
                                 </tr>
                             </table>
                             </td>

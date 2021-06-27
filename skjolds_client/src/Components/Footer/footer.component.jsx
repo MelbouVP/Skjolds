@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import twitterIcon from '../../Assets/images/Icon-twitter.png';
 import facebookIcon from '../../Assets/images/Icon-facebook.png';
@@ -10,6 +11,7 @@ import './footer.styles.scss';
 
 const Footer = () => {
     
+    const { t } = useTranslation();
     
     return (
         <footer className="page-footer">
@@ -48,10 +50,10 @@ const Footer = () => {
 
                     <div className="description__copyright">
                         <p>
-                            © Copyright 2021 MelbouVP Design Inc.
+                            {t('Footer.copyright-1')}
                         </p>
                         <p>
-                            All rights reserved.
+                            {t('Footer.copyright-2')}
                         </p>
                     </div>
 

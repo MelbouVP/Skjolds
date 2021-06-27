@@ -1,0 +1,177 @@
+{
+    "Navbar": {
+        "home": "Home",
+        "shop": "Shop",
+        "language": "Language",
+        "contact": "Contact",
+        "products": "Products",
+        "login": "Login",
+        "logout": "Logout",
+        "profile": "Profile",
+        "register": "Register",
+        "en": "English",
+        "lv": "Latvian"
+    },
+    "Footer": {
+        "copyright-1": "© Copyright 2021 MelbouVP Design Inc.",
+        "copyright-2": "All rights reserved."
+    },
+    "Homepage": {
+        "welcome-section": {
+            "sup-title": "Enjoy this season with",
+            "title": "SKJOLDS CLOTHING",
+            "sub-title": "Release your inner passion through fashion.",
+            "link": "SHOP NOW"
+        },
+        "category-section": {
+            "title": "Explore latest trends",
+            "men": {
+                "description_sup-title": "Discover",
+                "description_title": "MEN",
+                "text-1": "Fashion for the sophisticated men.",
+                "text-2": "Skjolds offers newest collections that follow newest trends within male fashion.",
+                "description-link": "Browse"
+            },
+            "women": {
+                "description_sup-title": "Discover",
+                "description_title": "WOMEN",
+                "text-1": "Skjolds showcases designer collections from variety of seasons and styles.",
+                "text-2": "Find the inner passion in women's collections.",
+                "description-link": "Browse"
+            }
+        },
+        "feature-section": {
+            "title": "Our features",
+            "shipping": {
+                "title": "FREE SHIPPING",
+                "text": "SKJOLDS offers a free shipping on orders exceeding 50 EUR. Also note discounts that include free shipping!"
+            },
+            "returns": {
+                "title": "FREE RETURNS",
+                "text": "Sometimes it's though to find your match and we at SKJOLDS understand it. Our solution? Free item returns!"
+            },
+            "customer": {
+                "title": "CUSTOMER SUPPORT",
+                "text": "Hence the name, SKJOLDS prides itself in helping to unleash your passion through fashion! Chat with us to to find help."
+            }
+        }
+    },
+    "Shop": {
+        "products-not-found": "No such products were found.",
+        "filter": {
+            "header_text-1": "Filter",
+            "header_text-2": "clear filter",
+            "options": {
+                "category": {
+                    "title": "Category",
+                    "men": "Men",
+                    "women": "Women",
+                    "upper-body": "Upper-body",
+                    "pants": "Pants",
+                    "hats": "Hats",
+                    "shoes": "Shoes"
+                },
+                "size": {
+                    "title": "Size",
+                    "extra-small": "XS",
+                    "small": "S",
+                    "medium": "M",
+                    "large": "L",
+                    "extra-large": "XL",
+                    "extra-extra-large": "XXL"
+                },
+                "price": {
+                    "title": "Price"
+                },
+                "color": {
+                    "title": "Color"
+                }
+            }
+        }
+    },
+    "Product-card": {
+        "link": "Browse"
+    },
+    "Product-description-page": {
+        "categories": "Categories",
+        "availability": "Availability",
+        "in-stock": "In stock",
+        "size": "Size",
+        "color": "Color",
+        "quantity": "Quantity",
+        "action-btn": "Add to cart",
+        "product-description": "Product description"
+    },
+    "Cart": {
+        "options": {
+            "size": "Size",
+            "color": "Color"
+        },
+        "empty-cart": "Cart is empty..",
+        "title": "Cart",
+        "continue-btn": "Continue shopping",
+        "summary": {
+            "title": "Order summary",
+            "count": "Item count",
+            "sub-total": "Sub-total",
+            "delivery": "Delivery",
+            "total": "Total",
+            "pay": "Pay",
+            "we-accept": "We accept"
+        }
+    },
+    "Authentication-form": {
+        "welcome-back": "Welcome back",
+        "create": "Create account",
+        "please-log-in": "Please log-in",
+        "welcome-to-shop": "Welcome to the shop!"
+    },
+    "Login": {
+        "forgot-password": "Forgot your password?",
+        "login": "Login",
+        "dont-have-account": "Don't have an account?",
+        "register": "Register!"
+    },
+    "Register": {
+        "forgot-password": "Forgot your password?",
+        "register": "Register",
+        "have-account": "Already have an account?",
+        "login": "Login."
+    },
+    "Profile": {
+        "title": "Profile"
+    },
+    "Errorpage": {
+        "title": "Psst, there's nothing here.",
+        "text": "Let's get back home.",
+        "link": "Home"
+    },
+    "Checkout-page": {
+        "modal": {
+            "success": "Payment succesful!",
+            "success_message-1": "We've have prepared an invoice of your purchase!",
+            "success_message-2": "A copy has been sent to your email."
+        }
+    },
+    "Invoice": {
+        "color": "color",
+        "size": "size",
+        "go-back": "Home",
+        "print-invoice": "Print Invoice",
+        "invoice": "Invoice",
+        "invoice-nr": "Order",
+        "greeting" : "Hello",
+        "thank-you": "Thank you for your order.",
+        "item-name": "Item name",
+        "item-id": "Item ID",
+        "item-options": "Options",
+        "item-quantity": "Quantity",
+        "item-subtotal": "Subtotal",
+        "subtotal": "Subtotal",
+        "shipping-handling": "Shipping & Handling",
+        "tax": "Tax ",
+        "total": "Total",
+        "shipping-info": "Shipping Information"
+    }
+
+}

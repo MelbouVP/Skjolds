@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 
 import heroImg from "../../Assets/images/hero-img.png";
@@ -14,6 +14,8 @@ import './homepage.styles.scss';
 
 const HomePage = () => {
 
+    const { t } = useTranslation();
+
     return (
         <div className="index-page">
 
@@ -24,20 +26,22 @@ const HomePage = () => {
                         <div className="content__text">
                             <div className="content__text--sup-title">
                                 <p>
-                                    Enjoy this season with
+                                    {t('Homepage.welcome-section.sup-title')}
                                 </p>
                             </div>
                             <div className="content__text--title">
-                                Skjolds clothing
+                                {t('Homepage.welcome-section.title')}
                             </div>
                             <div className="content__text--sub-title">
-                                Release your inner passion through fashion.
+                                {t('Homepage.welcome-section.sub-title')}
                             </div>
                         </div>
 
                         <div className="content__action-btn">
 
-                            <Link className="content__action-btn--link" to="/shop">Shop now</Link>
+                            <Link className="content__action-btn--link" to="/shop">
+                                {t('Homepage.welcome-section.link')}
+                            </Link>
                         </div>
                     </div>
 
@@ -62,25 +66,31 @@ const HomePage = () => {
                     <div className="category__container">
                         
                         <div className="category__container--title">
-                            <h1>Explore latest trends</h1>
+                            <h1>
+                                {t('Homepage.category-section.title')}
+                            </h1>
                         </div>
 
                         <div className="category__container--content">
                             <div className="gender-card__container">
                                 <div className="gender-card__description">
                                     <div className="description__sup-title">
-                                        Discover
+                                        {t('Homepage.category-section.men.description_sup-title')}
                                     </div>
                                     <div className="description__title">
-                                        Men
+                                        {t('Homepage.category-section.men.description_title')}
                                     </div>
                                     <div className="description__text">
-                                        <p>Fashion for the sophisticated men.</p>
-                                        <p>Skjolds offers newest collections that follow newest trends within male fashion.</p>
+                                        <p>
+                                            {t('Homepage.category-section.men.text-1')}
+                                        </p>
+                                        <p>
+                                            {t('Homepage.category-section.men.text-2')}
+                                        </p>
                                     </div>
                                     <div className="description__action-btn">
                                         <Link to="/shop?category=men" className="description__action-btn--link" >
-                                            Browse
+                                            {t('Homepage.category-section.men.description-link')}
                                         </Link>
                                     </div>
                                 </div>
@@ -93,18 +103,22 @@ const HomePage = () => {
                             <div className="gender-card__container">
                                 <div className="gender-card__description">
                                     <div className="description__sup-title">
-                                        Discover
+                                        {t('Homepage.category-section.women.description_sup-title')}
                                     </div>
                                     <div className="description__title">
-                                        Women
+                                        {t('Homepage.category-section.women.description_title')}
                                     </div>
                                     <div className="description__text">
-                                        <p>Skjolds showcases designer collections from variety of seasons and styles.</p>
-                                        <p>Find the inner passion in women's collections.</p>
+                                        <p>
+                                            {t('Homepage.category-section.women.text-1')}
+                                        </p>
+                                        <p>
+                                            {t('Homepage.category-section.women.text-2')}
+                                        </p>
                                     </div>
                                     <div className="description__action-btn">
                                         <Link to="/shop?category=women" className="description__action-btn--link" >
-                                            Browse
+                                            {t('Homepage.category-section.women.description-link')}
                                         </Link>
                                     </div>
                                 </div>
@@ -125,7 +139,9 @@ const HomePage = () => {
                 <div className="feature__container">
                         
                     <div className="feature__container--title">
-                        <h1>Our features</h1>
+                        <h1>
+                            {t('Homepage.feature-section.title')}
+                        </h1>
                     </div>
 
                     <div className="feature__container--content">
@@ -137,11 +153,11 @@ const HomePage = () => {
 
                             <div className="feature-card__description">
                                 <div className="description__title">
-                                    Free shipping
+                                    {t('Homepage.feature-section.shipping.title')}
                                 </div>
                                 <div className="description__text">
                                     <p>
-                                        SKJOLDS offers a free shipping on orders exceeding 50 EUR. Also note discounts that include free shipping!
+                                        {t('Homepage.feature-section.shipping.text')}
                                     </p>
                                 </div>
                             </div>
@@ -155,11 +171,11 @@ const HomePage = () => {
 
                             <div className="feature-card__description">
                                 <div className="description__title">
-                                    Free returns
+                                    {t('Homepage.feature-section.returns.title')}
                                 </div>
                                 <div className="description__text">
                                     <p>
-                                        Sometimes it's though to find your match and we at SKJOLDS understand it. Our solution? Free item returns!
+                                        {t('Homepage.feature-section.returns.text')}
                                     </p>
                                 </div>
                             </div>
@@ -174,11 +190,11 @@ const HomePage = () => {
 
                             <div className="feature-card__description">
                                 <div className="description__title">
-                                    Customer support
+                                    {t('Homepage.feature-section.customer.title')}
                                 </div>
                                 <div className="description__text">
                                     <p>
-                                        Hence the name, SKJOLDS prides itself in helping to unleash your passion through fashion! Chat with us to to find help.
+                                        {t('Homepage.feature-section.customer.text')}
                                     </p>
                                 </div>
                             </div>

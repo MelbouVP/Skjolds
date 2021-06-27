@@ -1,0 +1,176 @@
+{
+    "Navbar": {
+        "home": "Sākums",
+        "shop": "Veikals",
+        "language": "Valoda",
+        "contact": "Kontakti",
+        "products": "Produkti",
+        "login": "Ielogoties",
+        "logout": "Izrakstīties",
+        "profile": "Profils",
+        "register": "Reģistrēties",
+        "en": "Angļu",
+        "lv": "Latviešu"
+    },
+    "Footer": {
+        "copyright-1": "© Autortiesības 2021 MelbouVP Design Inc.",
+        "copyright-2": "Visas tiesības aizsargātas."
+    },
+    "Homepage": {
+        "welcome-section": {
+            "sup-title": "Izbaudiet šo sezonu kopā ar",
+            "title": "SKJOLDS CLOTHING",
+            "sub-title": "Atklājiet savu iekšējo kaisli caur modi.",
+            "link": "Iepirkties"
+        },
+        "category-section": {
+            "title": "Izpētiet jaunākās tendences",
+            "men": {
+                "description_sup-title": "Atklājiet modi",
+                "description_title": "Vīriešiem",
+                "text-1": "Mode izsmalcinātiem vīriešiem.",
+                "text-2": "Skjolds piedāvā jaunākās kolekcijas, kas seko jaunākajām vīriešu modes tendencēm.",
+                "description-link": "Skatīt"
+            },
+            "women": {
+                "description_sup-title": "Atklājiet modi",
+                "description_title": "Sievietēm",
+                "text-1": "Skjolds demonstrē dizaineru kolekcijas no dažādiem gadalaikiem un stiliem.",
+                "text-2": "Atklājiet iekšējo kaisli caur sieviešu kolekcijām.",
+                "description-link": "Skatīt"
+            }
+        },
+        "feature-section": {
+            "title": "Mūsu piedāvājums",
+            "shipping": {
+                "title": "BEZMAKSAS PIEGĀDE",
+                "text": "SKJOLDS piedāvā bezmaksas piegādi pasūtījumiem, kuru summa pārsniedz 50 EUR. Ņemiet vērā arī atlaides, kas ietver bezmaksas piegādi!"
+            },
+            "returns": {
+                "title": "BEZMAKSAS ATGRIEŠANA",
+                "text": "Dažreiz ir grūti atrast savu izmēru un krāsu, un mēs, SKJOLDS, to saprotam. Mūsu risinājums? Bezmaksas prece atgriešana!"
+            },
+            "customer": {
+                "title": "KLIENTU ATBALSTS",
+                "text": "SKJOLDS lepojas ar to, ka palīdz atraisīt jūsu iekšējo kaisli caur modi! Tērzējiet ar mums, lai atrastu palīdzību."
+            }
+        }
+    },
+    "Shop": {
+        "products-not-found": "Meklētie produkti netika atrasti.",
+        "filter": {
+            "header_text-1": "Filtrs",
+            "header_text-2": "notīrīt filtru",
+            "options": {
+                "category": {
+                    "title": "Kategorija",
+                    "men": "Vīrieši",
+                    "women": "Sievietes",
+                    "upper-body": "Augšdaļa",
+                    "pants": "Bikses",
+                    "hats": "Cepures",
+                    "shoes": "Kurpes"
+                },
+                "size": {
+                    "title": "Izmērs",
+                    "extra-small": "XS",
+                    "small": "S",
+                    "medium": "M",
+                    "large": "L",
+                    "extra-large": "XL",
+                    "extra-extra-large": "XXL"
+                },
+                "price": {
+                    "title": "Cena"
+                },
+                "color": {
+                    "title": "Krāsa"
+                }
+            }
+        }
+    },
+    "Product-card": {
+        "link": "Skatīt"
+    },
+    "Product-description-page": {
+        "categories": "Kategorijas",
+        "availability": "Pieejamība",
+        "in-stock": "Ir noliktavā",
+        "size": "Izmērs",
+        "color": "Krāsa",
+        "quantity": "Skaits",
+        "action-btn": "Pievienot grozam",
+        "product-description": "Produkta apraksts"
+    },
+    "Cart": {
+        "options": {
+            "size": "Izmērs",
+            "color": "Krāsa"
+        },
+        "empty-cart": "Grozs ir tukšs..",
+        "title": "Grozs",
+        "continue-btn": "Turpināt iepirkties",
+        "summary": {
+            "title": "Pasūtījuma pārskats",
+            "count": "Preces skaits",
+            "sub-total": "Starpsumma",
+            "delivery": "Piegāde",
+            "total": "Summa",
+            "pay": "Samaksāt",
+            "we-accept": "Mēs pieņemam"
+        }
+    },
+    "Authentication-form": {
+        "welcome-back": "Laipni lūgti atpakaļ",
+        "create": "Izveidot kontu",
+        "please-log-in": "Lūdzu, ielogojoties",
+        "welcome-to-shop": "Laipni lūgti veikalā!"
+    },
+    "Login": {
+        "forgot-password": "Vai aizmirsāt savu paroli?",
+        "login": "Ielogoties",
+        "dont-have-account": "Nav lietotāja konta?",
+        "register": "Reģistrēties!"
+    },
+    "Register": {
+        "forgot-password": "Vai aizmirsāt savu paroli?",
+        "register": "Reģistrēties",
+        "have-account": "Jau ir lietotāja konts?",
+        "login": "Ielogoties."
+    },
+    "Profile": {
+        "title": "Profils"
+    },
+    "Errorpage": {
+        "title": "Psst, šeit nekā nav.",
+        "text": "Atgriezīsimies atpakāļ uz sākumu.",
+        "link": "Sākums"
+    },
+    "Checkout-page": {
+        "modal": {
+            "success": "Maksājums veiksmīgs!",
+            "success_message-1": "Mēs esam sagatavojuši pavadzīmi Jūsu pāsūtījumam!",
+            "success_message-2": "Kopija ir nosūtīta arī uz e-pastu."
+        }
+    },
+    "Invoice": {
+        "color": "krāsa",
+        "size": "izmērs",
+        "go-back": "Sākums",
+        "print-invoice": "Drukāt pavadzīmi",
+        "invoice": "Pavadzīme",
+        "invoice-nr": "Pasūtījums",
+        "greeting" : "Sveicināti",
+        "thank-you": "Paldies par Jūsu pasūtījumu.",
+        "item-name": "Preces nosaukums",
+        "item-id": "Preces ID",
+        "item-options": "Opcijas",
+        "item-quantity": "Skaits",
+        "item-subtotal": "Starpsumma",
+        "subtotal": "Starpsumma",
+        "shipping-handling": "Piegāde un apstrāde",
+        "tax": "Nodoklis ",
+        "total": "Summa",
+        "shipping-info": "Piegādes Informācija"
+    }
+}

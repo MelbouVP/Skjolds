@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -10,12 +11,15 @@ import { createStructuredSelector } from 'reselect';
 
 const ProfilePage = ({ isPrivileged}) => {
 
+    const { t } = useTranslation();
 
     return (
         <section className="profile-page">
             <div className="profile-page__container">
                 <div className="profile-page__header">
-                    <h1>Profile</h1>
+                    <h1>
+                        {t('Profile.title')}
+                    </h1>
                 </div>
                 {
                     isPrivileged ?

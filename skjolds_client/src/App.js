@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from "react-router-dom";
 import { createStructuredSelector } from 'reselect';
+import './i18n';
 
 import ErrorPage from './Pages/errorpage/error-page.component';
 import ErrorBoundary from './Components/Error-boundary/error-boundary.component';

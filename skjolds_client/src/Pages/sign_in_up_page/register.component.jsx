@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 
@@ -8,6 +8,7 @@ import './common.styles.scss';
 
 const Register = ({ handleRegister }) => {
 
+    const { t } = useTranslation();
     const [ signUpData, setSignUpData ] = useState({ 
         username: '',
         email: '',
@@ -66,17 +67,24 @@ const Register = ({ handleRegister }) => {
                     onChange={handleChange}
                 />
 
-                <Link to="/" className="common__link">Forgot your password?</Link>
+                <Link to="/" className="common__link">
+                    {t('Register.forgot-password')}
+                </Link>
                 
                 <button 
                     type="submit" 
                     className="common__submit-btn" 
                     onClick={ handeValidation }  
                     >
-                        Register
+                        {t('Register.register')}
                 </button>
                 
-                <Link to="/login" className="common__link">Already have an account? <span className="common__link--blue">Login.</span></Link>
+                <Link to="/login" className="common__link">
+                    {t('Register.have-account')}
+                    <span className="common__link--blue">
+                        {t('Register.login')}
+                    </span>
+                </Link>
             </form>
         </div>
     )

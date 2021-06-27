@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
@@ -28,6 +29,7 @@ import { orderPaymentStart } from '../../Redux/order/order.actions';
 
 const CartPage = ({ cartItems, cartTotal, removeItem, incrementItem, decrementItem, orderPaymentStart }) => {
 
+    const { t } = useTranslation();
 
     const handleRedirect = (productID) => {
         history.push(`/product/${productID}`)
@@ -62,7 +64,9 @@ const CartPage = ({ cartItems, cartTotal, removeItem, incrementItem, decrementIt
                         </div>
                         <div className="summary__options">
                             <div className="summary__options--size">
-                                <p>Size:</p>
+                                <p>
+                                    {t('Cart.options.size')}:
+                                </p>
                                 <span>
                                     {
                                         cartItem.selectedAttributes[0]
@@ -70,7 +74,9 @@ const CartPage = ({ cartItems, cartTotal, removeItem, incrementItem, decrementIt
                                 </span>
                             </div>
                             <div className="summary__options--color">
-                                <p>Color:</p>
+                                <p>
+                                    {t('Cart.options.color')}:
+                                </p>
                                 <span>
                                     {
                                         cartItem.selectedAttributes[1]
@@ -95,7 +101,9 @@ const CartPage = ({ cartItems, cartTotal, removeItem, incrementItem, decrementIt
             )
         })
     :
-        <div>Cart is empty..</div>
+        <div>
+            {t('Cart.empty-cart')}
+        </div>
 
 
     return (
@@ -107,7 +115,9 @@ const CartPage = ({ cartItems, cartTotal, removeItem, incrementItem, decrementIt
                     <div className="checkout-cart">
 
                         <div className="checkout-cart__header">
-                            <h1>Cart</h1>
+                            <h1>
+                                {t('Cart.title')}
+                            </h1>
                         </div>
 
                         <div className="checkout-cart__content">
@@ -120,7 +130,7 @@ const CartPage = ({ cartItems, cartTotal, removeItem, incrementItem, decrementIt
 
                         <div className="checkout-cart__continue-btn">
                             <Link to="/shop">
-                                Continue shopping
+                                {t('Cart.continue-btn')}
                             </Link>
                         </div>
 
@@ -134,22 +144,32 @@ const CartPage = ({ cartItems, cartTotal, removeItem, incrementItem, decrementIt
                        <div className="checkout-summary__container">
 
                            <div className="summary__header">
-                               <h2>Order summary</h2>
-                               <span>Item count: {cartItems.length}</span>
+                               <h2>
+                                    {t('Cart.summary.title')}
+                               </h2>
+                               <span>
+                                    {t('Cart.summary.count')}: {cartItems.length}
+                                </span>
                                <div className="header__sub-total">
-                                   <p>Sub-total:</p>
+                                   <p>
+                                    {t('Cart.summary.sub-total')}:
+                                    </p>
                                    <p>
                                        {
                                            cartTotal.toFixed(2)
                                        }€
                                    </p>
-                                   <p>Delivery:</p>
+                                   <p>
+                                        {t('Cart.summary.delivery')}:
+                                    </p>
                                    <p>0.00€</p>
                                </div>
                            </div>
 
                            <div className="summary__content">
-                               <p>Total:</p>
+                               <p>
+                                    {t('Cart.summary.total')}:
+                                </p>
                                <p>
                                        {
                                            cartTotal.toFixed(2)
@@ -164,14 +184,18 @@ const CartPage = ({ cartItems, cartTotal, removeItem, incrementItem, decrementIt
                                             <circle cx="12" cy="16" r="1" />
                                             <path d="M8 11v-4a4 4 0 0 1 8 0v4" />
                                         </svg>
-                                           <span>Pay</span>
+                                           <span>
+                                                {t('Cart.summary.pay')}
+                                           </span>
                                        </div>    
                                    </button>
                                </div>
                            </div>
 
                            <div className="summary__payment">
-                               <p>We accept:</p>
+                               <p>
+                                    {t('Cart.summary.we-accept')}:
+                                </p>
                                <div className="summary__payment--options">
                                    <VisaIcon />
 

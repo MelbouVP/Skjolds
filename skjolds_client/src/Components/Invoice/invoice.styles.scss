@@ -96,16 +96,23 @@ $serif: 'Lora', Georgia, serif;
 
 
 .invoice-container {
-    background-color: white;
-    padding: 3rem;
+  background-color: white;
+  padding: 3rem;
 }
 
 .customer {
-    text-align: left;
+  text-align: left;
 }
 
 .invoide-id {
-    text-align: left;
+  text-align: left;
+  
+  span {
+    font-size: .7rem;
+    font-weight: 200;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
 }
 
 header.top-bar {

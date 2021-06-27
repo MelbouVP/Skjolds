@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect';
 import apiClient from '../../apiClient';
@@ -16,6 +17,7 @@ import './checkout-page.styles.scss';
 
 const CheckoutPage = (props) => {
 
+    const { t } = useTranslation();
     const [ contentHasLoaded, setContentHasLoaded ] = useState(false);
     const [ showModal, setShowModal ] = useState(true);
 
@@ -117,9 +119,12 @@ const CheckoutPage = (props) => {
                                                     <div class="checkmark-background"></div>
                                                     <div class="checkmark draw"></div>
                                                 </div>
-                                                <h1>Payment succesful!</h1>
-                                                <p>We've have prepared an invoice of your purchase!
-                                                    <br></br>A copy has been sent to your email.</p>
+                                                <h1>
+                                                    {t('Checkout-page.modal.success')}
+                                                </h1>
+                                                <p>
+                                                    {t('Checkout-page.modal.success_message-1')}
+                                                    <br></br>{t('Checkout-page.modal.success_message-2')}</p>
                                                 <button type="button" class="redo btn" onClick={() => setShowModal(false)}>OK</button>
                                             </div>
                                         </div>

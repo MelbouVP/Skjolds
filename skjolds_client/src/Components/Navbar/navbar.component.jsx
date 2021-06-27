@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { useTranslation } from 'react-i18next';
 
 import { logOutStart } from '../../Redux/user/user.actions';
 import { selectIsAuthenticated } from '../../Redux/user/user.select';
@@ -15,16 +16,28 @@ import './navbar.styles.scss';
 
 import apiClient from '../../apiClient';
 
-const getProducts = () => {
-
-    apiClient.get('/api/product/54')
-        .then(response => {
-            console.log(response)
-        })
-}
-
 
 const Navbar = ({ isAuthenticated, logOutStart, cartItemCount }) => {
+
+    const { t, i18n } = useTranslation();
+    
+    const [ showLanguages, setShowLanguages ] = useState(false);
+    
+    const getProducts = () => {
+        apiClient.get('/api/product/54')
+            .then(response => {
+                console.log(response)
+            })
+    }
+
+
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+
+        localStorage.removeItem('i18nextLng', lng)
+        localStorage.setItem('i18nextLng', lng)
+
+    }
 
     return (
         <nav className="navigation">
@@ -34,7 +47,7 @@ const Navbar = ({ isAuthenticated, logOutStart, cartItemCount }) => {
 
                     <Link to='/' className="navbar__link">
                         <li className="navbar__link--content">
-                            Home
+                            {t('Navbar.home')}
                         </li>
                     </Link>
 
@@ -42,21 +55,47 @@ const Navbar = ({ isAuthenticated, logOutStart, cartItemCount }) => {
                 <div className="navbar__link--container">
                     <Link to="/shop" className="navbar__link">
                         <li className="navbar__link--content">
-                            Shop
+                            {t('Navbar.shop')}
                         </li>
                     </Link>
                 </div>
-                <div className="navbar__link--container">
+                {/* <div className="navbar__link--container">
                     <Link to='/' className="navbar__link">
                         <li className="navbar__link--content">
-                            Contact
+                            {t('Navbar.contact')}
                         </li>
                     </Link>
-                </div>
-                <div onClick={getProducts} > Get products</div>
+                </div> */}
+                {/* <div onClick={getProducts} > {t('Navbar.products')}</div> */}
                 {/* {
                     isAuthenticated ? <div onClick={getProducts}>Get products</div> : null
                 } */}
+                <div className="navbar__link--container" onClick={() => setShowLanguages(!showLanguages)}>
+                    <div className="link__language">
+                        {t('Navbar.language')}
+                    </div>
+                    {
+                        showLanguages ?
+                            <div className="navbar__language-container">
+                                <div className="navbar__language">
+                                    <button onClick={() => changeLanguage('en')}>
+                                        <span>EN </span>
+                                        {
+                                            t('Navbar.en')
+                                        }
+                                    </button>
+                                    <button onClick={() => changeLanguage('lv')}>
+                                        <span>LV </span> 
+                                        {
+                                            t('Navbar.lv')
+                                        }
+                                    </button>
+                                </div>
+                            </div>
+                        :
+                            null
+                    }
+                </div>
             </div>
             <div className="navigation__navbar">
                     {
@@ -65,12 +104,12 @@ const Navbar = ({ isAuthenticated, logOutStart, cartItemCount }) => {
                                 <Link to='/' className="navbar__link" onClick={logOutStart} >
                                     <img src={userIcon} alt="Logout button" />
                                     <li className="navbar__link--content">
-                                        Logout
+                                        {t('Navbar.logout')}
                                     </li>
                                 </Link>
                                 <Link to='/profile' className="navbar__link" >
                                     <li className="navbar__link--content">
-                                        Profile
+                                        {t('Navbar.profile')}
                                     </li>
                                 </Link>
                             </div>
@@ -85,13 +124,13 @@ const Navbar = ({ isAuthenticated, logOutStart, cartItemCount }) => {
                                         <line x1="15" y1="8" x2="17" y2="10" />
                                     </svg>
                                     <li className="navbar__link--content">
-                                        Login
+                                        {t('Navbar.login')}
                                     </li>
                                 </Link>
                                 <Link to='/register' className="navbar__link">
                                     <img src={userIcon} alt="Logout button" />
                                     <li className="navbar__link--content">
-                                        Register
+                                        {t('Navbar.register')}
                                     </li>
                                 </Link>
                             </div>

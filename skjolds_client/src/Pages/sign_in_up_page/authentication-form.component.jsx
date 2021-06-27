@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { registerStart, emailLogInStart } from '../../Redux/user/user.actions';
 
@@ -12,6 +12,8 @@ import './authentication-form.scss'
 
 const AuthenticationForm = ({ history, registerStart, emailLogInStart }) => {
 
+
+    const { t } = useTranslation();
 
     // if route /login is true, Login components is displayed
     // if route /register is true,  showLogin is false, Register components is displayed
@@ -51,13 +53,19 @@ const AuthenticationForm = ({ history, registerStart, emailLogInStart }) => {
                         <div className="form__header">
                             <h2 className="form__header--title-text">
                                 {
-                                    showLogin ? 'Welcome back' : 'Create account'
+                                    showLogin ? 
+                                        t('Authentication-form.welcome-back') 
+                                    : 
+                                        t('Authentication-form.create')
                                 }
                             </h2>
 
                             <h5 className="form__header--body-text">
                                 {
-                                    showLogin ? 'Please log-in!' : 'Welcome to the shop!'
+                                    showLogin ? 
+                                        t('Authentication-form.please-log-in') 
+                                    : 
+                                        t('Authentication-form.welcome-to-shop')
                                 }
                             </h5>
                         </div>
