@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SizeController;
 use Illuminate\Http\Request;
@@ -55,4 +56,6 @@ Route::post('/products/filter', [ProductController::class, 'filter']);
 
 Route::post('/payment', [PaymentController::class, 'makePayment']);
 Route::post('/payment-success', [PaymentController::class, 'confirmPayment']);
+
+Route::post('/generate-pdf', [OrderController::class, 'generate']);
 

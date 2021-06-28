@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\{ Color, Order, OrderItem, Product, Size };
+use Barryvdh\Snappy\Facades\SnappyPdf;
+// use Barryvdh\Snappy\Facades\SnappyPdfe as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
+
 
 class OrderController extends Controller
 {
@@ -119,4 +123,67 @@ class OrderController extends Controller
     {
         //
     }
+
+    public function generate(Request $request)
+    {
+
+        $id = $request['id'];
+        $order = Order::where('order_id', $id)->firstOrFail();
+
+
+
+        // Log::info($order);
+
+        // Log::info($request->all());
+
+        $html = $request['invoice'];
+
+        // Log::info($html);
+        
+        // $html = mb_convert_encoding($html, "utf-8", "auto");
+        
+        // $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+
+        // $html = utf8_decode($html);
+
+        // Log::info($html);
+
+
+
+        $html = 
+        "<html>
+            <head>
+                <meta charset='utf-8' /> 
+                <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+                <link rel='stylesheet' type='text/css' href=" . public_path('/css/invoice.css') . " >
+            </head>
+            <body>
+                {$html}
+            </body>
+        </html>";
+
+        
+        // Log::info($html);
+        // $pdf = App::make('dompdf.wrapper');
+
+        $pdf = SnappyPdf::loadHTML($html);
+
+        // $pdf->setOptions(['dpi' => 72 ]);
+
+
+        // Log::info($pdf);
+        // $pdf->save("{$id}.pdf");
+
+        return $pdf->stream('invoice');
+
+        // $path = public_path() . '/pdf/' . $data->filename . '.pdf';
+
+        // $pdf = PDF::loadView('pdf.coverletter', $data);
+
+        // $pdf->save($path);
+
+        // return response()->download($path);
+    }
+
+
 }

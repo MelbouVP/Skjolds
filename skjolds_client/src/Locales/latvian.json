@@ -162,6 +162,7 @@
         "invoice-nr": "Pasūtījums",
         "greeting" : "Sveicināti",
         "thank-you": "Paldies par Jūsu pasūtījumu.",
+        "order-information": "Informācija par Jūsu pasūtījumu:",
         "item-name": "Preces nosaukums",
         "item-id": "Preces ID",
         "item-options": "Opcijas",
@@ -169,7 +170,7 @@
         "item-subtotal": "Starpsumma",
         "subtotal": "Starpsumma",
         "shipping-handling": "Piegāde un apstrāde",
-        "tax": "Nodoklis ",
+        "tax": "Nodoklis",
         "total": "Summa",
         "shipping-info": "Piegādes Informācija"
     }

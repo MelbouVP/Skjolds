@@ -1,10 +1,10 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import './error-boundary.styles.scss'
 
-class ErrorBoundary extends React.Component {
+class ErrorHandler extends React.Component {
     constructor(props) {
       super(props);
       this.state = { hasError: false };
@@ -32,6 +32,8 @@ class ErrorBoundary extends React.Component {
 
       const { t } = this.props;
 
+      console.log(this.props)
+
       if (this.state.hasError) {
         return (
             <div className="error-boundary">
@@ -58,5 +60,7 @@ class ErrorBoundary extends React.Component {
       return this.props.children; 
     }
   }
+
+const ErrorBoundary = withTranslation()(ErrorHandler);
 
 export default ErrorBoundary;

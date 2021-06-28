@@ -1,0 +1,261 @@
+* {
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6rem;
+}
+
+.invoice-id {
+    text-align: left;
+    padding: 1rem 0;
+}
+
+.invoice-id h2 {
+    margin-bottom: 0rem;
+}
+
+.logo {
+    text-align: right;
+}
+.logo img {
+    height: 6rem;
+    width: 6rem;
+}
+.logo div {
+    padding-right: 1.5rem;
+    font-style: italic;
+    font-weight: bold;
+}
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+
+.action-buttons .button {
+    vertical-align: middle;
+    -webkit-appearance: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    font-size: 0.9rem;
+    line-height: 1;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1rem;
+    height: 3rem;
+    width: 10rem;
+}
+.action-buttons .redirect-btn {
+    border: 1px solid #080808;
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+.action-buttons .redirect-btn svg {
+    margin: 0 0.35rem;
+}
+.action-buttons .redirect-btn:hover {
+    color: gray;
+    border-color: gray;
+}
+.action-buttons .redirect-btn:hover svg {
+    stroke: gray;
+}
+.action-buttons .print-btn {
+    background-color: #1779ba;
+    color: #fefefe;
+}
+.action-buttons .print-btn svg {
+    margin: 0 0.35rem;
+}
+.action-buttons .print-btn:hover {
+    background-color: #115c8d;
+}
+.invoice-container {
+    background-color: white;
+    padding: 3rem;
+}
+.customer {
+    text-align: left;
+}
+.invoide-id {
+    text-align: left;
+}
+.invoide-id span {
+    /* font-size: 1rem; */
+    /* font-weight: 200; */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+header.top-bar h1 {
+    font-family: 'Montserrat', sans-serif;
+}
+main {
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+    min-height: calc(100vh - 107px);
+}
+
+main .inner-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+table {
+    width: 100%;
+}
+table.invoice {
+    background: #fff;
+}
+table.invoice .num {
+    /* font-weight: 400; */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    /* font-size: 1rem; */
+}
+table.invoice tr, table.invoice td {
+    /* background: #fff; */
+    font-weight: 400;
+    color: #322d28;
+}
+table.invoice tr.header td img {
+    max-width: 300px;
+}
+table.invoice tr.header td h2 {
+    font-family: 'Montserrat', sans-serif;
+    /* font-weight: 200; */
+    font-size: 3rem;
+    padding-bottom: 1rem;
+    color: #1779ba;
+}
+table.invoice tr.intro td:nth-child(2) {
+    text-align: right;
+}
+table.invoice tr.details > td {
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+}
+table.invoice tr.details td.id, table.invoice tr.details th.id, table.invoice tr.details td.qty, table.invoice tr.details th.qty {
+    text-align: center;
+    
+}
+table.invoice tr.details td:last-child, table.invoice tr.details th:last-child {
+    text-align: right;
+}
+table.invoice tr.details table thead, table.invoice tr.details table tbody {
+    position: relative;
+    
+}
+table.invoice tr.totals td {
+    /* padding-top: 0.75rem; */
+}
+table.invoice tr.totals table tr td {
+    font-size: 1.1rem;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+table.invoice tr.totals table tr td:nth-child(1) {
+    /* font-weight: 500; */
+}
+table.invoice tr.totals table tr td:nth-child(2) {
+    text-align: right;
+    /* font-weight: 200; */
+}
+table.invoice tr.totals table tr td:nth-child(3) {
+    padding-bottom: 1rem;
+}
+/* table.invoice tr.totals table tr:nth-last-child() td {
+    padding-bottom: 1rem;
+} */
+table.invoice tr.totals table tr:nth-last-child(2) td:last-child {
+    /* position: relative; */
+    width: 10px;
+}
+
+table.invoice tr.totals table tr.total td {
+    font-size: 1.75rem;
+    padding-top: 0.75rem;
+    font-weight: 700;
+}
+table.invoice tr.totals table tr.total td:last-child {
+    font-weight: 700;
+}
+.additional-info {
+    padding: 1rem 2rem;
+}
+.additional-info h4 {
+    margin: 0;
+    /* font-size: 1rem; */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1779ba;
+}
+
+
+table { 
+    border-collapse: collapse; 
+}
+
+#item .desc {
+    text-align: center;
+    padding: 1rem 0rem;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#item .id {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 0rem 1rem;
+}
+
+#item .opt {
+    text-align: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 0rem 1rem;
+}
+
+#item .qty {
+    text-align: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 0rem 1rem;
+}
+
+#item .amt {
+    text-align: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 1rem 0rem;
+}
+
+#item-header th {
+    padding: 1rem 0;
+    text-align: center;
+    background: rgb(235, 235, 235);
+}
+.intro td {
+    padding: 3rem 0 2.5rem 0;
+}
+
+#total-underline {
+    border-bottom: 1px solid #1779ba;
+}
+
+.tax .num .tax-percent {
+    font-size: 1.1rem;
+    padding: 0 .25rem;
+}
+
+.tax td {
+    padding-bottom: 1rem;
+}

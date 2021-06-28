@@ -162,6 +162,7 @@
         "invoice-nr": "Order",
         "greeting" : "Hello",
         "thank-you": "Thank you for your order.",
+        "order-information": "Here's your order information:",
         "item-name": "Item name",
         "item-id": "Item ID",
         "item-options": "Options",

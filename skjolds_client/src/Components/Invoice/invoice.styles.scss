@@ -104,6 +104,15 @@ $serif: 'Lora', Georgia, serif;
   text-align: left;
 }
 
+table { 
+  border-collapse: collapse; 
+}
+
+.item {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
 .invoide-id {
   text-align: left;
   
@@ -167,7 +176,7 @@ table.invoice {
     }
     &.details {
       > td { 
-        padding-top: 4rem; 
+        padding-top: 2rem; 
         padding-bottom: 0; 
       }
       td, th {
@@ -249,7 +258,7 @@ table.invoice {
 }
 
 .additional-info {
-    padding: 1rem 2rem;
+    padding: 3rem 2rem;
 
     h4 {
         font-size: 1rem;
@@ -260,3 +269,12 @@ table.invoice {
         padding-bottom: 1rem;
     }
 }
+
+#item-header th {
+  background: rgb(235, 235, 235);
+}
+
+.intro {
+  height: 8rem;
+}
+

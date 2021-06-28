@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import ReactDOMServer from 'react-dom/server'
 import { Link } from 'react-router-dom';
 
+import apiClient from '../../apiClient.js';
+
 
 
 import './invoice.styles.scss';
@@ -15,17 +17,56 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
 
     const handleClick = () => {
 
-        const invoice = document.querySelector('.invoice-container');
+        const invoice = document.querySelector('#invoice').innerHTML;
         console.log(invoice);
+
+        // add authentication
+        // const cookie = await apiClient.get('/sanctum/csrf-cookie')
+        const response = apiClient.post(`/api/generate-pdf`, {
+            invoice: invoice,
+            id: invoiceData.orderID
+        },{
+            responseType: 'blob',
+        }).then((response) => {
+            // var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            // var fileLink = document.createElement('a');
+            // fileLink.href = fileURL;
+            // fileLink.setAttribute('download', 'file.pdf');
+            // document.body.appendChild(fileLink);
+            // fileLink.click();
+
+            // console.log(fileURL);
+            // console.log(fileLink)
+            let blob = new Blob([response.data], { type: 'application/pdf' })
+            let link = document.createElement('a')
+            link.href = window.URL.createObjectURL(blob)
+            link.download = 'test.pdf'
+            link.click()
+
+            console.log(blob);
+            console.log('link');
+            console.log(response.data);
+       
+       });
+
+        // const url = window.URL.createObjectURL(new Blob([response.data]));
+        // const link = document.createElement('a');
+        // link.href = url;
+        // link.setAttribute('download', 'file.pdf'); //or any other extension
+        // document.body.appendChild(link);
+        // link.click();
+
+        // const data = response.data
+
+        // console.log(data)
+
     }
-
-
     
     const date = new Date(invoiceData.order_date*1000)
 
     const lineItems = invoiceData.line_items.map(item => {
         return (
-            <tr class="item">
+            <tr class="item" id="item">
                 <td class="desc">
                     {
                         item.name
@@ -36,7 +77,7 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                         item.productID
                     }
                 </td>
-                <td>
+                <td className="opt">
                     {t('Invoice.color')}: {item.color} 
                     <br />
                     {t('Invoice.size')}: {item.size}
@@ -79,7 +120,7 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                     </button>
                 </header>
                 <section class="row">
-                <div class="callout large invoice-container">
+                <div class="callout large invoice-container" id="invoice">
                     <table class="invoice">
                         <tr class="header">
                             <td class="invoice-id">
@@ -87,16 +128,18 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                                     {t('Invoice.invoice')}
                                 </h2>
                                 <span>
-                                    {t('Invoice.invoice-nr')} #
-                                    {
-                                        invoiceData.orderID
-                                    }
+                                    {t('Invoice.invoice-nr')} # <strong>
+                                        {
+                                            invoiceData.orderID
+                                        }
+                                    </strong>
+                                    
                                 </span>
                             </td>
                             <td className="logo">
-                                <img src="https://www.dropbox.com/s/d2qser6yy5ui4nc/easternwaves.svg?raw=1" alt="Company logo" />
+                                {/* <img src="https://www.dropbox.com/s/d2qser6yy5ui4nc/easternwaves.svg?raw=1" alt="Company logo" /> */}
                                 <div>
-                                    Skjolds
+                                    © Skjolds
                                 </div>
                             </td>
                         </tr>
@@ -109,6 +152,8 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                                 </span>
                             <br></br>
                                 {t('Invoice.thank-you')}
+                            <br></br>
+                                {t('Invoice.order-information')}
                             </td>
                             <td class="text-right">
                                     {
@@ -120,14 +165,14 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                             <td colspan="2">
                             <table>
                                 <thead>
-                                <tr>
+                                <tr id="item-header">
                                     <th class="desc">
                                         {t('Invoice.item-name')}
                                     </th>
                                     <th class="id">
                                         {t('Invoice.item-id')}
                                     </th>
-                                    <th class="qty">
+                                    <th class="opt">
                                         {t('Invoice.item-options')}
                                     </th>
                                     <th class="qty">
@@ -169,13 +214,13 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                                 </tr>
                                 <tr class="tax">
                                     <td class="num">
-                                        {t('Invoice.tax')} (0%)
+                                        {t('Invoice.tax')} <span className="tax-percent">(0%)</span>
                                     </td>
-                                    <td class="num">0.00€</td>
+                                    <td class="num" id="total-underline">0.00€</td>
                                 </tr>
                                 <tr class="total">
                                     <td>
-                                        {t('Invoice.tax')}
+                                        {t('Invoice.total')}
                                     </td>
                                     <td>
                                         {
@@ -192,7 +237,9 @@ const Invoice = ({ invoiceData, redirectUrl }) => {
                     <section class="additional-info">
                     <div class="row">
                         <div class="columns">
-                            <h4>Shipping Information</h4>
+                            <h4>
+                                {t('Invoice.shipping-info')}
+                            </h4>
                             <p>{invoiceData.customer_name}<br></br>
                             {invoiceData.customer_address.street}<br></br>
                             {invoiceData.customer_address.city}, {invoiceData.customer_address.postal_code}<br></br>
